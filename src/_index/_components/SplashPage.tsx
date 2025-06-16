@@ -3,7 +3,7 @@ import { CaretDownIcon } from "@phosphor-icons/react";
 
 const SECTIONS = [{
   image: 'images/01-portrait-col.png',
-  imageClass: 'w-[420px] pt-1',
+  imageClass: 'w-[320px] pt-1',
   text: [
     'In the year 1590,',
     'Joachim Camerarius the Younger —',
@@ -15,7 +15,7 @@ const SECTIONS = [{
   textClass: 'pr-8 pt-16'
 }, {
   image: 'images/02-title-page.png',
-  imageClass: 'w-[320px] pt-4 pb-24',
+  imageClass: 'w-[320px] pb-24',
   text: [
     'The <em>Symbola</em> were part of',
     'the popular genre of emblem', 
@@ -29,10 +29,10 @@ const SECTIONS = [{
     'drawing from', 
     'Greek and Roman sources.'
    ] ,
-  textClass: 'text-right pr-12'
+  textClass: 'text-right pt-10 pr-12'
 },{
   image: 'images/03-emblem.png',
-  imageClass: 'w-[400px]',
+  imageClass: 'w-[380px] -translate-y-12',
   text: [
     'Written in Latin and Greek,', 
     'the <em>Symbola</em>',
@@ -43,7 +43,7 @@ const SECTIONS = [{
     'natural history, moral',
     'reflection, and poetic form.'
   ],
-  textClass: 'pt-16'
+  textClass: 'pt-24'
 }];
 
 const CTA = [
@@ -61,7 +61,7 @@ const IMAGE_VARIANTS = {
     scale: 1,
     filter: 'grayscale(1) blur(0px)',
     transition: {
-      duration: 2,
+      duration: 1.25,
       ease: 'easeIn'
     }
   }
@@ -74,7 +74,7 @@ const PARAGRAPH_VARIANTS = {
   visible: {
     filter: 'blur(0px)',
     transition: {
-      duration: 1.75,
+      duration: 1.25,
       ease: 'easeIn',
       staggerChildren: 0.1
     }
@@ -83,7 +83,7 @@ const PARAGRAPH_VARIANTS = {
     filter: 'blur(8px)',
     opacity: 0,
     transition: {
-      duration: 2,
+      duration: 1.5,
       ease: 'easeIn'
     }
   }
@@ -95,7 +95,7 @@ const TOKEN_VARIANTS = {
     opacity: 1,
     scale: 1,
     transition: {
-      duration: 1.5,
+      duration: 1.25,
       ease: 'easeIn'
     }
   }
@@ -111,7 +111,7 @@ export const SplashPage = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{
-          amount: 0.6,
+          amount: 0.34,
           once: true
         }}>
         {text.map((token, idx) => (
@@ -129,17 +129,17 @@ export const SplashPage = () => {
   return (
     <div>
       <section id="hero" className="h-[100vh] flex flex-col items-center justify-center">
-        <img src="/images/logo-dark-large-2.png" className="logo max-w-3xl mx-auto"></img>
+        <img src="/images/logo-dark-large-2.png" className="logo max-w-2xl p-2 mx-auto"></img>
 
         <div className="pt-8">
-          Scroll to Enter
+          Scroll
         </div>
 
         <CaretDownIcon size={24} className="scale-x-150" />
       </section>
 
       <section id="intro">
-        <div className="max-w-4xl mx-auto space-y-28 pt-12 pb-20">
+        <div className="max-w-4xl mx-auto pb-20">
           {SECTIONS.map(({ image, imageClass, text, textClass }, idx) => (
             <div className="flex">
               {idx % 2 === 0 ? (
@@ -152,7 +152,7 @@ export const SplashPage = () => {
                     whileInView="visible" 
                     viewport={{
                       once: true,
-                      amount: 0.6
+                      amount: 0.5
                     }}/>
                   {renderParagraph(text, textClass)}
                 </AnimatePresence>
@@ -167,7 +167,7 @@ export const SplashPage = () => {
                     whileInView="visible" 
                     viewport={{
                       once: true,
-                      amount: 0.6
+                      amount: 0.5
                     }}/>
                 </AnimatePresence>
               )}
@@ -176,7 +176,7 @@ export const SplashPage = () => {
         </div>
       </section>
 
-      <section id="cta" className="max-w-2xl text-lg leading-loose text-center mx-auto pt-32 pb-20">
+      <section id="cta" className="max-w-2xl text-lg leading-loose text-center mx-auto pt-6 pb-20">
         <AnimatePresence>
           <motion.p
             className="motion-safe:transition-transform" 
@@ -214,7 +214,7 @@ export const SplashPage = () => {
 
       <section id="about" className="with-shadow bg-[#706456] pb-32 relative">
         <div className="background w-full h-full absolute top-0 left-0" />
-        <div className="max-w-2xl mx-auto pt-16 pb-2 text-center">
+        <div className="max-w-xl mx-auto pt-16 pb-2 text-center">
           <img src="/images/neural-net.png" className="mix-blend-luminosity" />
 
           <h2 className="text-2xl mb-4 mt-12">About the Machine.</h2>
