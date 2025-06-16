@@ -32,7 +32,7 @@ const SECTIONS = [{
   textClass: 'text-right pt-10 pr-12'
 },{
   image: 'images/03-emblem.png',
-  imageClass: 'w-[380px] -translate-y-12',
+  imageClass: 'w-[380px]',
   text: [
     'Written in Latin and Greek,', 
     'the <em>Symbola</em>',
@@ -43,7 +43,7 @@ const SECTIONS = [{
     'natural history, moral',
     'reflection, and poetic form.'
   ],
-  textClass: 'pt-24'
+  textClass: 'pt-32'
 }];
 
 const CTA = [
@@ -111,7 +111,7 @@ export const SplashPage = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{
-          amount: 0.34,
+          amount: 0.4,
           once: true
         }}>
         {text.map((token, idx) => (
@@ -128,6 +128,10 @@ export const SplashPage = () => {
 
   return (
     <div>
+      <div className="absolute bg-white w-[60%] top-0 -translate-y-[30px] left-[20%] h-[30px] opacity-50" style={{
+        filter: 'blur(90px)'
+      }}/>
+
       <section id="hero" className="h-[100vh] flex flex-col items-center justify-center">
         <img src="/images/logo-dark-large-2.png" className="logo max-w-2xl p-2 mx-auto"></img>
 
@@ -214,7 +218,7 @@ export const SplashPage = () => {
 
       <section id="about" className="with-shadow bg-[#706456] pb-32 relative">
         <div className="background w-full h-full absolute top-0 left-0" />
-        <div className="max-w-xl mx-auto pt-16 pb-2 text-center">
+        <div className="max-w-xl mx-auto pt-24 pb-2 text-center">
           <img src="/images/neural-net.png" className="mix-blend-luminosity" />
 
           <h2 className="text-2xl mb-4 mt-12">About the Machine.</h2>
