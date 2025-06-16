@@ -217,7 +217,6 @@ export const SplashPage = () => {
       </section>
 
       <section id="about" className="with-shadow bg-[#706456] pb-32 relative">
-        <div className="background w-full h-full absolute top-0 left-0" />
         <div className="max-w-xl mx-auto pt-24 pb-2 text-center">
           <img src="/images/neural-net.png" className="mix-blend-luminosity" />
 
@@ -238,22 +237,22 @@ export const SplashPage = () => {
 					<ul className="space-y-8 leading-relaxed">
 						<li>
               <p className="opacity-60">Concept & Implementation</p>
-              <strong>Michela Vignoli</strong>, <a href="https://www.ait.ac.at/" target="_blank">AIT Austrian Institute of Technology</a>
+              <strong>Michela Vignoli</strong>, <a className="hover:underline" href="https://www.ait.ac.at/" target="_blank">AIT Austrian Institute of Technology</a>
 						</li>
 
 						<li>
               <p className="opacity-60">Design</p>
-							<strong>Rainer Simon</strong>, <a href="https://rainersimon.io" target="_blank">rainersimon.io</a>
+							<strong>Rainer Simon</strong>, <a className="hover:underline" href="https://rainersimon.io" target="_blank">rainersimon.io</a>
 						</li>
 
 						<li>
               <p className="opacity-60">Project Management</p>
-							<strong>Chiara Palladino</strong>, <a href="https://www.furman.edu/academics/classics/" target="_blank">Furman University Classics</a>
+							<strong>Chiara Palladino</strong>, <a className="hover:underline" href="https://www.furman.edu/academics/classics/" target="_blank">Furman University Classics</a>
 						</li>
 
 						<li>
               <p className="opacity-60">Scientific Support</p>
-							<strong>Kathryn Wilson</strong>, <a href="https://www.furman.edu/academics/classics/" target="_blank">Furman University Classics</a>
+							<strong>Kathryn Wilson</strong>, <a className="hover:underline" href="https://www.furman.edu/academics/classics/" target="_blank">Furman University Classics</a>
 						</li>
 					</ul>
 
