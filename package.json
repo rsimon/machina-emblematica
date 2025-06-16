@@ -6,7 +6,8 @@
   "scripts": {
     "start": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "deploy": "gh-pages -d dist --nojekyll --cname 'machina.rainersimon.io'"
   },
   "dependencies": {
     "@astrojs/react": "^4.3.0",
@@ -21,5 +22,8 @@
     "react-dom": "^19.1.0",
     "react-scrollama": "^2.4.1",
     "tailwindcss": "^4.1.8"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
   }
 }
