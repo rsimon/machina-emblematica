@@ -180,7 +180,7 @@ export const SplashPage = () => {
         </div>
       </section>
 
-      <section id="cta" className="max-w-2xl text-lg leading-loose text-center mx-auto pt-6 pb-20">
+      <section id="cta" className="max-w-2xl text-lg leading-loose text-center mx-auto pt-20 pb-20">
         <AnimatePresence>
           <motion.p
             className="motion-safe:transition-transform" 
