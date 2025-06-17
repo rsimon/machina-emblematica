@@ -111,8 +111,7 @@ export const SplashPage = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{
-          amount: 0.4,
-          once: true
+          amount: 0.4
         }}>
         {text.map((token, idx) => (
           <motion.span
@@ -155,7 +154,6 @@ export const SplashPage = () => {
                     initial="hidden"
                     whileInView="visible" 
                     viewport={{
-                      once: true,
                       amount: 0.5
                     }}/>
                   {renderParagraph(text, textClass)}
@@ -170,7 +168,6 @@ export const SplashPage = () => {
                     initial="hidden"
                     whileInView="visible" 
                     viewport={{
-                      once: true,
                       amount: 0.5
                     }}/>
                 </AnimatePresence>
@@ -188,7 +185,6 @@ export const SplashPage = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{
-              once: true,
               amount: 0.8
             }}>
             {CTA.map((token, idx) => (
@@ -207,7 +203,6 @@ export const SplashPage = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{
-              once: true,
               amount: 0.8
             }}>
             Ad Emblema
@@ -237,7 +232,7 @@ export const SplashPage = () => {
 					<ul className="space-y-8 leading-relaxed">
 						<li>
               <p className="opacity-60">Concept & Implementation</p>
-              <strong>Michela Vignoli</strong>, <a className="hover:underline" href="https://www.ait.ac.at/" target="_blank">AIT Austrian Institute of Technology</a>
+              <strong>Michela Vignoli</strong>, <a className="hover:underline" href="https://www.ait.ac.at/en/research-topics/data-science-artificial-intelligence" target="_blank">AIT Austrian Institute of Technology</a>
 						</li>
 
 						<li>
