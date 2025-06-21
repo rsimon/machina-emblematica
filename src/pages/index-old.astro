@@ -1,0 +1,110 @@
+---
+import { SplashPage } from '../_index/_components/SplashPage';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Machina Emblematica">
+	<main>
+		<div class="hero-wrapper">
+			<div class="hero" />
+		</div>
+		<div class="tracking-wider leading-loose">
+			<SplashPage client:only />
+				<!--
+				<div class="flex gap-12">
+					<img 
+						src="images/01-portrait-col.png"
+						class="w-[280px] opacity-60 pl-8" />
+
+					<p class="pt-12 pr-8">
+						In the year 1590, Joachim Camerarius the Younger — botanist, zoologist, 
+						and humanist scholar from Nuremberg — published the <em>Symbola et Emblemata</em>.
+					</p>
+				</div>
+
+				<div class="flex gap-12">
+					<p class="text-right">
+						The <em>Symbola</em> were part of the popular genre of emblem books.
+						Descendants of medieval bestiaries, they paired allegorical 
+						illustrations—emblems—with reflections on animals, proverbs, 
+						fables, morals, or poems, often drawing from Greek and 
+						Roman sources.
+					</p>
+
+					<img
+						src="images/02-title-page.png" 
+						class="w-[320px]" />
+				</div>
+
+				<div class="flex gap-12">
+					<img 
+						src="images/03-emblem.png" 
+						class="w-[240px] opacity-60" />
+
+					<p class="pt-8">
+						Written in Latin and Greek, the <em>Symbola</em> were an 
+						early encyclopedia. But unlike today's encyclopedias, 
+						they sought to teach through metaphor—blending natural history, 
+						moral reflection, and poetic form.
+					</p>
+				</div>
+
+				<div class="max-w-xl mx-auto text-center">
+					<p>
+  					I am the Machina Emblematica, built to preserve Camerarius' 
+						knowledge—and to guide those who seek it. Follow me, and let us 
+						together  turn the pages of the Symbola et Emblemata once more.
+					</p>
+				</div>
+
+				<button>Ad Emblemata</button>
+				-->
+		</div>
+	</main>
+</BaseLayout>
+
+<style>
+	:global(#intro p) {
+		text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95);
+	}
+
+	.hero-wrapper {
+		position: absolute;
+		width: 100%;
+		height: 80vh;
+		overflow: hidden;
+	}
+
+	.hero-wrapper::before {
+		content: "";
+		position: absolute;
+		width: 200%;
+		height: 200%;
+		top: -50%;
+		left: -50%;
+		background-image: url('/images/hero.jpg');
+		background-size: cover;
+		background-position: center;
+		transform: rotate(-10deg);
+	}
+
+	.hero {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		z-index: 10;
+		background: linear-gradient(to bottom, #121212 0%, transparent 90%);
+	}
+
+	.hero::before {
+		content: '';
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		z-index: 10;
+		background: linear-gradient(to bottom, transparent 0%, #121212 80%);
+	}
+</style>

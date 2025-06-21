@@ -1,20 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Rosarivo:ital@0;1&display=swap');
 
+@font-face {
+  font-family: 'Rosarivo';
+  src: url('/fonts/Rosarivo-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Rosarivo';
+  src: url('/fonts/Rosarivo-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
 @import "tailwindcss";
 
+@theme {
+  --font-rosarivo: Rosarivo, 'Times New Roman', Times, serif;
+}
+
 html, body {
-  font-family: "Rosarivo", cursive;
-  font-style: italic;
-}
-
-em {
-  font-style: normal;
-}
-
-#intro img {
-  filter: grayscale(1);
-}
-
-.with-shadow {
-  box-shadow: inset 0 0 160px rgba(0, 0, 0, 0.22);
+  background-color: #121212;
 }

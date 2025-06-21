@@ -127,7 +127,7 @@ export const SplashPage = () => {
 
   return (
     <div>
-      <div className="absolute bg-white w-[60%] top-0 -translate-y-[30px] left-[20%] h-[30px] opacity-50" style={{
+      <div className="absolute bg-white  z-30 w-[60%] top-0 -translate-y-[30px] left-[20%] h-[30px] opacity-50" style={{
         filter: 'blur(90px)'
       }}/>
 

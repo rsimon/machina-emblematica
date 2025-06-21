@@ -3,7 +3,7 @@ import "../styles/global.css";
 
 const { title } = Astro.props;
 
-const SOCIAL_TITLE = "Machina Emblematica";
+const SOCIAL_TITLE = title;
 const SOCIAL_DESCRIPTION = "I am the Machina Emblematica, built to preserve the knowledge of Joachim Camerarius' Symbola et Emblemata and to guide those who seek it.";
 const SOCIAL_URL = "https://machina.rainersimon.io";
 const SOCIAL_IMAGE = "https://machina.rainersimon.io/images/social.jpg";
@@ -39,21 +39,7 @@ const SOCIAL_IMAGE_SIZE = { width: "1600", height: "800" };
 
 		<title>{title}</title>
 	</head>
-	<body class="dark">
-    <div class="wrapper">
-      <slot />
-    </div>
+	<body>
+    <slot />
   </body>
 </html>
-
-<style>
-  body {
-    background-color: #121212;
-    background: linear-gradient(
-        to bottom,
-        #121212 0%,
-        #232323 100%
-    );
-    color: #f2f2f2;
-  }
-</style>
