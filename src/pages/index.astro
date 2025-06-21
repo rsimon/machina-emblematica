@@ -2,12 +2,16 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 <BaseLayout title="Machina Emblematica">
-  <header class="font-rosarivo text-white relative h-[60vh] w-full
-    before:absolute before:top-0 before:left-0 before:w-full before:h-2/3 
+  <header class="font-rosarivo text-white relative w-full
+    before:absolute before:top-0 before:left-0 before:w-full before:h-5/6 
     before:bg-gradient-to-b before:from-[#121212] before:to-transparent 
     before:z-10 after:absolute after:bottom-0 after:left-0 after:w-full 
-    after:h-2/3 after:bg-gradient-to-t after:from-[#121212] after:to-transparent after:z-10">
-    <div class="bg-white w-full h-full bg-[url(/images/hero-bg.jpg)] bg-cover bg-center" />
+    after:h-5/6 after:bg-gradient-to-t after:from-[#121212] after:to-transparent after:z-10">
+    <div class="absolute bg-white w-full h-full bg-[url(/images/hero-bg.jpg)] bg-cover bg-center" />
+
+    <div class="px-4 py-12 w-full flex justify-center">
+      <img src="/images/logo-sketched.png" class="max-w-[800px] z-20 relative drop-shadow-[0_0_60px_rgba(0,0,0,0.9)]" />
+    </div>
   </header>
 </BaseLayout>
 
