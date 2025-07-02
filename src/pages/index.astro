@@ -16,7 +16,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   <main class="font-rosarivo leading-loose">
     <section id="narrative" class="py-28">
-      <div class="text-white max-w-3xl px-4 mx-auto text-lg leading-loose italic flex gap-4">
+      <div class="text-white max-w-4xl px-4 mx-auto text-lg leading-loose italic flex gap-4">
         <div class="shrink-0">
           <img src="/images/camerarius-portrait.png" class="w-[300px] mix-blend-luminosity opacity-50" /> 
         </div>
@@ -52,13 +52,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       id="about"
       class="bg-splash-mocha pb-32 shadow-[inset_0_0_140px_rgba(0,0,0,0.4)]">
       
-      <div class="pt-10 pb-2">
+      <div class="pt-12 pb-2">
         <img
           src="/images/neural-net.png" 
           class="w-[740px] max-w-full mx-auto" />
 
         <div class="max-w-xl mx-auto text-center">
-          <h2 class="text-2xl mb-4 mt-2">About the Machine.</h2>
+          <h2 class="text-2xl mb-4 mt-4">About the Machine.</h2>
 
           <p>
             The Machina Emblematica is a retrieval-augmented generation (RAG) 
@@ -105,7 +105,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </section>
   </main>
 
-  <footer class="h-80">
-
+  <footer class="p-12">
+    <img 
+      class="w-[221px]"
+      src="/images/logo-furman.png" />
   </footer>
 </BaseLayout>
