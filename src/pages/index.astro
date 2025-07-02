@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { AnimatedParagraph } from '../_index/_components/AnimatedParagraph';
 ---
 <BaseLayout title="Machina Emblematica">
   <header class="font-rosarivo text-white relative w-full
@@ -21,29 +22,39 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <img src="/images/camerarius-portrait.png" class="w-[300px] mix-blend-luminosity opacity-50" /> 
         </div>
 
-        <div class="space-y-20 pt-16">
-          <p>
-            In the year 1590, Joachim Camerarius the Younger —
-            botanist, zoologist, and humanist scholar from Nuremberg — 
-            published the <em class="not-italic">Symbola et Emblemata</em>.
-          </p>
+        <div class="space-y-16 pt-20">
+          <div>
+            <AnimatedParagraph 
+              client:only
+              html={[
+                'In the year 1590,', 'Joachim Camerarius', ' the Younger —',
+                'botanist, zoologist,', 'and humanist scholar', 'from Nuremberg —',
+                'published the', '<em class="not-italic">Symbola et</em>', '<em class="not-italic">Emblemata</em>.']} />
+          </div>
 
-          <p>
-            The <em class="not-italic">Symbola</em> were part of
-            the popular genre of emblem books. Descendants of
-            medieval bestiaries, they paired allegorical 
-            illustrations—emblems—with reflections on
-            animals, proverbs, fables, morals, or poems, often
-            drawing from Greek and Roman sources.
-          </p>
+          <div>
+            <AnimatedParagraph
+              client:only
+              html={[
+                'The <em class="not-italic">Symbola</em>',
+                'were part of', 'the popular genre', 
+                'of emblem books.', 'Descendants of',
+                'medieval bestiaries,', 'they paired allegorical',
+                'illustrations—emblems—with', 'reflections on',
+                'animals, proverbs,', 'fables, morals,', 'or poems,', 
+                'often drawing from', 'Greek and', 'Roman sources.']} />
+          </div>
 
-          <p>
-            Written in Latin and Greek, the 
-            <em class="not-italic">Symbola</em> were an early
-            encyclopedia. But unlike today's encyclopedias,
-            they sought to teach through metaphor—blending
-            natural history, moral reflection, and poetic form.
-          </p>
+          <div>
+            <AnimatedParagraph
+              client:only
+              html={[
+                'Written in', 'Latin and Greek,',
+                'the <em class="not-italic">Symbola</em> were', 
+                'an early encyclopedia.', 'But unlike', 'today\'s encyclopedias,',
+                'they sought to', 'teach through metaphor',
+                '—blending natural history,', 'moral reflection,', 'and poetic form.']} />
+          </div>
         </div>
       </div>
     </section>
