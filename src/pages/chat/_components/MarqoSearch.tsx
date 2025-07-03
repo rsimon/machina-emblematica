@@ -20,7 +20,7 @@ export const MarqoSearch = () => {
         {chat.map((message, idx) => (
           <li 
             key={`message-${message.from}-${idx}`}
-            className="whitespace-pre-line bg-white/50 rounded-md p-4">
+            className="whitespace-pre-line bg-white/50 rounded-md p-4 ">
             {message.text}
           </li>
         ))}
