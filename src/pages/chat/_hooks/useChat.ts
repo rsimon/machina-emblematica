@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useMarqo } from './useMarqo';
 import { useKlusterAI } from './useKlusterAI';
 
-interface ChatMessage {
+export interface ChatMessage {
 
   from: 'me' | 'machina'
 
@@ -17,17 +17,17 @@ export const useChat = () => {
 
   const { search } = useMarqo();
 
-  const { generate } = useKlusterAI();
+  const { generate, busy } = useKlusterAI();
 
-  const sendMessage = (text: string) => {
+  const sendMessage = (text: string, lastReply?: string) => {
     setChat(current => ([...current, { from: 'me', text }]));
-    search(text).then(context => {
-      generate(text, context).then((text: string) => {
+    search(`${text} ${lastReply ? lastReply : ''}`.trim()).then(context => {
+      generate(text, context, chat).then((text: string) => {
         setChat(current => ([...current, { from: 'machina', text }]));
       });
     })
   }
 
-  return { chat, sendMessage };
+  return { chat, sendMessage, busy };
 
 }

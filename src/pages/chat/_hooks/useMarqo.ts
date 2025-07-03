@@ -17,7 +17,8 @@ export const useMarqo = () => {
       },
       body: JSON.stringify({ 
         q: query,
-        searchMethod: 'LEXICAL'
+        limit: 10,
+        searchMethod: 'HYBRID'
       })
     }).then(res => res.json()).then(data => {
       const context = data.hits.map((d: any) => d.text_page).join('\n\n');

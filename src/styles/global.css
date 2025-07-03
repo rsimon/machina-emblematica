@@ -20,7 +20,7 @@
 
 @theme {
   --font-rosarivo: Rosarivo, 'Times New Roman', Times, serif;
-  --color-splash-mocha: #a79077;
+  --color-mocha: #a79077;
 }
 
 html, body {
