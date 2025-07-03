@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { AnimatedParagraph } from '../_index/_components/AnimatedParagraph';
+import { AnimatedImage, AnimatedParagraph } from '../_index/_components';
+import type { SiOnlyfans } from '@icons-pack/react-simple-icons';
 ---
 <BaseLayout title="Machina Emblematica">
   <header class="font-rosarivo text-white relative w-full
@@ -8,7 +9,7 @@ import { AnimatedParagraph } from '../_index/_components/AnimatedParagraph';
     before:bg-gradient-to-b before:from-[#121212] before:to-transparent 
     before:z-10 after:absolute after:bottom-0 after:left-0 after:w-full 
     after:h-11/12 after:bg-gradient-to-t after:from-[#121212] after:to-transparent after:z-10">
-    <div class="absolute bg-white w-full h-full bg-[url(/images/hero-bg.jpg)] bg-cover bg-center" />
+    <div class="absolute bg-white w-full opacity-75 h-full bg-[url(/images/hero-bg.jpg)] bg-cover bg-center" />
 
     <div class="px-4 py-16 w-full flex justify-center">
       <img src="/images/logo-sketched.png" class="max-w-[800px] z-20 relative drop-shadow-[0_0_60px_rgba(0,0,0,0.9)]" />
@@ -16,10 +17,15 @@ import { AnimatedParagraph } from '../_index/_components/AnimatedParagraph';
   </header>
 
   <main class="font-rosarivo leading-loose">
-    <section id="narrative" class="py-28">
-      <div class="text-white max-w-4xl px-4 mx-auto text-lg leading-loose italic flex gap-4">
+    <section id="narrative" 
+      class="py-28 text-white max-w-4xl px-4 mx-auto text-lg leading-loose italic">
+
+      <div class="flex gap-4">
         <div class="shrink-0">
-          <img src="/images/camerarius-portrait.png" class="w-[300px] mix-blend-luminosity opacity-50" /> 
+          <AnimatedImage
+            client:only
+            src="/images/camerarius-portrait.png" 
+            className="w-[300px] mix-blend-luminosity opacity-50" /> 
         </div>
 
         <div class="space-y-16 pt-20">
@@ -56,6 +62,17 @@ import { AnimatedParagraph } from '../_index/_components/AnimatedParagraph';
                 '—blending natural history,', 'moral reflection,', 'and poetic form.']} />
           </div>
         </div>
+      </div>
+
+      <div class="pt-40 pb-20 max-w-2xl mx-auto text-center">
+        <AnimatedParagraph
+          client:only 
+          html={[
+            'I am the', '<em class="not-italic">Machina Emblematica</em>,', 'built to preserve', 
+            'Camerarius\'', 'knowledge—and', 'to guide those', 'who seek it.',
+            'Follow me,', 'and let us', 'together turn', 'the pages', 'of the',
+            'Symbola et Emblemata', 'once more.'
+          ]} />
       </div>
     </section>
 
