@@ -7,10 +7,10 @@ const BASE_URL = 'http://92.112.48.13:8882';
 
 const INDEX = 'camerarius_testIndex_full-texts'
 
-export const useSearch = () => {
+export const useMarqo = () => {
 
   const search = useCallback((query: string) => {
-    fetch(`/indexes/${INDEX}/search`, {
+    return fetch(`/indexes/${INDEX}/search`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json'
@@ -20,9 +20,9 @@ export const useSearch = () => {
         searchMethod: 'LEXICAL'
       })
     }).then(res => res.json()).then(data => {
-      // console.log(data);
-
-      console.log(data.hits.map((d: any) => d.text_page).join(' --- '));
+      const context = data.hits.map((d: any) => d.text_page).join('\n\n');
+      console.log(context);
+      return context;
     });
   }, []);
 
