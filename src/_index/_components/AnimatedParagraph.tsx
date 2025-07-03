@@ -50,7 +50,7 @@ export const AnimatedParagraph = (props: AnimatedParagraphProps) => {
       initial="hidden"
       whileInView="visible"
       viewport={{
-        amount: 0.5
+        amount: 0.35
       }}>
       {props.html.map((html, idx) => (
         <motion.span
