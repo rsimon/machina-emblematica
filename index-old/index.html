@@ -1,0 +1,51 @@
+<!DOCTYPE html><html lang="en" class="scroll-smooth"> <head><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="I am the Machina Emblematica, built to preserve the knowledge of Joachim Camerarius' Symbola et Emblemata and to guide those who seek it."><meta name="generator" content="Astro v5.9.2"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://machina.rainersimon.io"><meta property="og:title" content="Machina Emblematica"><meta property="og:description" content="I am the Machina Emblematica, built to preserve the knowledge of Joachim Camerarius' Symbola et Emblemata and to guide those who seek it."><meta property="og:image" content="https://machina.rainersimon.io/images/social.jpg"><meta property="og:image:width" content="1600"><meta property="og:image:height" content="800"><meta property="og:site_name" content="Machina Emblematica"><meta property="og:locale" content="en_US"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:url" content="https://machina.rainersimon.io"><meta name="twitter:title" content="Machina Emblematica"><meta name="twitter:description" content="I am the Machina Emblematica, built to preserve the knowledge of Joachim Camerarius' Symbola et Emblemata and to guide those who seek it."><meta name="twitter:image" content="https://machina.rainersimon.io/images/social.jpg"><link rel="canonical" href="https://machina.rainersimon.io"><title>Machina Emblematica</title><link rel="stylesheet" href="/_astro/index.mbI1Q88y.css">
+<style>#intro p{text-shadow:0 2px 14px rgba(0,0,0,.95)}.hero-wrapper[data-astro-cid-dlr55tob]{position:absolute;width:100%;height:80vh;overflow:hidden}.hero-wrapper[data-astro-cid-dlr55tob]:before{content:"";position:absolute;width:200%;height:200%;top:-50%;left:-50%;background-image:url(/images/hero.jpg);background-size:cover;background-position:center;transform:rotate(-10deg)}.hero[data-astro-cid-dlr55tob]{position:relative;width:100%;height:100%;top:0;left:0;z-index:10;background:linear-gradient(to bottom,#121212 0%,transparent 90%)}.hero[data-astro-cid-dlr55tob]:before{content:"";position:absolute;width:100%;height:100%;top:0;left:0;z-index:10;background:linear-gradient(to bottom,transparent 0%,#121212 80%)}
+</style></head> <body>  <main data-astro-cid-dlr55tob> <div class="hero-wrapper" data-astro-cid-dlr55tob> <div class="hero" data-astro-cid-dlr55tob></div> </div> <div class="tracking-wider leading-loose" data-astro-cid-dlr55tob> <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).only=e;window.dispatchEvent(new Event("astro:only"));})();</script><script>(()=>{var A=Object.defineProperty;var g=(i,o,a)=>o in i?A(i,o,{enumerable:!0,configurable:!0,writable:!0,value:a}):i[o]=a;var d=(i,o,a)=>g(i,typeof o!="symbol"?o+"":o,a);{let i={0:t=>m(t),1:t=>a(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(a(t)),5:t=>new Set(a(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>1/0*t},o=t=>{let[l,e]=t;return l in i?i[l](e):void 0},a=t=>t.map(o),m=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([l,e])=>[l,o(e)]));class y extends HTMLElement{constructor(){super(...arguments);d(this,"Component");d(this,"hydrator");d(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let c=this.querySelectorAll("astro-slot"),n={},h=this.querySelectorAll("template[data-astro-template]");for(let r of h){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("data-astro-template")||"default"]=r.innerHTML,r.remove())}for(let r of c){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("name")||"default"]=r.innerHTML)}let p;try{p=this.hasAttribute("props")?m(JSON.parse(this.getAttribute("props"))):{}}catch(r){let s=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(s+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${s}`,this.getAttribute("props"),r),r}let u;await this.hydrator(this)(this.Component,p,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});d(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),c.disconnect(),this.childrenConnectedCallback()},c=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});c.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}async start(){let e=JSON.parse(this.getAttribute("opts")),c=this.getAttribute("client");if(Astro[c]===void 0){window.addEventListener(`astro:${c}`,()=>this.start(),{once:!0});return}try{await Astro[c](async()=>{let n=this.getAttribute("renderer-url"),[h,{default:p}]=await Promise.all([import(this.getAttribute("component-url")),n?import(n):()=>()=>{}]),u=this.getAttribute("component-export")||"default";if(!u.includes("."))this.Component=h[u];else{this.Component=h;for(let f of u.split("."))this.Component=this.Component[f]}return this.hydrator=p,this.hydrate},e,this)}catch(n){console.error(`[astro-island] Error hydrating ${this.getAttribute("component-url")}`,n)}}attributeChangedCallback(){this.hydrate()}}d(y,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",y)}})();</script><astro-island uid="2k3F0m" component-url="/_astro/SplashPage.CU7wYoVy.js" component-export="SplashPage" renderer-url="/_astro/client.BPIbHqJh.js" props="{&quot;data-astro-cid-dlr55tob&quot;:[0,true]}" ssr client="only" opts="{&quot;name&quot;:&quot;SplashPage&quot;,&quot;value&quot;:true}"></astro-island> <!--
+				<div class="flex gap-12">
+					<img 
+						src="images/01-portrait-col.png"
+						class="w-[280px] opacity-60 pl-8" />
+
+					<p class="pt-12 pr-8">
+						In the year 1590, Joachim Camerarius the Younger — botanist, zoologist, 
+						and humanist scholar from Nuremberg — published the <em>Symbola et Emblemata</em>.
+					</p>
+				</div>
+
+				<div class="flex gap-12">
+					<p class="text-right">
+						The <em>Symbola</em> were part of the popular genre of emblem books.
+						Descendants of medieval bestiaries, they paired allegorical 
+						illustrations—emblems—with reflections on animals, proverbs, 
+						fables, morals, or poems, often drawing from Greek and 
+						Roman sources.
+					</p>
+
+					<img
+						src="images/02-title-page.png" 
+						class="w-[320px]" />
+				</div>
+
+				<div class="flex gap-12">
+					<img 
+						src="images/03-emblem.png" 
+						class="w-[240px] opacity-60" />
+
+					<p class="pt-8">
+						Written in Latin and Greek, the <em>Symbola</em> were an 
+						early encyclopedia. But unlike today's encyclopedias, 
+						they sought to teach through metaphor—blending natural history, 
+						moral reflection, and poetic form.
+					</p>
+				</div>
+
+				<div class="max-w-xl mx-auto text-center">
+					<p>
+  					I am the Machina Emblematica, built to preserve Camerarius' 
+						knowledge—and to guide those who seek it. Follow me, and let us 
+						together  turn the pages of the Symbola et Emblemata once more.
+					</p>
+				</div>
+
+				<button>Ad Emblemata</button>
+				--> </div> </main>  </body></html> 
