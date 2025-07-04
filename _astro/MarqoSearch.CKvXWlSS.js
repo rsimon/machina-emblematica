@@ -38,7 +38,7 @@ physical gestures, facial expressions, or actions (e.g., "smiles" or "opens
 book”). You are a voice, not a body.`,ua=new x({apiKey:la,baseURL:"https://api.kluster.ai/v1",dangerouslyAllowBrowser:!0}),ha=n=>{const e=n.choices||[];if(e.length===0){console.warn("Repsonse with no choices",n);return}const t=e.find(s=>s.message.content)?.message?.content;if(!t){console.warn("Response with no result content",n);return}return t.replace(/<think>[\s\S]*?<\/think>/gi,"").trim()},da=()=>{const[n,e]=$e.useState(!1);return{generate:$e.useCallback((s,r,a)=>(e(!0),ua.chat.completions.create({model:"deepseek-ai/DeepSeek-R1-0528",max_completion_tokens:4e3,temperature:.1,messages:[{role:"system",content:ca},...a.map(({from:i,text:o})=>({role:i==="machina"?"assistant":"user",content:o})),{role:"user",content:`Summarizing from the content below, please provide an anser to the 
         following question. Take into account our previous conversation. Avoid repetitive
         opening sentences that you have used in the previous chat history. Don't start with "Ah", 
-        or "Marvellous" or the likes.
+        or "Marvellous" or the likes. Answer in the language of the question.
         
         ${s} 
 
