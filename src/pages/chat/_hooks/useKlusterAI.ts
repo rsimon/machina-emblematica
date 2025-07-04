@@ -66,7 +66,7 @@ export const useKlusterAI = () => {
         content: `Summarizing from the content below, please provide an anser to the 
         following question. Take into account our previous conversation. Avoid repetitive
         opening sentences that you have used in the previous chat history. Don't start with "Ah", 
-        or "Marvellous" or the likes.
+        or "Marvellous" or the likes. Answer in the language of the question.
         
         ${question} 
 
