@@ -3,17 +3,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { AnimatedImage, AnimatedParagraph } from '../_index/_components';
 ---
 <BaseLayout title="Machina Emblematica">
-  <header class="font-rosarivo text-white relative w-full
+  <header class="font-rosarivo text-white relative w-full overflow-hidden
     before:absolute before:top-0 before:left-0 before:w-full before:h-11/12 
-    before:bg-gradient-to-b before:from-[#121212] before:to-transparent 
+    md:before:bg-gradient-to-b before:from-[#121212] md:before:to-transparent 
     before:z-10 after:absolute after:bottom-0 after:left-0 after:w-full 
-    after:h-11/12 after:bg-gradient-to-t after:from-[#121212] after:to-transparent after:z-10">
-    <div class="absolute bg-white w-full opacity-75 h-full bg-[url(/images/hero-bg.jpg)] bg-cover bg-center" />
+    after:h-11/12 after:bg-gradient-to-t after:from-[#121212] max-md:after:via-[#121212] after:to-transparent after:z-10">
+    <div class="absolute bg-white w-full opacity-30 md:opacity-75 h-full bg-[url(/images/hero-bg.jpg)] bg-cover bg-center" />
 
     <div class="px-4 py-16 w-full flex justify-center">
       <img 
         src="/images/hero-logo-render.png" 
-        class="max-w-full md:max-w-[800px] z-20 relative drop-shadow-[0_0_60px_rgba(0,0,0,0.9)]" />
+        class="max-w-[120%] md:max-w-[800px] z-20 relative drop-shadow-[0_0_60px_rgba(0,0,0,0.9)]" />
     </div>
 
     <a 
@@ -25,17 +25,17 @@ import { AnimatedImage, AnimatedParagraph } from '../_index/_components';
 
   <main class="font-rosarivo leading-loose">
     <section id="narrative" 
-      class="py-28 text-white text-lg leading-loose italic bg-gradient-to-b from-[#121212] via-[#121212] to-[#1f1f1f]">
+      class="md:py-28 text-white text-lg leading-loose italic bg-gradient-to-b from-[#121212] via-[#121212] to-[#1f1f1f]">
 
       <div class="max-w-2xl text-center md:text-left px-6 mx-auto tracking-wide">
         <div class="md:float-left md:pl-4 md:pb-32 md:-ml-12">
           <AnimatedImage
             client:only
             src="/images/camerarius-portrait.png" 
-            className="w-[180px] md:w-[300px] mix-blend-luminosity opacity-50 mx-auto" /> 
+            className="w-[140px] md:w-[300px] mix-blend-luminosity opacity-50 mx-auto" /> 
         </div>
 
-        <div class="-space-y-36 md:space-y-52 pt-10 md:pt-20">
+        <div class="space-y-36 md:space-y-52 md:pt-10 md:pt-20">
           <div>
             <AnimatedParagraph 
               client:only
@@ -93,7 +93,7 @@ import { AnimatedImage, AnimatedParagraph } from '../_index/_components';
       id="about"
       class="bg-mocha pb-32 shadow-[inset_0_0_140px_rgba(0,0,0,0.4)]">
       
-      <div class="pt-12 pb-2 px-6">
+      <div class="pt-12 pb-2 px-6 overflow-hidden">
         <img
           src="/images/neural-net.png" 
           class="w-[740px] max-w-full mx-auto" />
