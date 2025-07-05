@@ -11,11 +11,13 @@ import { AnimatedImage, AnimatedParagraph } from '../_index/_components';
     <div class="absolute bg-white w-full opacity-75 h-full bg-[url(/images/hero-bg.jpg)] bg-cover bg-center" />
 
     <div class="px-4 py-12 w-full flex justify-center">
-      <img src="/images/hero-logo-render.png" class="max-w-[860px] z-20 relative drop-shadow-[0_0_60px_rgba(0,0,0,0.9)]" />
+      <img 
+        src="/images/hero-logo-render.png" 
+        class="max-w-[90%] md:max-w-[860px] z-20 relative drop-shadow-[0_0_60px_rgba(0,0,0,0.9)]" />
     </div>
 
     <a 
-      class="absolute text-sm text-white/70 hover:text-white inline-block font-sans top-6 right-6 rounded-full z-30 px-5 py-2.5 bg-white/5 hover:bg-white/10 backdrop-blur"
+      class="absolute text-sm text-white/70 hover:text-white inline-block font-sans top-3 right-3 md:top-6 md:right-6 rounded-full z-30 px-5 py-2.5 bg-white/5 hover:bg-white/10 backdrop-blur"
       href="#about">
       About
     </a>
@@ -25,12 +27,12 @@ import { AnimatedImage, AnimatedParagraph } from '../_index/_components';
     <section id="narrative" 
       class="py-28 text-white text-lg leading-loose italic bg-gradient-to-b from-[#121212] via-[#121212] to-[#1f1f1f]">
 
-      <div class="max-w-2xl px-4 mx-auto tracking-wide">
-        <div class="shrink-0 float-left pl-4 pb-32 -ml-12">
+      <div class="max-w-2xl text-center md:text-left px-6 mx-auto tracking-wide">
+        <div class="md:float-left md:pl-4 md:pb-32 md:-ml-12">
           <AnimatedImage
             client:only
             src="/images/camerarius-portrait.png" 
-            className="w-[300px] mix-blend-luminosity opacity-50" /> 
+            className="w-[300px] mix-blend-luminosity opacity-50 mx-auto" /> 
         </div>
 
         <div class="space-y-52 pt-20">
@@ -91,7 +93,7 @@ import { AnimatedImage, AnimatedParagraph } from '../_index/_components';
       id="about"
       class="bg-mocha pb-32 shadow-[inset_0_0_140px_rgba(0,0,0,0.4)]">
       
-      <div class="pt-12 pb-2">
+      <div class="pt-12 pb-2 px-6">
         <img
           src="/images/neural-net.png" 
           class="w-[740px] max-w-full mx-auto" />
@@ -113,7 +115,7 @@ import { AnimatedImage, AnimatedParagraph } from '../_index/_components';
             <em>Symbola</em> – its contents, topics, imagery, sources, 
             or symbolism. The Machina will search the original work, look up 
             relevant passages, and reply in modern language. No need to 
-            be fluent in Latin or Greek. Though if you are, the Machina 
+            be fluent in Latin or Greek. Though if you are, the machine 
             will love the opportunity to converse in either!
           </p>
 
@@ -161,7 +163,7 @@ import { AnimatedImage, AnimatedParagraph } from '../_index/_components';
   </main>
 
   <footer class="p-12">
-    <div class="flex justify-between items-end  ">
+    <div class="flex flex-col md:flex-row gap-6 justify-between items-center md:items-end">
       <a href="https://www.furman.edu/humanities-center/" target="_blank">
         <img 
           class="w-[221px]"
