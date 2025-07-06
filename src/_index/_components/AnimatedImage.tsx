@@ -9,7 +9,7 @@ const VARIANTS = {
     filter: 'blur(0px)',
     opacity: 0.65,
     transition: {
-      duration: 2,
+      duration: 1.25,
       ease: 'easeInOut'
     }
   },
@@ -17,7 +17,7 @@ const VARIANTS = {
     filter: 'blur(8px)',
     opacity: 0,
     transition: {
-      duration: 2,
+      duration: 1.25,
       ease: 'easeInOut'
     }
   }
@@ -31,9 +31,6 @@ export const AnimatedImage = (props: HTMLMotionProps<"img">) => {
       variants={VARIANTS}
       initial="hidden"
       whileInView="visible"
-      viewport={{
-        amount: 0.25
-      }}
       {...props} />
   )
 

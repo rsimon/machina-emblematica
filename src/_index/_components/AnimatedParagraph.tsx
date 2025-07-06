@@ -22,7 +22,7 @@ const PARAGRAPH_VARIANTS = {
     filter: 'blur(8px)',
     opacity: 0,
     transition: {
-      duration: 2,
+      duration: 1.25,
       ease: 'easeIn'
     }
   }
@@ -35,7 +35,7 @@ const TOKEN_VARIANTS = {
     scale: 1,
     y: 0,
     transition: {
-      duration: 1.75,
+      duration: 1,
       ease: 'easeInOut'
     }
   }
@@ -48,10 +48,7 @@ export const AnimatedParagraph = (props: AnimatedParagraphProps) => {
       className="motion-safe:transition-transform" 
       variants={PARAGRAPH_VARIANTS}
       initial="hidden"
-      whileInView="visible"
-      viewport={{
-        amount: 0.35
-      }}>
+      whileInView="visible">
       {props.html.map((html, idx) => (
         <motion.span
           className="inline-block origin-center"
