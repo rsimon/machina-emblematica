@@ -3,103 +3,110 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { AnimatedImage, AnimatedParagraph } from '../_index/_components';
 ---
 <BaseLayout title="Machina Emblematica">
-  <header class="font-rosarivo text-white relative w-full overflow-hidden
-    before:absolute before:top-0 before:left-0 before:w-full before:h-11/12 
-    md:before:bg-gradient-to-b before:from-[#121212] md:before:to-transparent 
-    before:z-10 after:absolute after:bottom-0 after:left-0 after:w-full 
-    after:h-11/12 after:bg-gradient-to-t after:from-[#121212] max-md:after:via-[#121212] after:to-transparent after:z-10">
-    <div class="absolute bg-white w-full opacity-30 md:opacity-75 h-full bg-[url(/images/hero-bg.jpg)] bg-cover bg-center" />
+  <div class="relative">
+    <header 
+      role="banner"
+      class="max-md:sticky md:relative max-md:-top-40 font-rosarivo text-white w-full overflow-hidden
+        before:absolute before:top-0 before:left-0 before:w-full before:h-11/12 
+        md:before:bg-gradient-to-b before:from-[#121212] md:before:to-transparent 
+        before:z-10 after:absolute after:bottom-0 after:left-0 after:w-full 
+        after:h-11/12 after:bg-gradient-to-t after:from-[#121212] max-md:after:via-[#121212] 
+        after:to-transparent after:z-10 z-30">
+      <div class="absolute bg-white w-full opacity-30 md:opacity-75 h-full bg-[url(/images/hero-bg.jpg)] bg-cover bg-center" />
 
-    <div class="px-4 py-16 w-full flex justify-center">
-      <img 
-        src="/images/hero-logo-render.png" 
-        class="max-w-[120%] md:max-w-[800px] z-20 relative drop-shadow-[0_0_60px_rgba(0,0,0,0.9)]" />
-    </div>
+      <div class="px-4 py-16 w-full flex justify-center">
+        <img 
+          src="/images/hero-logo-render.png" 
+          class="max-w-[120%] md:max-w-[800px] z-20 relative drop-shadow-[0_0_60px_rgba(0,0,0,0.9)]" />
+      </div>
 
-    <a 
-      class="absolute text-sm text-white/70 hover:text-white inline-block font-sans top-3 right-3 md:top-6 md:right-6 rounded-full z-30 px-5 py-2.5 bg-white/5 hover:bg-white/10 backdrop-blur-xs"
-      href="#about">
-      About
-    </a>
-  </header>
+      <a 
+        class="absolute text-sm text-white/70 hover:text-white inline-block font-sans top-3 right-3 md:top-6 md:right-6 rounded-full z-30 px-5 py-2.5 bg-white/5 hover:bg-white/10 backdrop-blur-xs"
+        href="#about">
+        About
+      </a>
+    </header>
+
+    <main class="font-rosarivo leading-loose">
+      <section id="narrative" 
+        class="py-20 md:py-28 text-white md:text-lg leading-loose italic bg-gradient-to-b from-[#121212] via-[#121212] to-[#1f1f1f]">
+
+        <div class="max-w-2xl text-center md:text-left px-6 mx-auto tracking-wide">
+          <div class="max-md:hidden float-left pl-4 pb-32 -ml-16">
+            <AnimatedImage
+              client:only
+              src="/images/camerarius-portrait.png" 
+              className="w-[300px] mix-blend-luminosity opacity-50 mx-auto" /> 
+          </div>
+
+          <div class="space-y-52 md:pt-20">
+            <div>
+              <AnimatedParagraph 
+                client:only
+                html={[
+                  'In the year 1590,', 'Joachim Camerarius', ' the', 'Younger —',
+                  'botanist, zoologist,', 'and humanist', 'scholar', 'from', 'Nuremberg —',
+                  'published the', '<em class="not-italic">Symbola et</em>', 
+                  '<em class="not-italic">Emblemata</em>.']} />
+            </div>
+
+            <div class="clear-both">
+              <AnimatedParagraph
+                client:only
+                html={[
+                  'The <em class="not-italic">Symbola</em>',
+                  'were part of', 'the popular genre', 
+                  'of <em class="not-italic">emblem books</em>.', 'Descendants of',
+                  'medieval bestiaries,', 'they paired allegorical',
+                  'illustrations —', 'emblems — with', 'reflections on',
+                  'animals, proverbs,', 'fables, morals,', 'or poems,', 
+                  'often drawing from', 'Greek and', 'Roman sources.']} />
+            </div>
+
+            <div>
+              <AnimatedParagraph
+                client:only
+                html={[
+                  'Written in', 'Latin and Greek,',
+                  'the <em class="not-italic">Symbola</em> were', 
+                  'an early encyclopedia.', 'But unlike', 'today\'s encyclopedias,',
+                  'they sought to', 'teach through metaphor',
+                  '— blending natural history,', 'moral reflection,', 'and poetic form.']} />
+            </div>
+
+            <div>
+              <AnimatedParagraph
+                client:only 
+                html={[
+                  'I am the', '<em class="not-italic">Machina Emblematica</em> –', 
+                  'an ancient', 'mechanism built', 'to preserve', 'Camerarius\'', 'knowledge',
+                  ' — and', 'to guide those', 'who seek it.',
+                  'Follow me,', 'and let us', 'together turn', 'the pages', 'of the',
+                  'Symbola et Emblemata', 'once more.'
+                ]} />
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-48 pb-24 mx-auto text-center tracking-wider">
+          <a href="/chat" class="relative inline-block cursor-pointer hover:brightness-110 active:scale-95 transition-all duration-200
+            border-t border-t-[#ae804c] border-b border-b-[#6c4d29]
+            px-28 py-4.5 text-white rounded bg-gradient-to-b from-[#a79077] to-[#6b5d4a]
+            shadow-[0_0_18px_rgba(0,0,0,0.8),inset_0_0_80px_rgba(0,0,0,0.6)]
+            before:absolute before:-top-3 before:-left-3 before:w-24 before:h-24
+            before:bg-[url('/images/cta-top-left.png')] before:bg-no-repeat before:bg-contain before:z-10
+            after:absolute after:-bottom-6 after:-right-4 after:w-24 after:h-20
+            after:bg-[url('/images/cta-bottom-right.png')] after:bg-no-repeat after:bg-contain after:z-10">
+            Ad Emblema
+        </a>
+          
+          <div class="text-sm mt-5 text-white/70">– To the Emblems –</div>
+        </div>
+      </section>
+    </main>
+  </div>
 
   <main class="font-rosarivo leading-loose">
-    <section id="narrative" 
-      class="py-8 md:py-28 text-white md:text-lg leading-loose italic bg-gradient-to-b from-[#121212] via-[#121212] to-[#1f1f1f]">
-
-      <div class="max-w-2xl text-center md:text-left px-6 mx-auto tracking-wide">
-        <div class="max-md:hidden float-left pl-4 pb-32 -ml-16">
-          <AnimatedImage
-            client:only
-            src="/images/camerarius-portrait.png" 
-            className="w-[300px] mix-blend-luminosity opacity-50 mx-auto" /> 
-        </div>
-
-        <div class="space-y-28 md:space-y-52 md:pt-20">
-          <div>
-            <AnimatedParagraph 
-              client:only
-              html={[
-                'In the year 1590,', 'Joachim Camerarius', ' the', 'Younger —',
-                'botanist, zoologist,', 'and humanist', 'scholar', 'from', 'Nuremberg —',
-                'published the', '<em class="not-italic">Symbola et</em>', 
-                '<em class="not-italic">Emblemata</em>.']} />
-          </div>
-
-          <div class="clear-both">
-            <AnimatedParagraph
-              client:only
-              html={[
-                'The <em class="not-italic">Symbola</em>',
-                'were part of', 'the popular genre', 
-                'of <em class="not-italic">emblem books</em>.', 'Descendants of',
-                'medieval bestiaries,', 'they paired allegorical',
-                'illustrations —', 'emblems — with', 'reflections on',
-                'animals, proverbs,', 'fables, morals,', 'or poems,', 
-                'often drawing from', 'Greek and', 'Roman sources.']} />
-          </div>
-
-          <div>
-            <AnimatedParagraph
-              client:only
-              html={[
-                'Written in', 'Latin and Greek,',
-                'the <em class="not-italic">Symbola</em> were', 
-                'an early encyclopedia.', 'But unlike', 'today\'s encyclopedias,',
-                'they sought to', 'teach through metaphor',
-                '— blending natural history,', 'moral reflection,', 'and poetic form.']} />
-          </div>
-
-          <div>
-            <AnimatedParagraph
-              client:only 
-              html={[
-                'I am the', '<em class="not-italic">Machina Emblematica</em> –', 
-                'an ancient', 'mechanism built', 'to preserve', 'Camerarius\'', 'knowledge',
-                ' — and', 'to guide those', 'who seek it.',
-                'Follow me,', 'and let us', 'together turn', 'the pages', 'of the',
-                'Symbola et Emblemata', 'once more.'
-              ]} />
-          </div>
-        </div>
-      </div>
-
-      <div class="pt-48 pb-24 mx-auto text-center tracking-wider">
-        <button class="relative cursor-pointer
-          border-t border-t-[#ae804c] border-b border-b-[#6c4d29]
-          px-28 py-4.5 text-white rounded bg-gradient-to-b from-[#a79077] to-[#6b5d4a]
-          shadow-[0_0_18px_rgba(0,0,0,0.8),inset_0_0_80px_rgba(0,0,0,0.6)]
-          before:absolute before:-top-3 before:-left-3 before:w-24 before:h-24
-          before:bg-[url('/images/cta-top-left.png')] before:bg-no-repeat before:bg-contain before:z-10
-          after:absolute after:-bottom-6 after:-right-4 after:w-24 after:h-20
-          after:bg-[url('/images/cta-bottom-right.png')] after:bg-no-repeat after:bg-contain after:z-10">
-          Ad Emblema
-        </button>
-        
-        <div class="text-sm mt-5 text-white/70">– To the Emblems –</div>
-      </div>
-    </section>
-
     <section 
       id="about"
       class="bg-mocha pb-32 shadow-[inset_0_0_140px_rgba(0,0,0,0.4)]">
