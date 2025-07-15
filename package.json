@@ -22,6 +22,7 @@
     "openai": "^5.8.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-markdown": "^10.1.0",
     "react-scrollama": "^2.4.1",
     "tailwindcss": "^4.1.8"
   },
