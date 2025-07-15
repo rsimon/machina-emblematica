@@ -72,9 +72,6 @@ export const useKlusterAI = () => {
 
         ---
         ${context}`
-      }, {
-        role: 'user',
-        content: question
       }]
     }).then(completion => {
       setBusy(false);
