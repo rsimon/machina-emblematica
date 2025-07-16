@@ -1,0 +1,18 @@
+.llm-response em {
+  color: #fff;
+  font-style: normal;
+}
+
+.llm-response ul {
+  margin: 0;
+  padding: 0;
+}
+
+.llm-response li {
+  margin: 0 0 0 1rem;
+  list-style-type: disc;
+}
+
+.llm-response p {
+  padding: 0.75rem 0;
+}

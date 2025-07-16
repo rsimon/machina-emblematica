@@ -2,6 +2,8 @@ import { useEffect, useRef, useState, type FormEvent } from 'react';
 import Markdown from 'react-markdown';
 import { useChat } from '../../_hooks/useChat';
 
+import './Conversation.css';
+
 interface ConversationProps {
 
   showSources: boolean;
@@ -35,30 +37,34 @@ export const Conversation = (props: ConversationProps) => {
     <div className="min-h-full flex flex-col">
       <div className={containerClass}>
         <div className="flex-1 px-4">
-          <ul className="space-y-6 flex flex-col items-end py-4">
+          <ul className="space-y-6 flex flex-col items-end py-4 pb-16">
             {chat.map((message, idx) => message.from === 'me' ? (
               <li 
                 key={`message-${message.from}-${idx}`}
-                className="bg-mocha w-2/3 rounded-3xl px-5 py-2.5">
+                className="bg-gradient-to-b from-[#54493a] to-[#594c3f] w-2/3 rounded-md px-5 py-2.5 text-white/70">
                 {message.text}
               </li>
             ) : (
               <li 
                 key={`message-${message.from}-${idx}`}
-                className="font-rosarivo text-white/80 whitespace-pre-line rounded-md p-4 leading-loose tracking-wide italic">
+                className="llm-response font-rosarivo text-white/80 rounded-md py-4 pr-8 leading-loose tracking-wide italic">
                 <Markdown>{message.text}</Markdown>
               </li>
             ))}
           </ul>
 
           {busy && (
-            <div className="font-rosarivo italic text-white/70 tracking-wider text-base mx-auto animate-pulse pb-4">Thinking...</div>
+            <div className="font-rosarivo w-full flex italic text-white/70 tracking-wider 
+              text-base mx-auto animate-pulse justify-center p-4 pb-16">
+              Thinking...
+            </div>
           )}
 
           <div ref={chatEndRef} />
         </div>
 
-        <form onSubmit={onSubmit} className="sticky bottom-0 w-full px-4 py-0 flex-shrink-0">
+        <form onSubmit={onSubmit} 
+          className={`sticky bottom-0 w-full py-0 flex-shrink-0 ${props.showSources ? 'px-4' : 'px-10'}`}>
           <div className="relative pb-6 z-10 
             before:absolute before:left-0 before:-top-8 before:z-10
             before:w-full before:h-12 before:bg-contain before:bg-center 
@@ -70,7 +76,7 @@ export const Conversation = (props: ConversationProps) => {
               autoFocus
               autoCorrect="off"
               className="relative p-4 w-full rounded-md text-white/70 text-base tracking-wide
-                outline-none bg-gradient-to-b from-[#6b5d4a] to-[#a79077] 
+                outline-none bg-gradient-to-b from-[#6b5d4a] to-[#8d7965] 
                 shadow-[0_0_18px_rgba(0,0,0,0.8),inset_0_0_80px_rgba(0,0,0,0.6)]
                 border border-[#6e5539] placeholder-[#a79077]"
               value={value}

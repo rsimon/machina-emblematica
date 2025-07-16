@@ -4,7 +4,7 @@ import { Conversation } from './conversation/Conversation';
 
 export const ChatInterface = () => {
 
-  const [showSources, setShowSources] = useState(true);
+  const [showSources, setShowSources] = useState(false);
 
   const sourcesClass = showSources 
     ? 'w-7/12 transition-all duration-300 ease-in-out' 
