@@ -22,7 +22,12 @@ export const useMarqo = () => {
         searchMethod: 'HYBRID'
       })
     }).then(res => res.json()).then((data: MarqoResponse) => {
-      const pages = [...new Set(data.hits.map(h => h.textID))];
+      console.log(data);
+      const pages = [...new Set(data.hits.map(h => {
+        const page = h.page.length === 5 ? h.page : `0${h.page}`;
+        return `https://api.digitale-sammlungen.de/iiif/image/v2/${h.documentID}_${page}/full/full/0/default.jpg`
+        // return `https://api.digitale-sammlungen.de/iiif/image/v2/${h.textID.replaceAll('_', '/')}.jpg`
+      }))];
       const context = data.hits.map((d: any) => d.text_page).join('\n\n');
       return { context, pages };
     });
