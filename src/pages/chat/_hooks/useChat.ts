@@ -8,6 +8,8 @@ export interface ChatMessage {
 
   text: string;
 
+  attachments?: string[];
+
 }
 
 
@@ -21,9 +23,11 @@ export const useChat = () => {
 
   const sendMessage = (text: string, lastReply?: string) => {
     setChat(current => ([...current, { from: 'me', text }]));
-    search(`${text} ${lastReply ? lastReply : ''}`.trim()).then(context => {
+
+    search(`${text} ${lastReply ? lastReply : ''}`.trim()).then(({ context, pages }) => {
       generate(text, context, chat).then((text: string) => {
-        setChat(current => ([...current, { from: 'machina', text }]));
+        const attachments = pages.map(str => `${str.replaceAll('_', '/')}.jpg`);
+        setChat(current => ([...current, { from: 'machina', text, attachments }]));
       });
     })
   }

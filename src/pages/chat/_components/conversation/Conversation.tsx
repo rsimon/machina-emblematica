@@ -6,7 +6,9 @@ import './Conversation.css';
 
 interface ConversationProps {
 
-  showSources: boolean;
+  currentSource?: string;
+
+  onShowSource(src: string): void;
 
 }
 
@@ -29,7 +31,7 @@ export const Conversation = (props: ConversationProps) => {
     setValue('');
   }
 
-  const containerClass = props.showSources 
+  const containerClass = props.currentSource 
     ? 'container relative max-w-2xl mx-auto flex-1 flex flex-col min-h-full'
     : 'container relative max-w-2xl mx-auto flex-1 flex flex-col min-h-full';
 
@@ -47,8 +49,26 @@ export const Conversation = (props: ConversationProps) => {
             ) : (
               <li 
                 key={`message-${message.from}-${idx}`}
-                className="llm-response font-rosarivo text-white/80 rounded-md py-4 pr-8 leading-loose tracking-wide italic">
-                <Markdown>{message.text}</Markdown>
+                className="font-rosarivo text-white/80 rounded-md py-4 pr-8 leading-loose tracking-wide italic">
+                <div className="llm-response">
+                  <Markdown>{message.text}</Markdown>
+                </div>
+
+                {(message.attachments || []).length > 0 && (
+                  <ul className="flex gap-2 pt-4">
+                    {message.attachments?.map(url => (
+                      <li>
+                        <button 
+                          className="cursor-pointer"
+                          onClick={() => props.onShowSource(url)}>
+                          <img 
+                            src={url} 
+                            className="rounded-full size-10 border-2 border-white/70 object-cover" />
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </li>
             ))}
           </ul>
@@ -64,13 +84,13 @@ export const Conversation = (props: ConversationProps) => {
         </div>
 
         <form onSubmit={onSubmit} 
-          className={`sticky bottom-0 w-full py-0 flex-shrink-0 ${props.showSources ? 'px-4' : 'px-10'}`}>
+          className={`sticky bottom-0 w-full py-0 flex-shrink-0 ${props.currentSource ? 'px-4' : 'px-10'}`}>
           <div className="relative pb-6 z-10 
-            before:absolute before:left-0 before:-top-8 before:z-10
-            before:w-full before:h-12 before:bg-contain before:bg-center 
+            before:absolute before:left-0 before:-top-6 before:z-10
+            before:w-full before:h-10 before:bg-contain before:bg-center 
             before:bg-[url('/images/chat-input-top.png')] before:bg-no-repeat
-            after:absolute after:left-0 after:bottom-3 after:z-10
-            after:w-full after:h-5.5 after:bg-contain after:bg-center 
+            after:absolute after:left-0 after:bottom-4 after:z-10
+            after:w-full after:h-3.5 after:bg-contain after:bg-center 
             after:bg-[url('/images/chat-input-bottom.png')] after:bg-no-repeat">
             <input 
               autoFocus

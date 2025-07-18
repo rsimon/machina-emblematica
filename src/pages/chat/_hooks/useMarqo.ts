@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import type { MarqoResponse } from './types';
 
 // https://colab.research.google.com/drive/1rEUaYDLIvpOo5ZTQW6-YqlOzs6_ZdL8c?authuser=1
 
@@ -20,10 +21,10 @@ export const useMarqo = () => {
         limit: 10,
         searchMethod: 'HYBRID'
       })
-    }).then(res => res.json()).then(data => {
+    }).then(res => res.json()).then((data: MarqoResponse) => {
+      const pages = [...new Set(data.hits.map(h => h.textID))];
       const context = data.hits.map((d: any) => d.text_page).join('\n\n');
-      console.log(context);
-      return context;
+      return { context, pages };
     });
   }, []);
 

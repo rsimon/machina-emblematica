@@ -4,26 +4,26 @@ import { Conversation } from './conversation/Conversation';
 
 export const ChatInterface = () => {
 
-  const [showSources, setShowSources] = useState(false);
+  const [currentSource, setCurrentSource] = useState<string | undefined>(undefined);
 
-  const sourcesClass = showSources 
+  const sourcesClass = currentSource 
     ? 'w-7/12 transition-all duration-300 ease-in-out' 
     : 'w-0 transition-all duration-300 ease-in-out overflow-hidden';
 
   return (
     <div className="h-full w-full overflow-y-auto">
-      <button 
-        onClick={() => setShowSources(s => !s)} className="absolute top-2 left-2 z-20">Toggle
-      </button>
-
       <div className="flex min-h-full w-full">
         <div className={sourcesClass}>
-          <Sources />
+          {currentSource && (
+            <Sources 
+              currentSource={currentSource} />
+          )}
         </div>
 
         <div className="flex-1 min-h-full">
           <Conversation 
-            showSources={showSources} />
+            currentSource={currentSource} 
+            onShowSource={setCurrentSource} />
         </div>
       </div>
     </div>

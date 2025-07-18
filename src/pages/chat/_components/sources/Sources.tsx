@@ -1,8 +1,14 @@
-export const Sources = () => {
+interface SourcesProps {
+
+  currentSource: string;
+
+}
+
+export const Sources = (props: SourcesProps) => {
 
   return (
-    <div className="bg-red-500">
-
+    <div>
+      <img src={props.currentSource} />
     </div>
   )
 
