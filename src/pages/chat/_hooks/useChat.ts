@@ -26,7 +26,7 @@ export const useChat = () => {
 
     search(`${text} ${lastReply ? lastReply : ''}`.trim()).then(({ context, pages }) => {
       generate(text, context, chat).then((text: string) => {
-        const attachments = pages.map(str => `${str.replaceAll('_', '/')}.jpg`);
+        const attachments = pages.map(str => `${str.replaceAll  ('_', '/')}.jpg`);
         setChat(current => ([...current, { from: 'machina', text, attachments }]));
       });
     })
