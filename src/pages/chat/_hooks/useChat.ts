@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useMarqo } from './useMarqo';
-import { useKlusterAI } from './useKlusterAI';
+import { useOpenRouter } from './useOpenRouter';
 
 export interface ChatMessage {
 
@@ -19,7 +19,7 @@ export const useChat = () => {
 
   const { search } = useMarqo();
 
-  const { generate, busy } = useKlusterAI();
+  const { generate, busy } = useOpenRouter();
 
   const sendMessage = (text: string, lastReply?: string) => {
     setChat(current => ([...current, { from: 'me', text }]));
