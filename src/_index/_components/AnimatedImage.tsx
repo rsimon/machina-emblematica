@@ -1,6 +1,6 @@
-import { motion, type HTMLMotionProps } from 'motion/react';
+import { motion, type HTMLMotionProps, type Variants } from 'motion/react';
 
-const VARIANTS = {
+const VARIANTS: Variants = {
   hidden: { 
     filter: 'blur(8px)',
     opacity: 0
@@ -31,6 +31,7 @@ export const AnimatedImage = (props: HTMLMotionProps<"img">) => {
       variants={VARIANTS}
       initial="hidden"
       whileInView="visible"
+      viewport={{ once: true }}
       {...props} />
   )
 

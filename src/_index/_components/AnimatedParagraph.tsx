@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { motion, type Variants } from 'motion/react';
 import type { ReactNode } from 'react';
 
 interface AnimatedParagraphProps {
@@ -9,7 +9,7 @@ interface AnimatedParagraphProps {
 
 }
 
-const PARAGRAPH_VARIANTS = {
+const PARAGRAPH_VARIANTS: Variants = {
   hidden: { 
     filter: 'blur(8px)',
   },
@@ -31,7 +31,7 @@ const PARAGRAPH_VARIANTS = {
   }
 };
 
-const CHILDREN_VARIANTS = (delay: number) => ({
+const CHILDREN_VARIANTS = (delay: number): Variants => ({
   hidden: { 
     opacity: 0,
     filter: 'blur(8px)',
@@ -55,7 +55,7 @@ const CHILDREN_VARIANTS = (delay: number) => ({
   }
 });
 
-const TOKEN_VARIANTS = {
+const TOKEN_VARIANTS: Variants = {
   hidden: { opacity: 0, scale: 0.97, y: 8 },
   visible: {
     opacity: 1,
@@ -75,7 +75,8 @@ export const AnimatedParagraph = (props: AnimatedParagraphProps) => {
       className="motion-safe:transition-transform" 
       variants={PARAGRAPH_VARIANTS}
       initial="hidden"
-      whileInView="visible">
+      whileInView="visible"
+      viewport={{ once: true }}>
       <p>
         {props.html.map((html, idx) => (
           <motion.span
@@ -98,7 +99,8 @@ export const AnimatedParagraph = (props: AnimatedParagraphProps) => {
       className="motion-safe:transition-transform" 
       variants={PARAGRAPH_VARIANTS}
       initial="hidden"
-      whileInView="visible">
+      whileInView="visible"
+      viewport={{ once: true }}>
       {props.html.map((html, idx) => (
         <motion.span
           className="inline-block origin-center"
