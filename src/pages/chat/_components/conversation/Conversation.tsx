@@ -43,7 +43,7 @@ export const Conversation = (props: ConversationProps) => {
             {chat.map((message, idx) => message.from === 'me' ? (
               <li 
                 key={`message-${message.from}-${idx}`}
-                className="bg-gradient-to-b from-[#54493a] to-[#594c3f] w-2/3 rounded-md px-5 py-2.5 text-white/70">
+                className="bg-linear-to-b from-[#54493a] to-[#594c3f] w-2/3 rounded-md px-5 py-2.5 text-white/70">
                 {message.text}
               </li>
             ) : (
@@ -84,7 +84,7 @@ export const Conversation = (props: ConversationProps) => {
         </div>
 
         <form onSubmit={onSubmit} 
-          className={`sticky bottom-0 w-full py-0 flex-shrink-0 ${props.currentSource ? 'px-4' : 'px-10'}`}>
+          className={`sticky bottom-0 w-full py-0 shrink-0 ${props.currentSource ? 'px-4' : 'px-10'}`}>
           <div className="relative pb-6 z-10 
             before:absolute before:left-0 before:-top-6 before:z-10
             before:w-full before:h-10 before:bg-contain before:bg-center 
@@ -96,9 +96,9 @@ export const Conversation = (props: ConversationProps) => {
               autoFocus
               autoCorrect="off"
               className="relative p-4 w-full rounded-md text-white/70 text-base tracking-wide
-                outline-none bg-gradient-to-b from-[#6b5d4a] to-[#8d7965] 
+                outline-none bg-linear-to-b from-[#6b5d4a] to-[#8d7965] 
                 shadow-[0_0_18px_rgba(0,0,0,0.8),inset_0_0_80px_rgba(0,0,0,0.6)]
-                border border-[#6e5539] placeholder-[#a79077]"
+                border border-[#6e5539] placeholder-mocha"
               value={value}
               placeholder="Ask any question..."
               onChange={evt => setValue(evt.target.value)} />
