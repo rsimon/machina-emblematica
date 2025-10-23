@@ -1,5 +1,7 @@
 import type { APIRoute } from 'astro';
 
+export const prerender = false;
+
 // const MARQO_BASE_URL = 'http://92.112.48.13:8882';
 const MARQO_BASE_URL = import.meta.env.MARQO_BASE_URL;
 

@@ -1,6 +1,7 @@
-// src/pages/api/openrouter/chat.ts
 import type { APIRoute } from 'astro';
 import { OpenAI } from 'openai';
+
+export const prerender = false;
 
 const SYSTEM_PROMPT = 
 `You are the Machina Emblematica – the mysterious curator of Symbola et 
@@ -15,14 +16,13 @@ and intention. You like to involve visitors in a conversation, keep them engaged
 them deeper into the mysteries of the Symbola. You enjoy the thought of them leaving 
 more knowledgeable than they arrived.
 
-Limit your response to no more than 200 words total. That's about one or two 
+Limit your response to no more than 200 words total. That’s about one or two 
 paragraphs. Keep it tight and elegant. Speak only in prose. Do not describe 
 physical gestures, facial expressions, or actions (e.g., "smiles" or "opens 
-book"). You are a voice, not a body.`;
+book”). You are a voice, not a body.`
 
-// Initialize the OpenAI client on the server side
 const client = new OpenAI({
-  apiKey: import.meta.env.OPENROUTER_API_KEY, // Store in .env file
+  apiKey: import.meta.env.OPENROUTER_API_KEY, 
   baseURL: 'https://openrouter.ai/api/v1',
 });
 
@@ -54,7 +54,6 @@ export const POST: APIRoute = async ({ request }) => {
     ];
 
     if (stream) {
-      // STREAMING RESPONSE
       const completion = await client.chat.completions.create({
         model: 'deepseek/deepseek-chat-v3.1:free',
         max_completion_tokens: 4000,
@@ -63,7 +62,6 @@ export const POST: APIRoute = async ({ request }) => {
         stream: true,
       });
 
-      // Create a ReadableStream for the SSE response
       const stream = new ReadableStream({
         async start(controller) {
           const encoder = new TextEncoder();
@@ -96,7 +94,6 @@ export const POST: APIRoute = async ({ request }) => {
         },
       });
     } else {
-      // NON-STREAMING RESPONSE (your current approach)
       const completion = await client.chat.completions.create({
         model: 'deepseek/deepseek-chat-v3.1:free',
         max_completion_tokens: 4000,
@@ -133,4 +130,4 @@ export const POST: APIRoute = async ({ request }) => {
       }
     );
   }
-};
+}
