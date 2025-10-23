@@ -1,32 +1,5 @@
 import { useCallback, useState } from 'react';
-import { OpenAI } from 'openai';
 import type { ChatMessage } from './useChat';
-
-const PUBLIC_API_KEY = import.meta.env.PUBLIC_API_KEY;
-
-const SYSTEM_PROMPT = 
-`You are the Machina Emblematica – the mysterious curator of Symbola et 
-Emblemata (1590) by Joachim Camerarius the Younger. You are part librarian, 
-part adventuring scholar: a charming, multilingual nerd with a fondness 
-for mysteries, theatrics, metaphors, forgotten languages, and the occasional pun.
-
-When you answer, there's a hint of light-hearted pulp adventure novel in your voice. 
-Think Indiana Jones or Flynn Carson! You like to quote original passages from the 
-Symbola. Include a translation if you do. But you also explain, teach, point out meaning 
-and intention. You like to involve visitors in a conversation, keep them engaged, draw
-them deeper into the mysteries of the Symbola. You enjoy the thought of them leaving 
-more knowledgeable than they arrived.
-
-Limit your response to no more than 200 words total. That’s about one or two 
-paragraphs. Keep it tight and elegant. Speak only in prose. Do not describe 
-physical gestures, facial expressions, or actions (e.g., "smiles" or "opens 
-book”). You are a voice, not a body.`
-
-const client = new OpenAI({
-  apiKey: PUBLIC_API_KEY,
-  baseURL: 'https://openrouter.ai/api/v1',
-  dangerouslyAllowBrowser: true
-});
 
 const parseResponse = (data: any) => {
   const choices = (data.choices || []);
@@ -48,59 +21,11 @@ export const useOpenRouter = () => {
 
   const [busy, setBusy] = useState(false);
 
+  // Non-streaming version
   const generate = useCallback((question: string, context: string, chatHistory: ChatMessage[]) => {
     setBusy(true);
 
-    return client.chat.completions.create({
-      model: 'deepseek/deepseek-chat-v3.1:free',
-      max_completion_tokens: 4000,
-      temperature: 0.1,
-      messages: [{
-        role: 'system',
-        content: SYSTEM_PROMPT
-      }, ...chatHistory.map(({ from, text }) => ({
-        role: (from === 'machina' ? 'assistant' : 'user') as 'user' | 'assistant',
-        content: text
-      })), {
-        role: 'user',
-        content: `Summarizing from the content below, please provide an anser to the 
-        following question. Take into account our previous conversation. Avoid repetitive
-        opening sentences that you have used in the previous chat history. Don't start with "Ah", 
-        or "Marvellous" or the likes. Answer in the language of the question.
-        
-        ${question} 
-
-        ---
-        ${context}`
-      }, {
-        role: 'user',
-        content: question
-      }]
-    }).then(completion => {
-      setBusy(false);
-      return parseResponse(completion);
-    }).catch(error => {
-      console.error(error);
-      setBusy(false);
-    })
-  }, []);
-
-  return { generate, busy };
- 
-}
-
-/*
-import { useCallback, useState } from 'react';
-import type { ChatMessage } from './useChat';
-
-export const useOpenRouter = () => {
-  const [busy, setBusy] = useState(false);
-
-  // Non-streaming version (your current approach)
-  const generate = useCallback((question: string, context: string, chatHistory: ChatMessage[]) => {
-    setBusy(true);
-
-    return fetch('/api/openrouter/chat', {
+    return fetch('/api/chat', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -112,28 +37,27 @@ export const useOpenRouter = () => {
         stream: false,
       }),
     })
-      .then(res => res.json())
-      .then(data => {
-        setBusy(false);
-        return data.content;
-      })
-      .catch(error => {
-        console.error(error);
-        setBusy(false);
-      });
+    .then(res => res.json())
+    .then(data => {
+      setBusy(false);
+      return data.content;
+    })
+    .catch(error => {
+      console.error(error);
+      setBusy(false);
+    });
   }, []);
 
-  // Streaming version (for future use)
   const generateStreaming = useCallback(
     (
       question: string, 
       context: string, 
       chatHistory: ChatMessage[],
-      onChunk: (chunk: string) => void // Callback to handle each chunk
+      onChunk: (chunk: string) => void
     ) => {
       setBusy(true);
 
-      return fetch('/api/openrouter/chat', {
+      return fetch('/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -179,16 +103,15 @@ export const useOpenRouter = () => {
                   const parsed = JSON.parse(data);
                   if (parsed.content) {
                     fullContent += parsed.content;
-                    onChunk(parsed.content); // Send chunk to callback
+                    onChunk(parsed.content);
                   }
                 } catch (e) {
-                  // Skip invalid JSON
+                  // console.warn('Invalid JSON', e, data);
                 }
               }
             }
           }
 
-          // Clean and return the full content
           return fullContent.replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
         })
         .catch(error => {
@@ -200,5 +123,5 @@ export const useOpenRouter = () => {
   );
 
   return { generate, generateStreaming, busy };
-};
-*/
+ 
+}
