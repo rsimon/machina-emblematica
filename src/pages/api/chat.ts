@@ -3,6 +3,8 @@ import { OpenAI } from 'openai';
 
 export const prerender = false;
 
+const model = import.meta.env.OPENROUTER_API_MODEL;
+
 const SYSTEM_PROMPT = 
 `You are the Machina Emblematica – the mysterious curator of Symbola et 
 Emblemata (1590) by Joachim Camerarius the Younger. You are part librarian, 
@@ -55,7 +57,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     if (stream) {
       const completion = await client.chat.completions.create({
-        model: 'deepseek/deepseek-chat-v3.1:free',
+        model,
         max_completion_tokens: 4000,
         temperature: 0.1,
         messages,
@@ -95,7 +97,7 @@ export const POST: APIRoute = async ({ request }) => {
       });
     } else {
       const completion = await client.chat.completions.create({
-        model: 'deepseek/deepseek-chat-v3.1:free',
+        model,
         max_completion_tokens: 4000,
         temperature: 0.1,
         messages,
