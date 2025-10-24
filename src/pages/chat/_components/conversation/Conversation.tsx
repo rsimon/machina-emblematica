@@ -1,14 +1,15 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import Markdown from 'react-markdown';
 import { useChat } from '../../_hooks/useChat';
+import type { Page } from '../../types';
 
 import './Conversation.css';
 
 interface ConversationProps {
 
-  currentSource?: string;
+  currentSource?: Page;
 
-  onShowSource(src: string): void;
+  onShowSource(page: Page): void;
 
 }
 
@@ -56,13 +57,13 @@ export const Conversation = (props: ConversationProps) => {
 
                 {(message.attachments || []).length > 0 && (
                   <ul className="flex flex-wrap gap-2 pt-4">
-                    {message.attachments?.map(url => (
-                      <li key={url}>
+                    {message.attachments?.map(page => (
+                      <li key={page.url}>
                         <button 
                           className="cursor-pointer"
-                          onClick={() => props.onShowSource(url)}>
+                          onClick={() => props.onShowSource(page)}>
                           <img 
-                            src={url} 
+                            src={page.url} 
                             className="rounded-full shrink-0 size-10 border-2 border-white/70 object-cover" />
                         </button>
                       </li>

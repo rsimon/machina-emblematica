@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { Sources } from './sources/Sources';
 import { Conversation } from './conversation/Conversation';
+import type { Page } from '../types';
 
 export const ChatInterface = () => {
 
-  const [currentSource, setCurrentSource] = useState<string | undefined>(undefined);
+  const [currentSource, setCurrentSource] = useState<Page | undefined>(undefined);
 
   const sourcesClass = currentSource 
     ? 'w-7/12 transition-all duration-300 ease-in-out' 

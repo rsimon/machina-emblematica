@@ -1,17 +1,7 @@
 import { useState } from 'react';
 import { useMarqo } from './useMarqo';
 import { useOpenRouter } from './useOpenRouter';
-
-export interface ChatMessage {
-
-  from: 'me' | 'machina'
-
-  text: string;
-
-  attachments?: string[];
-
-}
-
+import type { ChatMessage } from '../types';
 
 export const useChat = () => {
 

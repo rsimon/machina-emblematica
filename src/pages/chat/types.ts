@@ -29,3 +29,22 @@ export interface MarqoHit {
   text_page: string;
 
 }
+
+export interface ChatMessage {
+
+  from: 'me' | 'machina'
+
+  text: string;
+
+  attachments?: Page[];
+
+}
+
+
+export interface Page {
+
+  pageNumber?: number;
+
+  url: string; 
+
+}
