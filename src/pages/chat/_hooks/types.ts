@@ -14,7 +14,9 @@ export interface MarqoResponse {
 
 export interface MarqoHit {
 
-  documentID: string;
+  document: string;
+
+  image_url: string;
 
   page: string;
 

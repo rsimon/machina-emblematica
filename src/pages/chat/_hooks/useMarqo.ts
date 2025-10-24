@@ -17,11 +17,8 @@ export const useMarqo = () => {
     })
     .then(res => res.json())
     .then((data: MarqoResponse) => {
-        console.log(data);
-        const pages = [...new Set(data.hits.map(h => {
-          const page = h.page.length === 5 ? h.page : `0${h.page}`;
-          return `https://api.digitale-sammlungen.de/iiif/image/v2/${h.documentID}_${page}/full/full/0/default.jpg`
-        }))];
+        // console.log(data);
+        const pages = [...new Set(data.hits.map(h => h.image_url))];
         const context = data.hits.map((d: any) => d.text_page).join('\n\n');
         return { context, pages };
       });
