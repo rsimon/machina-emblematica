@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import type { ChatMessage } from './useChat';
+import type { ChatMessage } from '../types';
 
 const parseResponse = (data: any) => {
   const choices = (data.choices || []);
