@@ -18,6 +18,8 @@ export const useMarqo = () => {
     .then((data: MarqoResponse[]) => {
       const hits = data.flatMap(r => r.hits);
 
+      console.log(hits);
+
       const pages = hits.reduce<Page[]>((deduplicated, hit) => {
         const imageUrl = hit.image_url;
         const viewerUrl = hit.viewer_url;
