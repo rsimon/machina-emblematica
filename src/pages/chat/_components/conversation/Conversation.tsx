@@ -101,7 +101,7 @@ export const Conversation = (props: ConversationProps) => {
                 shadow-[0_0_18px_rgba(0,0,0,0.8),inset_0_0_80px_rgba(0,0,0,0.6)]
                 border border-[#6e5539] placeholder-mocha"
               value={value}
-              placeholder="Ask any question..."
+              placeholder="Ask me anything about the Symbola et Emblemata..."
               onChange={evt => setValue(evt.target.value)} />
           </div>
 
