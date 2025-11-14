@@ -1,5 +1,7 @@
 export interface MarqoResponse {
 
+  index: string;
+
   limit: number;
 
   offset: number;
@@ -20,13 +22,19 @@ export interface MarqoHit {
 
   page: string;
 
+  text_page: string;
+
+  viewer_url: string;
+
+}
+
+export interface MarqoTextHit extends MarqoHit {
+
   regionID: string;
 
   textID: string;
 
   text_chunk: string;
-
-  text_page: string;
 
 }
 
@@ -45,6 +53,8 @@ export interface Page {
 
   pageNumber?: number;
 
-  url: string; 
+  imageUrl: string; 
+
+  viewerUrl: string;
 
 }

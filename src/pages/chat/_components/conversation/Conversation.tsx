@@ -58,12 +58,12 @@ export const Conversation = (props: ConversationProps) => {
                 {(message.attachments || []).length > 0 && (
                   <ul className="flex flex-wrap gap-2 pt-4">
                     {message.attachments?.map(page => (
-                      <li key={page.url}>
+                      <li key={page.imageUrl}>
                         <button 
                           className="cursor-pointer"
                           onClick={() => props.onShowSource(page)}>
                           <img 
-                            src={page.url} 
+                            src={page.imageUrl} 
                             className="rounded-full shrink-0 size-10 border-2 border-white/70 object-cover" />
                         </button>
                       </li>

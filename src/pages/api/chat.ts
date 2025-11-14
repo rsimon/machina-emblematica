@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { OpenAI } from 'openai';
+import type { ChatMessage, Page } from '../chat/types';
 
 export const prerender = false;
 
@@ -31,27 +32,41 @@ const client = new OpenAI({
 export const POST: APIRoute = async ({ request }) => {
   try {
     const { question, context, chatHistory, stream = false } = await request.json();
+    
+    const currentAttachments: Page[] = chatHistory[chatHistory.length - 1]?.attachments || [];
 
     const messages = [
       {
         role: 'system' as const,
         content: SYSTEM_PROMPT
       },
-      ...chatHistory.map(({ from, text }: { from: string; text: string }) => ({
+      ...chatHistory.map(({ from, text,  }: ChatMessage) => ({
         role: (from === 'machina' ? 'assistant' : 'user') as 'user' | 'assistant',
         content: text
       })),
       {
         role: 'user' as const,
-        content: `Summarizing from the content below, please provide an answer to the 
-        following question. Take into account our previous conversation. Avoid repetitive
-        opening sentences that you have used in the previous chat history. Don't start with "Ah", 
-        or "Marvellous" or the likes. Answer in the language of the question.
-        
-        ${question} 
+        content: [
+          ...currentAttachments.map(page => ({
+            type: 'image_url',
+            image_url: {
+              url: page.imageUrl
+            }
+          })),
+          {
+            type: 'text',
+            text: 
+              `Summarizing from the content below, please provide an answer to the 
+              following question. Take into account our previous conversation. Avoid repetitive
+              opening sentences that you have used in the previous chat history. Don't start with "Ah", 
+              or "Marvellous" or the likes. Answer in the language of the question.
 
-        ---
-        ${context}`
+              ${question} 
+
+              ---
+              ${context}`
+          }
+        ]
       }
     ];
 

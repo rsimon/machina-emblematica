@@ -2,28 +2,28 @@ import type { APIRoute } from 'astro';
 
 export const prerender = false;
 
-// const MARQO_BASE_URL = 'http://92.112.48.13:8882';
 const MARQO_BASE_URL = import.meta.env.MARQO_BASE_URL;
 
-// const MARQO_INDEX = 'camerarius_testIndex_full-texts';
-const MARQO_INDEX = import.meta.env.MARQO_INDEX;
+const INDEXES = [
+  import.meta.env.MARQO_TXT_INDEX,
+  import.meta.env.MARQO_IMG_INDEX
+]
 
 export const POST: APIRoute = async ({ request }) => {
   try {
     const body = await request.json();
-    
-    const response = await fetch(`${MARQO_BASE_URL}/indexes/${MARQO_INDEX}/search`, {
+
+    const requests = INDEXES.map(index => fetch(`${MARQO_BASE_URL}/indexes/${index}/search`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),
-    });
+    }).then(res => res.json()).then(data => ({ index, ...data })));
 
-    const data = await response.json();
+    const results = await Promise.all(requests);
 
-    return new Response(JSON.stringify(data), {
-      status: response.status,
+    return new Response(JSON.stringify(results), {
       headers: {
         'Content-Type': 'application/json',
       },

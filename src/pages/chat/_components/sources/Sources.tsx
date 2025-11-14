@@ -20,33 +20,44 @@ const patchIIIFURL = (url: string, pageNumber: number, changeTo: number) => {
 export const Sources = (props: SourcesProps) => {
 
   const { left, right } = useMemo(() => {
-    const { pageNumber, url } = props.currentSource;
+    const { pageNumber, imageUrl } = props.currentSource;
 
     if (pageNumber === undefined)
-      return { left: props.currentSource.url };
+      return { left: props.currentSource.imageUrl };
 
     if (pageNumber % 2 === 0) {
-      const left = url;
-      const right = patchIIIFURL(url, pageNumber, pageNumber + 1);
+      const left = imageUrl;
+      const right = patchIIIFURL(imageUrl, pageNumber, pageNumber + 1);
       return { left, right };
     } else {
-      const left = patchIIIFURL(url, pageNumber, pageNumber - 1);
-      const right = props.currentSource.url;
+      const left = patchIIIFURL(imageUrl, pageNumber, pageNumber - 1);
+      const right = props.currentSource.imageUrl;
       return { left, right };
     }
   }, [props.currentSource]);
 
   return (
-    <div className="fixed top-0 h-screen w-7/12 flex justify-center items-center  -rotate-3">
-      <img 
-        src={left} 
-        className={`max-w-4/12 max-h-[80vh] ${right ? 'rounded-l' :  'rounded'}`} />
-
-      {right && (
+    <div className="fixed top-0 h-screen w-7/12">
+      <div className="h-screen flex justify-center items-center -rotate-3">
         <img 
-          src={right} 
-          className="max-w-4/12 max-h-[80vh] rounded-r" />  
-      )}
+          src={left} 
+          className={`max-w-4/12 max-h-[80vh] ${right ? 'rounded-l' :  'rounded'}`} />
+
+        {right && (
+          <img 
+            src={right} 
+            className="max-w-4/12 max-h-[80vh] rounded-r" />  
+        )}
+      </div>
+      
+      <div 
+        className="fixed bottom-4 left-4 text-white/70 text-sm">
+        <a 
+          target="_blank"
+          href={props.currentSource.viewerUrl}>
+          View at <span className="underline">Münchener Digitale Bibliothek</span>
+        </a>
+      </div>
     </div>
   )
 
