@@ -71,12 +71,14 @@ export const POST: APIRoute = async ({ request }) => {
     ];
 
     if (stream) {
+      // @ts-ignore
       const completion = await client.chat.completions.create({
         model,
+        transforms: ['middle-out'], 
         max_completion_tokens: 4000,
         temperature: 0.1,
         messages,
-        stream: true,
+        stream: true
       });
 
       const stream = new ReadableStream({
