@@ -47,7 +47,7 @@ export const POST: APIRoute = async ({ request }) => {
       {
         role: 'user' as const,
         content: [
-          ...currentAttachments.map(page => ({
+          ...currentAttachments.slice(0, 3).map(page => ({
             type: 'image_url',
             image_url: {
               url: page.imageUrl
@@ -71,10 +71,9 @@ export const POST: APIRoute = async ({ request }) => {
     ];
 
     if (stream) {
-      // @ts-ignore
       const completion = await client.chat.completions.create({
         model,
-        transforms: ['middle-out'], 
+        // transforms: ['middle-out'], 
         max_completion_tokens: 4000,
         temperature: 0.1,
         messages,
