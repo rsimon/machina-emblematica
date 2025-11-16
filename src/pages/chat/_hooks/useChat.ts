@@ -22,12 +22,9 @@ export const useChat = () => {
         generate(text, context, chat).then((text: string) => {
           setChat(current => ([...current, { from: 'machina', text, attachments: pages }]));
         }).catch(error => {
-          console.log('caught it', JSON.stringify(error));
           setError(error);
         })
       }).catch(error => {
-        console.log('yikes error!')
-        console.error(error);
         setError(error.message);
       });
   }
