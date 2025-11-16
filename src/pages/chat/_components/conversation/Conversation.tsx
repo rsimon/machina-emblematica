@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import Markdown from 'react-markdown';
+import { Frown } from 'lucide-react';
 import { useChat } from '../../_hooks/useChat';
 import type { Page } from '../../types';
 
@@ -19,7 +20,7 @@ export const Conversation = (props: ConversationProps) => {
 
   const chatEndRef = useRef<HTMLDivElement>(null);
 
-  const { busy, chat, sendMessage } = useChat();
+  const { busy, chat, error, sendMessage } = useChat();
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -81,6 +82,19 @@ export const Conversation = (props: ConversationProps) => {
             </div>
           )}
 
+          
+          {error && (
+            <div className="text-white/70 space-y-4 text-sm">
+              <div className="flex gap-2 items-center">
+                <Frown className="size-4" /> Yikes – something went wrong
+              </div>
+
+              <div className="bg-white/5 rounded p-3 border border-white/25 text-xs font-mono leading-relaxed">
+                {error}
+              </div>
+            </div>
+          )}
+     
           <div ref={chatEndRef} />
         </div>
 

@@ -70,6 +70,8 @@ export const POST: APIRoute = async ({ request }) => {
       }
     ];
 
+    // console.log(messages);
+
     if (stream) {
       const completion = await client.chat.completions.create({
         model,
@@ -86,7 +88,7 @@ export const POST: APIRoute = async ({ request }) => {
           
           try {
             for await (const chunk of completion) {
-              const content = chunk.choices[0]?.delta?.content;
+              const content = chunk?.choices[0]?.delta?.content;
               if (content) {
                 // Send as Server-Sent Events format
                 controller.enqueue(
@@ -120,25 +122,40 @@ export const POST: APIRoute = async ({ request }) => {
         stream: false,
       });
 
-      const result = completion.choices[0]?.message?.content || '';
-      const cleaned = result.replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
+      // console.log(completion);
 
-      return new Response(
-        JSON.stringify({ content: cleaned }),
-        {
-          status: 200,
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+      if ('error' in completion) {
+        const { code } = (completion.error as any);
+        return new Response(
+          JSON.stringify(completion.error),
+          {
+            status: code,
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+      } else {
+        const result = completion.choices[0]?.message?.content || '';
+        const cleaned = result.replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
+
+        return new Response(
+          JSON.stringify({ content: cleaned }),
+          {
+            status: 200,
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+      }
     }
   } catch (error) {
     console.error('OpenRouter proxy error:', error);
     return new Response(
       JSON.stringify({ 
         error: 'Failed to generate response',
-        message: error instanceof Error ? error.message : 'Unknown error'
+        message: (error as any).error?.message || 'Unknown error'
       }),
       {
         status: 500,

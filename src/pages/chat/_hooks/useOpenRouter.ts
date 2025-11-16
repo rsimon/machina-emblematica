@@ -40,11 +40,15 @@ export const useOpenRouter = () => {
     .then(res => res.json())
     .then(data => {
       setBusy(false);
-      return data.content;
+      if (data.error) {
+        throw data.message;
+      } else {
+        return data.content;
+      }
     })
     .catch(error => {
-      console.error(error);
       setBusy(false);
+      throw error;
     });
   }, []);
 
