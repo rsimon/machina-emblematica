@@ -48,8 +48,8 @@ export const Conversation = (props: ConversationProps) => {
                 className="bg-linear-to-b from-[#54493a] to-[#594c3f] w-2/3 rounded-md px-5 py-2.5 text-white/70">
                 {message.text}
               </li>
-            ) : (
-              <li 
+            ) : message.text ? (
+              <li
                 key={`message-${message.from}-${idx}`}
                 className="font-rosarivo text-white/80 rounded-md py-4 pr-8 leading-loose tracking-wide italic">
                 <div className="llm-response">
@@ -72,7 +72,7 @@ export const Conversation = (props: ConversationProps) => {
                   </ul>
                 )}
               </li>
-            ))}
+            ) : null)}
           </ul>
 
           {busy && (
@@ -81,7 +81,6 @@ export const Conversation = (props: ConversationProps) => {
               Thinking...
             </div>
           )}
-
           
           {error && (
             <div className="text-white/70 space-y-4 text-sm">
