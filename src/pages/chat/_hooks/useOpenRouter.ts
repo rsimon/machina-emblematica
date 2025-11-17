@@ -1,22 +1,6 @@
 import { useCallback, useState } from 'react';
 import type { ChatMessage } from '../types';
 
-const parseResponse = (data: any) => {
-  const choices = (data.choices || []);
-  if (choices.length === 0) {
-    console.warn('Repsonse with no choices', data);
-    return undefined;
-  }
-
-  const result = choices.find((c: any) => c.message.content)?.message?.content;
-  if (!result) {
-    console.warn('Response with no result content', data);
-    return undefined;
-  }
-
-  return result.replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
-}
-
 export const useOpenRouter = () => {
 
   const [busy, setBusy] = useState(false);
@@ -86,10 +70,7 @@ export const useOpenRouter = () => {
         while (true) {
           const { done, value } = await reader.read();
           
-          if (done) {
-            setBusy(false);
-            break;
-          }
+          if (done) break;
 
           const chunk = decoder.decode(value);
           const lines = chunk.split('\n');
@@ -98,14 +79,13 @@ export const useOpenRouter = () => {
             if (line.startsWith('data: ')) {
               const data = line.slice(6);
               
-              if (data === '[DONE]') {
-                setBusy(false);
-                break;
-              }
+              if (data === '[DONE]') break;
 
               try {
                 const parsed = JSON.parse(data);
                 if (parsed.content) {
+                  setBusy(false);
+
                   fullContent += parsed.content;
                   onChunk(parsed.content);
                 }

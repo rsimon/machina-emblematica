@@ -11,7 +11,7 @@ export const useChat = () => {
 
   const { search } = useMarqo();
 
-  const { generate, busy } = useOpenRouter();
+  const { generateStreaming, busy } = useOpenRouter();
 
   const sendMessage = (text: string, lastReply?: string) => {
     setError(undefined);
@@ -19,8 +19,25 @@ export const useChat = () => {
 
     search(`${text} ${lastReply ? lastReply : ''}`.trim())
       .then(({ context, pages }) => {
-        generate(text, context, chat).then((text: string) => {
-          setChat(current => ([...current, { from: 'machina', text, attachments: pages }]));
+        // Response being streamed right now
+        const currentResponseIndex = chat.length + 1;
+
+        setChat(current => ([
+          ...current, 
+          { from: 'machina', text: '', attachments: pages }
+        ]));
+
+        generateStreaming(text, context, chat, (chunk: string) => {
+          setChat(current => {
+            const updated = [...current];
+              updated[currentResponseIndex] = {
+                ...updated[currentResponseIndex],
+                text: updated[currentResponseIndex].text + chunk
+              };
+              return updated;
+            });
+        // }).then((text: string) => {
+        //  setChat(current => ([...current, { from: 'machina', text, attachments: pages }]));
         }).catch(error => {
           setError(error.message);
         })
