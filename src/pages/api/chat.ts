@@ -73,9 +73,10 @@ export const POST: APIRoute = async ({ request }) => {
     // console.log(messages);
 
     if (stream) {
+      // @ts-ignore
       const completion = await client.chat.completions.create({
         model,
-        // transforms: ['middle-out'], 
+        transforms: ['middle-out'], 
         max_completion_tokens: 4000,
         temperature: 0.1,
         messages,
@@ -127,11 +128,10 @@ export const POST: APIRoute = async ({ request }) => {
       // console.log(completion);
 
       if ('error' in completion) {
-        const { code } = (completion.error as any);
         return new Response(
-          JSON.stringify(completion.error),
+          JSON.stringify({ error: { message: (completion.error as any).metadata?.raw || (completion.error as any).message }}),
           {
-            status: code,
+            status: 500,
             headers: {
               'Content-Type': 'application/json',
             },

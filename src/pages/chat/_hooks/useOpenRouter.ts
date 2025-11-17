@@ -40,16 +40,17 @@ export const useOpenRouter = () => {
     .then(res => res.json())
     .then(data => {
       setBusy(false);
+      console.error(data);
+      
       if (data.error) {
-        throw data.message;
+        throw new Error(data.message);
       } else {
         return data.content;
       }
-    })
-    .catch(error => {
+    }).catch(error => {
       setBusy(false);
-      throw error;
-    });
+      throw new Error(error);
+    })
   }, []);
 
   const generateStreaming = useCallback(
@@ -72,56 +73,54 @@ export const useOpenRouter = () => {
           chatHistory,
           stream: true,
         }),
-      })
-        .then(async response => {
-          const reader = response.body?.getReader();
-          const decoder = new TextDecoder();
+      }).then(async response => {
+        const reader = response.body?.getReader();
+        const decoder = new TextDecoder();
 
-          if (!reader) {
-            throw new Error('No reader available');
+        if (!reader) {
+          throw new Error('No reader available');
+        }
+
+        let fullContent = '';
+
+        while (true) {
+          const { done, value } = await reader.read();
+          
+          if (done) {
+            setBusy(false);
+            break;
           }
 
-          let fullContent = '';
+          const chunk = decoder.decode(value);
+          const lines = chunk.split('\n');
 
-          while (true) {
-            const { done, value } = await reader.read();
-            
-            if (done) {
-              setBusy(false);
-              break;
-            }
+          for (const line of lines) {
+            if (line.startsWith('data: ')) {
+              const data = line.slice(6);
+              
+              if (data === '[DONE]') {
+                setBusy(false);
+                break;
+              }
 
-            const chunk = decoder.decode(value);
-            const lines = chunk.split('\n');
-
-            for (const line of lines) {
-              if (line.startsWith('data: ')) {
-                const data = line.slice(6);
-                
-                if (data === '[DONE]') {
-                  setBusy(false);
-                  break;
+              try {
+                const parsed = JSON.parse(data);
+                if (parsed.content) {
+                  fullContent += parsed.content;
+                  onChunk(parsed.content);
                 }
-
-                try {
-                  const parsed = JSON.parse(data);
-                  if (parsed.content) {
-                    fullContent += parsed.content;
-                    onChunk(parsed.content);
-                  }
-                } catch (e) {
-                  // console.warn('Invalid JSON', e, data);
-                }
+              } catch (e) {
+                // console.warn('Invalid JSON', e, data);
               }
             }
           }
-
-          return fullContent.replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
-        })
-        .catch(error => {
-          console.error(error);
-          setBusy(false);
-        });
+        }
+        return fullContent.replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
+      })
+      .catch(error => {
+        setBusy(false);
+        throw error;
+      });
     },
     []
   );
