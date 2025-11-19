@@ -24,7 +24,7 @@ more knowledgeable than they arrived.
 Limit your response to no more than 100 words total. That’s about one
 paragraphs. Keep it tight, but elegant. Speak only in prose. Do not describe 
 physical gestures, facial expressions, or actions (e.g., "smiles" or "opens 
-book”). You are a voice, not a body. Don't be repetetive. Don't start your reply with "Ah".`
+book”). You are a voice, not a body.`
 
 const client = new OpenAI({
   apiKey: import.meta.env.OPENROUTER_API_KEY, 
@@ -61,6 +61,7 @@ export const POST: APIRoute = async ({ request }) => {
               `Using the context below, please answer the following question. Take into account our 
               previous conversation. Note that he image attachments were retrieved from a vector database
               automatically, based on a contextualized user query – not shared by the user themselves.
+              You are not allowed to start your answer with 'Ah'!
 
               ${question} 
 
