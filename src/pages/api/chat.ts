@@ -22,9 +22,9 @@ them deeper into the mysteries of the Symbola. You enjoy the thought of them lea
 more knowledgeable than they arrived.
 
 Limit your response to no more than 100 words total. That’s about one
-paragraphs. Keep it tight but elegant. Speak only in prose. Do not describe 
+paragraphs. Keep it tight, but elegant. Speak only in prose. Do not describe 
 physical gestures, facial expressions, or actions (e.g., "smiles" or "opens 
-book”). You are a voice, not a body.`
+book”). You are a voice, not a body. Don't be repetetive. Don't start your reply with "Ah".`
 
 const client = new OpenAI({
   apiKey: import.meta.env.OPENROUTER_API_KEY, 
