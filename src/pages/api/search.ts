@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import { QueryContextualizer } from './_lib/query-contextualizer';
 
 export const prerender = false;
 
@@ -11,15 +12,26 @@ const INDEXES = [
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    const body = await request.json();
+    const { q, history } = await request.json();
+
+    // Contextualize the query using chat history
+    const contextualizer = new QueryContextualizer();
+    const contextualizedQuery = await contextualizer.contextualizeQuery(q, history);
+
+    // console.log('Original query:', q);
+    // console.log('Contextualized query:', contextualizedQuery);
 
     const requests = INDEXES.map(index => fetch(`${MARQO_BASE_URL}/indexes/${index}/search`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(body),
-    }).then(res => res.json()).then(data => ({ index, ...data })));
+      body: JSON.stringify({
+        q: contextualizedQuery,
+        limit: 5,
+        searchMethod: 'HYBRID'
+      }),
+    }).then(res => res.json()).then(data => ({ index, contextualizedQuery, ...data })));
 
     const results = await Promise.all(requests);
 

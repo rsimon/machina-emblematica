@@ -13,12 +13,12 @@ export const useChat = () => {
 
   const { generateStreaming, busy } = useOpenRouter();
 
-  const sendMessage = (text: string, lastReply?: string) => {
+  const sendMessage = (text: string) => {
     setError(undefined);
     setChat(current => ([...current, { from: 'me', text }]));
 
-    search(`${text} ${lastReply ? lastReply : ''}`.trim())
-      .then(({ context, pages }) => {
+    search(text, chat)
+      .then(({ context, pages, contextualizedQuery }) => {
         // Response being streamed right now
         const currentResponseIndex = chat.length + 1;
 
@@ -27,7 +27,7 @@ export const useChat = () => {
           { from: 'machina', text: '', attachments: pages }
         ]));
 
-        generateStreaming(text, context, chat, (chunk: string) => {
+        generateStreaming(contextualizedQuery, context, chat, (chunk: string) => {
           setChat(current => {
             const updated = [...current];
               updated[currentResponseIndex] = {

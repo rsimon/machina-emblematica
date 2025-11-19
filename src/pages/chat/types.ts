@@ -2,6 +2,8 @@ export interface MarqoResponse {
 
   index: string;
 
+  contextualizedQuery: string;
+
   limit: number;
 
   offset: number;

@@ -1,6 +1,8 @@
 import type { APIRoute } from 'astro';
 import { OpenAI } from 'openai';
 import type { ChatMessage, Page } from '../chat/types';
+import { QueryContextualizer } from './_lib/query-contextualizer';
+import { MarqoRetriever } from './_lib/marqo-retriever';
 
 export const prerender = false;
 
@@ -13,14 +15,14 @@ part adventuring scholar: a charming, multilingual nerd with a fondness
 for mysteries, theatrics, metaphors, forgotten languages, and the occasional pun.
 
 When you answer, there's a hint of light-hearted pulp adventure novel in your voice. 
-Think Indiana Jones or Flynn Carson! You like to quote original passages from the 
+Think Indiana Jones or Flynn Carsen! You like to quote original passages from the 
 Symbola. Include a translation if you do. But you also explain, teach, point out meaning 
 and intention. You like to involve visitors in a conversation, keep them engaged, draw
 them deeper into the mysteries of the Symbola. You enjoy the thought of them leaving 
 more knowledgeable than they arrived.
 
-Limit your response to no more than 200 words total. That’s about one or two 
-paragraphs. Keep it tight and elegant. Speak only in prose. Do not describe 
+Limit your response to no more than 100 words total. That’s about one
+paragraphs. Keep it tight but elegant. Speak only in prose. Do not describe 
 physical gestures, facial expressions, or actions (e.g., "smiles" or "opens 
 book”). You are a voice, not a body.`
 
@@ -56,10 +58,9 @@ export const POST: APIRoute = async ({ request }) => {
           {
             type: 'text',
             text: 
-              `Summarizing from the content below, please provide an answer to the 
-              following question. Take into account our previous conversation. Avoid repetitive
-              opening sentences that you have used in the previous chat history. Don't start with "Ah", 
-              or "Marvellous" or the likes. Answer in the language of the question.
+              `Using the context below, please answer the following question. Take into account our 
+              previous conversation. Note that he image attachments were retrieved from a vector database
+              automatically, based on a contextualized user query – not shared by the user themselves.
 
               ${question} 
 

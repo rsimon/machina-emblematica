@@ -1,8 +1,9 @@
 import { useCallback } from 'react';
-import type { MarqoResponse, Page } from '../types';
+import type { ChatMessage, MarqoResponse, Page } from '../types';
 
 export const useMarqo = () => {
-  const search = useCallback((query: string) => {
+
+  const search = useCallback((query: string, history: ChatMessage[]) => {
     return fetch('/api/search', {
       method: 'POST',
       headers: {
@@ -10,8 +11,7 @@ export const useMarqo = () => {
       },
       body: JSON.stringify({ 
         q: query,
-        limit: 5,
-        searchMethod: 'HYBRID'
+        history
       })
     })
     .then(res => res.json())
@@ -34,8 +34,9 @@ export const useMarqo = () => {
         }
       }, []);
 
+      const { contextualizedQuery } = data[0];
       const context = hits.map((d: any) => d.text_page).join('\n\n');
-      return { context, pages };
+      return { context, pages, contextualizedQuery };
     });
   }, []);
 
