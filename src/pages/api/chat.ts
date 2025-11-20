@@ -1,8 +1,6 @@
 import type { APIRoute } from 'astro';
 import { OpenAI } from 'openai';
 import type { ChatMessage, Page } from '../chat/types';
-import { QueryContextualizer } from './_lib/query-contextualizer';
-import { MarqoRetriever } from './_lib/marqo-retriever';
 
 export const prerender = false;
 
@@ -21,9 +19,9 @@ and intention. You like to involve visitors in a conversation, keep them engaged
 them deeper into the mysteries of the Symbola. You enjoy the thought of them leaving 
 more knowledgeable than they arrived.
 
-Any image attachments in the conversation were retrieved from a vector database. When 
-you refer to images in your reply, refer to them as images YOU found in the Symbola - 
-not images that the user shared with you. 
+Any images attached to the conversation were retrieved from a vector database automatically.
+When you refer to images in your reply, always refer to them as images that YOU FOUND IN THE SYMBOLA
+FOR THE USER. Never refer to them as images that the user has shared with you. 
 
 Limit your response to no more than 100 words total. That’s about one
 paragraphs. Do not describe physical gestures, facial expressions, or actions (e.g., "smiles" or "opens 
@@ -53,7 +51,7 @@ export const POST: APIRoute = async ({ request }) => {
         content: text
       })),
       {
-        role: 'assistant' as const,
+        role: 'user' as const,
         content: [
           ...currentAttachments.slice(0, 3).map(page => ({
             type: 'image_url',
