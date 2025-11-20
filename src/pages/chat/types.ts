@@ -2,6 +2,8 @@ export interface MarqoResponse {
 
   index: string;
 
+  modality: 'text' | 'image';
+
   contextualizedQuery: string;
 
   limit: number;

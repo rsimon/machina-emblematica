@@ -21,7 +21,7 @@ export const useChat = () => {
     setChat(current => ([...current, { from: 'me', text }]));
 
     search(text, chat)
-      .then(({ context, pages, contextualizedQuery }) => {
+      .then(({ context, pages, contextualizedQuery, modality }) => {
         setSearchBusy(false);
 
         // Response being streamed right now
@@ -32,7 +32,7 @@ export const useChat = () => {
           { from: 'machina', text: '', attachments: pages }
         ]));
 
-        generateStreaming(contextualizedQuery, context, chat, (chunk: string) => {
+        generateStreaming(contextualizedQuery, context, pages, chat, modality, (chunk: string) => {
           setChat(current => {
             const updated = [...current];
               updated[currentResponseIndex] = {

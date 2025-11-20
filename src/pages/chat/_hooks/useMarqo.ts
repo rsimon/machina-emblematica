@@ -34,9 +34,9 @@ export const useMarqo = () => {
         }
       }, []);
 
-      const { contextualizedQuery } = data[0];
+      const { contextualizedQuery, modality } = data[0];
       const context = hits.map((d: any) => d.text_page).join('\n\n');
-      return { context, pages, contextualizedQuery };
+      return { context, pages, contextualizedQuery, modality };
     });
   }, []);
 

@@ -6,6 +6,7 @@ export const prerender = false;
 
 const model = import.meta.env.OPENROUTER_API_MODEL;
 
+/*
 const SYSTEM_PROMPT = 
 `You are the Machina Emblematica – the mysterious curator of Symbola et 
 Emblemata (1590) by Joachim Camerarius the Younger. You are part librarian, 
@@ -29,6 +30,42 @@ book”). You are a voice, not a body.
 
 Prohibited: The first token of any response may not be "Ah," "Ah" or any variant 
 ("Ahh," "Ahh," "Aah," etc.).`
+*/
+const getSystemPrompt = (modality: 'text' | 'image') => 
+`You are the Machina Emblematica – the mysterious curator of Symbola et 
+Emblemata (1590) by Joachim Camerarius the Younger. You are part librarian, 
+part adventuring scholar: a charming, multilingual nerd with a fondness 
+for mysteries, theatrics, metaphors, forgotten languages, and the occasional pun.
+
+When you answer, there's a hint of light-hearted pulp adventure novel in your voice. 
+Think Indiana Jones or Flynn Carsen! You like to quote original passages from the 
+Symbola. Include a translation if you do. But you also explain, teach, point out meaning 
+and intention. You like to involve visitors in a conversation, keep them engaged, draw
+them deeper into the mysteries of the Symbola. You enjoy the thought of them leaving 
+more knowledgeable than they arrived.
+
+Primary modality: ${modality}.
+
+Limit your response to no more than 200 words total. That’s about one or two 
+paragraphs. Keep it tight and elegant. Speak only in prose. Do not describe 
+physical gestures, facial expressions, or actions (e.g., "smiles" or "opens 
+book"). You are a voice, not a body.
+
+Summarizing from the content below, please provide an answer to the 
+following question.
+Rules:
+- Any image and text context in the conversation was retrieved by you. When you refer to it in your reply,
+  ALWAYS refer to them as if YOU FOUND THEM IN THE SYMBOLA FOR THE USER. NEVER suggest that the 
+  user has shared these images or text excerpts with you. 
+- If the primary modality is 'image', use the images via the image_url to generate the answer.
+- If the primary modality is 'text', use the text context provided instead.
+- Use the other modality only to supplement the primary one.
+- Output a concise answer.
+- Take into account our previous conversation.
+- Avoid repetitive opening sentences that you have used in the previous chat history.
+- Don't start with "Ah", or "Marvellous" or the likes.
+- Answer in the language of the question.
+- Add a summary of the context documents that you see.`
 
 const client = new OpenAI({
   apiKey: import.meta.env.OPENROUTER_API_KEY, 
@@ -37,52 +74,43 @@ const client = new OpenAI({
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    const { question, context, chatHistory, stream = false } = await request.json();
+    const { question, context, pages, chatHistory, modality, stream = false } = await request.json();
+
+    // console.log('question', question);
     
-    const currentAttachments: Page[] = chatHistory[chatHistory.length - 1]?.attachments || [];
+    const currentAttachments: Page[] = pages || [];
 
     const messages = [
       {
         role: 'system' as const,
-        content: SYSTEM_PROMPT
+        content: getSystemPrompt(modality)
       },
       ...chatHistory.map(({ from, text,  }: ChatMessage) => ({
         role: (from === 'machina' ? 'assistant' : 'user') as 'user' | 'assistant',
         content: text
       })),
+      { role: 'user', content: question },
       {
         role: 'user' as const,
-        content: [
-          ...currentAttachments.slice(0, 3).map(page => ({
-            type: 'image_url',
-            image_url: {
-              url: page.imageUrl
-            }
-          })),
-          {
-            type: 'text',
-            text: 
-              `Using the given context, please answer the following question. Take into account our 
-              previous conversation. Analyze the attached images and take into account what you see on them.
-
-              ${question} 
-
-              ---
-              ${context}`
-          }
-        ]
+        content: [{
+          type: 'text',
+          text: '\n\nText context:\n' + context
+        },
+        ...currentAttachments.slice(0, 4).map(page => ({
+          type: 'image_url',
+          image_url: page.imageUrl
+        }))]
       }
     ];
 
-    // console.log(messages);
+    // console.log(JSON.stringify(messages, null, 2));
 
     if (stream) {
       // @ts-ignore
       const completion = await client.chat.completions.create({
         model,
         transforms: ['middle-out'], 
-        max_completion_tokens: 4000,
-        temperature: 0.1,
+        temperature: 0,
         messages,
         stream: true
       });

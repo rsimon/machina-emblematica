@@ -37,7 +37,7 @@ export const POST: APIRoute = async ({ request }) => {
         limit: 10,
         searchMethod: 'HYBRID'
       }),
-    }).then(res => res.json()).then(data => ({ index, contextualizedQuery: retrieval_query, ...data }));
+    }).then(res => res.json()).then(data => ({ index, contextualizedQuery: retrieval_query, modality: target_index, ...data }));
 
     return new Response(JSON.stringify([result]), {
       headers: {

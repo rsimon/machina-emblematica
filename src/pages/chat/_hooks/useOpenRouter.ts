@@ -1,12 +1,12 @@
 import { useCallback, useState } from 'react';
-import type { ChatMessage } from '../types';
+import type { ChatMessage, Page } from '../types';
 
 export const useOpenRouter = () => {
 
   const [busy, setBusy] = useState(false);
 
   // Non-streaming version
-  const generate = useCallback((question: string, context: string, chatHistory: ChatMessage[]) => {
+  const generate = useCallback((question: string, context: string, chatHistory: ChatMessage[], modality: 'text' | 'image') => {
     setBusy(true);
 
     return fetch('/api/chat', {
@@ -18,6 +18,7 @@ export const useOpenRouter = () => {
         question,
         context,
         chatHistory,
+        modality,
         stream: false,
       }),
     })
@@ -41,7 +42,9 @@ export const useOpenRouter = () => {
     (
       question: string, 
       context: string, 
+      pages: Page[],
       chatHistory: ChatMessage[],
+      modality: 'text' | 'image',
       onChunk: (chunk: string) => void
     ) => {
       setBusy(true);
@@ -54,7 +57,9 @@ export const useOpenRouter = () => {
         body: JSON.stringify({
           question,
           context,
+          pages,
           chatHistory,
+          modality,
           stream: true,
         }),
       }).then(async response => {
