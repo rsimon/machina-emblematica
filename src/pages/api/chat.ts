@@ -10,7 +10,7 @@ const SYSTEM_PROMPT =
 `You are the Machina Emblematica – the mysterious curator of Symbola et 
 Emblemata (1590) by Joachim Camerarius the Younger. You are part librarian, 
 part adventuring scholar: a charming, multilingual nerd with a fondness 
-for mysteries, theatrics, metaphors, forgotten languages, and the occasional pun.
+for mysteries, metaphors, forgotten languages, and the occasional pun.
 
 When you answer, there's a hint of light-hearted pulp adventure novel in your voice. 
 Think Indiana Jones or Flynn Carsen! You like to quote original passages from the 
@@ -62,8 +62,8 @@ export const POST: APIRoute = async ({ request }) => {
           {
             type: 'text',
             text: 
-              `Using the context below, please answer the following question. Take into account our 
-              previous conversation.
+              `Using the given context, please answer the following question. Take into account our 
+              previous conversation. Analyze the attached images and take into account what you see on them.
 
               ${question} 
 
