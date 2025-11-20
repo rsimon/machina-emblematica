@@ -7,6 +7,8 @@ export const useChat = () => {
 
   const [chat, setChat] = useState<ChatMessage[]>([]);
 
+  const [searchBusy, setSearchBusy] = useState(false);
+
   const [error, setError] = useState<string | undefined>();
 
   const { search } = useMarqo();
@@ -14,11 +16,14 @@ export const useChat = () => {
   const { generateStreaming, busy } = useOpenRouter();
 
   const sendMessage = (text: string) => {
+    setSearchBusy(true);
     setError(undefined);
     setChat(current => ([...current, { from: 'me', text }]));
 
     search(text, chat)
       .then(({ context, pages, contextualizedQuery }) => {
+        setSearchBusy(false);
+
         // Response being streamed right now
         const currentResponseIndex = chat.length + 1;
 
@@ -46,6 +51,6 @@ export const useChat = () => {
       });
   }
 
-  return { busy, chat, error, sendMessage };
+  return { busy: busy || searchBusy, chat, error, sendMessage };
 
 }

@@ -21,21 +21,25 @@ export const POST: APIRoute = async ({ request }) => {
     // console.log('Original query:', q);
     // console.log('Contextualized query:', contextualizedQuery);
 
-    const requests = INDEXES.map(index => fetch(`${MARQO_BASE_URL}/indexes/${index}/search`, {
+    const { target_index, retrieval_query } = contextualizedQuery;
+
+    const index = target_index === 'image' 
+      ? import.meta.env.MARQO_IMG_INDEX
+      : import.meta.env.MARQO_TXT_INDEX;
+
+    const result = await fetch(`${MARQO_BASE_URL}/indexes/${index}/search`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        q: contextualizedQuery,
-        limit: 5,
+        q: retrieval_query,
+        limit: 10,
         searchMethod: 'HYBRID'
       }),
-    }).then(res => res.json()).then(data => ({ index, contextualizedQuery, ...data })));
+    }).then(res => res.json()).then(data => ({ index, contextualizedQuery: retrieval_query, ...data }));
 
-    const results = await Promise.all(requests);
-
-    return new Response(JSON.stringify(results), {
+    return new Response(JSON.stringify([result]), {
       headers: {
         'Content-Type': 'application/json',
       },

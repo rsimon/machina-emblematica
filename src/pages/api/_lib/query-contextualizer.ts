@@ -5,6 +5,44 @@ import type { ChatMessage } from '../../chat/types';
 const OPENROUTER_API_KEY = import.meta.env.OPENROUTER_API_KEY;
 const OPENROUTER_API_MODEL = import.meta.env.OPENROUTER_API_MODEL;
 
+export interface ContextualizedResult {
+
+  target_index: 'text' | 'image';
+
+  retrieval_query: string;
+
+}
+
+const getPrompt = (history: string, question: string) =>  
+`You are a Retrieval Router Agent for a RAG system using two vector indexes:
+1. A TEXT index
+2. An IMAGE index
+
+You have two tasks:
+
+1. Given the conversation history, rewrite the user's latest question as a standalone retrieval query 
+that includes all necessary context. If the user question pertains to a particular page or 
+chapter number, emblem title or other canonical numerical reference, repeat this reference 
+in the rewritten query.
+
+2. Decide which index is the best match for the user's query. Decision rules:
+- If the user asks about images, pictures, visual similarity, appearance, color, shapes → choose "image".
+- If the user asks about text meaning, authors, facts, historical explanations, interpretations → choose "text".
+- If ambiguous, choose "text".
+
+Return ONLY JSON. Do not show your reasoning or thought process.
+
+Output a JSON object with:
+  {
+    "target_index": "text" or "image",
+    "retrieval_query": "the optimized, rewritten retrieval query"
+  }
+
+Conversation history:
+${history}
+
+Latest question: ${question}`;
+
 export class QueryContextualizer {
 
   private llm: ChatOpenAI;
@@ -24,8 +62,8 @@ export class QueryContextualizer {
   async contextualizeQuery(
     currentQuery: string,
     chatHistory: ChatMessage[]
-  ): Promise<string> {
-    if (chatHistory.length === 0) return currentQuery;
+  ): Promise<ContextualizedResult> {
+    // if (chatHistory.length === 0) currentQuery;
 
     // Build conversation context
     const historyText = chatHistory
@@ -33,16 +71,11 @@ export class QueryContextualizer {
       .map(msg => `${msg.from === 'me' ? 'User' : 'Assistant'}: ${msg.text}`)
       .join('\n');
 
-    const prompt = `Given the following conversation history, rewrite the user's latest question as a standalone question that includes all necessary context. Output ONLY the rewritten question, nothing else. If the user query pertains to a particular page or chapter number, emblem title or other canonical numerical reference, repeat this reference in the rewritten question.
-
-Conversation history:
-${historyText}
-
-Latest question: ${currentQuery}
-
-Standalone question:`;
+    const prompt = getPrompt(historyText, currentQuery);
 
     const response = await this.llm.invoke(prompt);
-    return response.content.toString().trim();
+
+    const cleaned = response.content.toString().replace(/^```(?:json)?\s*\n?/i, '').replace(/\n?```\s*$/, '');
+    return JSON.parse(cleaned);
   }
 }
