@@ -9,18 +9,14 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "@astrojs/netlify": "^6.6.1",
+    "@astrojs/netlify": "^6.6.2",
     "@astrojs/react": "^4.4.2",
     "@icons-pack/react-simple-icons": "^13.8.0",
-    "@langchain/core": "^1.0.6",
-    "@langchain/openai": "^1.1.2",
     "@tailwindcss/vite": "^4.1.17",
     "@types/react": "^19.2.6",
     "@types/react-dom": "^19.2.3",
-    "astro": "^5.15.9",
-    "langchain": "^1.0.6",
+    "astro": "^5.16.0",
     "lucide-react": "^0.554.0",
-    "marqo": "^0.2.0",
     "motion": "^12.23.24",
     "openai": "^6.9.1",
     "react": "^19.2.0",
@@ -28,8 +24,5 @@
     "react-markdown": "^10.1.0",
     "react-scrollama": "^2.4.2",
     "tailwindcss": "^4.1.17"
-  },
-  "devDependencies": {
-    "gh-pages": "^6.3.0"
   }
 }
