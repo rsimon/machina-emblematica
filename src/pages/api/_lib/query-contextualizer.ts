@@ -1,6 +1,6 @@
 // lib/query-contextualizer.ts
 import { ChatOpenAI } from "@langchain/openai";
-import type { ChatMessage } from '../../chat/types';
+import type { ChatMessage } from '../../../types';
 
 const OPENROUTER_API_KEY = import.meta.env.OPENROUTER_API_KEY;
 const OPENROUTER_API_MODEL = import.meta.env.OPENROUTER_API_MODEL;

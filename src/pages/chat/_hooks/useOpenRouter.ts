@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import type { ChatMessage, Page } from '../types';
+import type { ChatMessage, Page } from '../../../types';
 
 export const useOpenRouter = () => {
 

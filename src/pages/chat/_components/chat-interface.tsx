@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Sources } from './sources/Sources';
-import { Conversation } from './conversation/Conversation';
-import type { Page } from '../types';
+import { Conversation } from './conversation/Conversationas';
+import type { Page } from '../../../types';
 
 export const ChatInterface = () => {
 

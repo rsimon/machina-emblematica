@@ -1,6 +1,6 @@
 import { BaseRetriever, type BaseRetrieverInput } from "@langchain/core/retrievers";
 import { Document } from "@langchain/core/documents";
-import type { MarqoResponse, MarqoTextHit } from '../../chat/types';
+import type { MarqoResponse, MarqoTextHit } from '../../../types';
 
 interface MarqoRetrieverConfig extends BaseRetrieverInput {
 

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type FormEvent } from 'react';
 import Markdown from 'react-markdown';
 import { Frown } from 'lucide-react';
 import { useChat } from '../../_hooks/useChat';
-import type { Page } from '../../types';
+import type { Page } from '../../../../types';
 
 import './Conversation.css';
 

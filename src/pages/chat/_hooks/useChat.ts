@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useMarqo } from './useMarqo';
 import { useOpenRouter } from './useOpenRouter';
-import type { ChatMessage } from '../types';
+import type { ChatMessage } from '../../../types';
 
 export const useChat = () => {
 

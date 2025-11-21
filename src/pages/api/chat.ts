@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 import { OpenAI } from 'openai';
-import type { ChatMessage, Page } from '../chat/types';
+import type { ChatMessage, Page } from '../../types';
 
 export const prerender = false;
 

@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import type { Page } from '../../types';
+import type { Page } from '../../../../types';
 
 interface SourcesProps {
 

@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import type { ChatMessage, MarqoResponse, Page } from '../types';
+import type { ChatMessage, MarqoResponse, Page } from '../../../types';
 
 export const useMarqo = () => {
 
