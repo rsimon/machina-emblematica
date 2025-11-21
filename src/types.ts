@@ -76,9 +76,9 @@ export interface ChatRequestPayload {
 
   contextualizedQuery: string;
 
-  modality: 'text' | 'image';
-
   images: { url: string }[];
+
+  modality: 'text' | 'image';
 
   stream: boolean;
 

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type FormEvent } from 'react';
+import { useEffect, useMemo, useRef, useState, type FormEvent } from 'react';
 import Markdown from 'react-markdown';
 import { Frown } from 'lucide-react';
 import type { Page } from '@/types';
@@ -32,6 +32,10 @@ export const Conversation = (props: ConversationProps) => {
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [chat, busy]);
+
+  const thinking = useMemo(() => {
+    return THINKING[Math.floor(Math.random() * THINKING.length)];
+  }, [busy]);
 
   const onSubmit = (evt: FormEvent) => {
     evt.preventDefault();
@@ -85,7 +89,7 @@ export const Conversation = (props: ConversationProps) => {
           {busy && (
             <div className="font-rosarivo w-full flex italic text-white/70 tracking-wider 
               text-base mx-auto animate-pulse justify-center p-4 pb-16">
-              {THINKING[Math.floor(Math.random() * THINKING.length)]}
+              {thinking}
             </div>
           )}
           
