@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Sources } from './sources/Sources';
-import { Conversation } from './conversation/Conversation';
-import type { Page } from '../types';
+import { SourcePreview } from './source-preview';
+import { Conversation } from './conversation';
+import type { Page } from '@/types';
 
 export const ChatInterface = () => {
 
@@ -16,7 +16,7 @@ export const ChatInterface = () => {
       <div className="flex min-h-full w-full">
         <div className={sourcesClass}>
           {currentSource && (
-            <Sources 
+            <SourcePreview
               currentSource={currentSource} />
           )}
         </div>

@@ -1,10 +1,17 @@
-import { useEffect, useRef, useState, type FormEvent } from 'react';
+import { useEffect, useMemo, useRef, useState, type FormEvent } from 'react';
 import Markdown from 'react-markdown';
 import { Frown } from 'lucide-react';
-import { useChat } from '../../_hooks/useChat';
-import type { Page } from '../../types';
+import type { Page } from '@/types';
+import { useMachina } from '@/pages/chat/_hooks';
 
-import './Conversation.css';
+import './conversation.css';
+
+const THINKING = [
+  'Consulting the Symbola...',
+  'Sifting through the archives...',
+  'Flipping through folios...',
+  'Browsing the tomes...',
+];
 
 interface ConversationProps {
 
@@ -20,11 +27,15 @@ export const Conversation = (props: ConversationProps) => {
 
   const chatEndRef = useRef<HTMLDivElement>(null);
 
-  const { busy, chat, error, sendMessage } = useChat();
+  const { busy, chat, error, sendMessage } = useMachina();
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [chat, busy]);
+
+  const thinking = useMemo(() => {
+    return THINKING[Math.floor(Math.random() * THINKING.length)];
+  }, [busy]);
 
   const onSubmit = (evt: FormEvent) => {
     evt.preventDefault();
@@ -56,9 +67,9 @@ export const Conversation = (props: ConversationProps) => {
                   <Markdown>{message.text}</Markdown>
                 </div>
 
-                {(message.attachments || []).length > 0 && (
+                {(message.pages || []).length > 0 && (
                   <ul className="flex flex-wrap gap-2 pt-4">
-                    {message.attachments?.map(page => (
+                    {message.pages?.map(page => (
                       <li key={page.imageUrl}>
                         <button 
                           className="cursor-pointer"
@@ -78,7 +89,7 @@ export const Conversation = (props: ConversationProps) => {
           {busy && (
             <div className="font-rosarivo w-full flex italic text-white/70 tracking-wider 
               text-base mx-auto animate-pulse justify-center p-4 pb-16">
-              Thinking...
+              {thinking}
             </div>
           )}
           

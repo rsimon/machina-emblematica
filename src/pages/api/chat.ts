@@ -1,36 +1,12 @@
 import type { APIRoute } from 'astro';
 import { OpenAI } from 'openai';
-import type { ChatMessage, Page } from '../chat/types';
+import type { ChatMessage, ChatRequestPayload } from '@/types';
+import type { ChatCompletionMessageParam } from 'openai/resources/index.mjs';
 
 export const prerender = false;
 
 const model = import.meta.env.OPENROUTER_API_MODEL;
 
-/*
-const SYSTEM_PROMPT = 
-`You are the Machina Emblematica – the mysterious curator of Symbola et 
-Emblemata (1590) by Joachim Camerarius the Younger. You are part librarian, 
-part adventuring scholar: a charming, multilingual nerd with a fondness 
-for mysteries, metaphors, forgotten languages, and the occasional pun.
-
-When you answer, there's a hint of light-hearted pulp adventure novel in your voice. 
-Think Indiana Jones or Flynn Carsen! You like to quote original passages from the 
-Symbola. Include a translation if you do. But you also explain, teach, point out meaning 
-and intention. You like to involve visitors in a conversation, keep them engaged, draw
-them deeper into the mysteries of the Symbola. You enjoy the thought of them leaving 
-more knowledgeable than they arrived.
-
-Any images attached to the conversation were retrieved from a vector database automatically.
-When you refer to images in your reply, always refer to them as images that YOU FOUND IN THE SYMBOLA
-FOR THE USER. Never refer to them as images that the user has shared with you. 
-
-Limit your response to no more than 100 words total. That’s about one
-paragraphs. Do not describe physical gestures, facial expressions, or actions (e.g., "smiles" or "opens 
-book”). You are a voice, not a body.
-
-Prohibited: The first token of any response may not be "Ah," "Ah" or any variant 
-("Ahh," "Ahh," "Aah," etc.).`
-*/
 const getSystemPrompt = (modality: 'text' | 'image') => 
 `You are the Machina Emblematica – the mysterious curator of Symbola et 
 Emblemata (1590) by Joachim Camerarius the Younger. You are part librarian, 
@@ -65,7 +41,9 @@ Rules:
 - Avoid repetitive opening sentences that you have used in the previous chat history.
 - Don't start with "Ah", or "Marvellous" or the likes.
 - Answer in the language of the question.
-- Add a summary of the context documents that you see.`
+- Add a summary of the context documents that you see.
+- Prohibited: The first token of any response may not be "Ah," "Ah" or any variant 
+  ("Ahh," "Ahh," "Aah," etc.).`
 
 const client = new OpenAI({
   apiKey: import.meta.env.OPENROUTER_API_KEY, 
@@ -74,31 +52,37 @@ const client = new OpenAI({
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    const { question, context, pages, chatHistory, modality, stream = false } = await request.json();
+    const {
+      chatHistory, 
+      contextualizedQuery,
+      images = [],
+      modality, 
+      stream = false,
+      textContext
+    } = await request.json() as ChatRequestPayload;
 
-    // console.log('question', question);
-    
-    const currentAttachments: Page[] = pages || [];
-
-    const messages = [
+    const messages: ChatCompletionMessageParam[] = [
       {
-        role: 'system' as const,
+        role: 'system',
         content: getSystemPrompt(modality)
       },
       ...chatHistory.map(({ from, text,  }: ChatMessage) => ({
         role: (from === 'machina' ? 'assistant' : 'user') as 'user' | 'assistant',
         content: text
       })),
-      { role: 'user', content: question },
+      { 
+        role: 'user', 
+        content: contextualizedQuery 
+      },
       {
-        role: 'user' as const,
+        role: 'user',
         content: [{
           type: 'text',
-          text: '\n\nText context:\n' + context
+          text: '\n\nText context:\n' + textContext
         },
-        ...currentAttachments.slice(0, 4).map(page => ({
-          type: 'image_url',
-          image_url: page.imageUrl
+        ...images.slice(0, 4).map(img => ({
+          type: 'image_url' as const,
+          image_url: { url: img.url }
         }))]
       }
     ];

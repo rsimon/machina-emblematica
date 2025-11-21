@@ -1,29 +1,20 @@
 import type { APIRoute } from 'astro';
-import { QueryContextualizer } from './_lib/query-contextualizer';
+import { contextualizeQuery } from './_search';
+import type { SearchRequestPayload, SearchResponse } from '@/types';
 
 export const prerender = false;
 
 const MARQO_BASE_URL = import.meta.env.MARQO_BASE_URL;
 
-const INDEXES = [
-  import.meta.env.MARQO_TXT_INDEX,
-  import.meta.env.MARQO_IMG_INDEX
-]
-
 export const POST: APIRoute = async ({ request }) => {
   try {
-    const { q, history } = await request.json();
+    const { q, history } = await request.json() as SearchRequestPayload;
 
-    // Contextualize the query using chat history
-    const contextualizer = new QueryContextualizer();
-    const contextualizedQuery = await contextualizer.contextualizeQuery(q, history);
-
+    const { contextualizedQuery, indexModality } = await contextualizeQuery(q, history);
     // console.log('Original query:', q);
     // console.log('Contextualized query:', contextualizedQuery);
 
-    const { target_index, retrieval_query } = contextualizedQuery;
-
-    const index = target_index === 'image' 
+    const index = indexModality === 'image' 
       ? import.meta.env.MARQO_IMG_INDEX
       : import.meta.env.MARQO_TXT_INDEX;
 
@@ -33,13 +24,22 @@ export const POST: APIRoute = async ({ request }) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        q: retrieval_query,
+        q: contextualizedQuery,
         limit: 10,
         searchMethod: 'HYBRID'
       }),
-    }).then(res => res.json()).then(data => ({ index, contextualizedQuery: retrieval_query, modality: target_index, ...data }));
+    }).then(res => res.json()).then(data => { 
+      const response: SearchResponse = {
+        contextualizedQuery,
+        indexModality,
+        indexName: index,
+        ...data
+      };
 
-    return new Response(JSON.stringify([result]), {
+      return response;
+    });
+
+    return new Response(JSON.stringify(result), {
       headers: {
         'Content-Type': 'application/json',
       },
