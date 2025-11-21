@@ -17,7 +17,8 @@ export const ChatInterface = () => {
         <div className={sourcesClass}>
           {currentSource && (
             <SourcePreview
-              currentSource={currentSource} />
+              currentSource={currentSource} 
+              onClose={() => setCurrentSource(undefined)} />
           )}
         </div>
 

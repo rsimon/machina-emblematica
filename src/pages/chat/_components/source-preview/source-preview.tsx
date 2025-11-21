@@ -1,9 +1,12 @@
 import { useMemo } from 'react';
 import type { Page } from '@/types';
+import { X } from 'lucide-react';
 
 interface SourcesProps {
 
   currentSource: Page;
+
+  onClose(): void;
 
 }
 
@@ -38,6 +41,14 @@ export const SourcePreview = (props: SourcesProps) => {
 
   return (
     <div className="fixed top-0 h-screen w-7/12">
+      <div className="absolute top-4 left-4 z-10">
+        <button 
+          className="cursor-pointer text-white/60 hover:text-white"
+          onClick={props.onClose}>
+          <X className="size-5" />
+        </button>
+      </div>
+
       <div className="h-screen flex justify-center items-center -rotate-3">
         <img 
           src={left} 
