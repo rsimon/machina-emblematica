@@ -1,8 +1,36 @@
-export interface MarqoResponse {
+export interface ChatMessage {
 
-  index: string;
+  from: 'me' | 'machina';
 
-  modality: 'text' | 'image';
+  text: string;
+
+  pages?: Page[];
+
+}
+
+export interface Page {
+
+  pageNumber?: number;
+
+  imageUrl: string; 
+
+  viewerUrl: string;
+
+}
+
+export interface SearchRequestPayload {
+  
+  q: string;
+
+  history: ChatMessage[]
+
+}
+
+export interface SearchResponse {
+
+  indexName: string;
+
+  indexModality: 'text' | 'image';
 
   contextualizedQuery: string;
 
@@ -14,11 +42,11 @@ export interface MarqoResponse {
 
   query: string;
 
-  hits: MarqoHit[];
+  hits: SearchResponseHit[];
 
 }
 
-export interface MarqoHit {
+export interface SearchResponseHit {
 
   document: string;
 
@@ -32,7 +60,7 @@ export interface MarqoHit {
 
 }
 
-export interface MarqoTextHit extends MarqoHit {
+export interface SearchResponseTextHit extends SearchResponseHit {
 
   regionID: string;
 
@@ -42,23 +70,18 @@ export interface MarqoTextHit extends MarqoHit {
 
 }
 
-export interface ChatMessage {
+export interface ChatRequestPayload {
 
-  from: 'me' | 'machina'
+  chatHistory: ChatMessage[];
 
-  text: string;
+  contextualizedQuery: string;
 
-  attachments?: Page[];
+  modality: 'text' | 'image';
 
-}
+  images: { url: string }[];
 
+  stream: boolean;
 
-export interface Page {
-
-  pageNumber?: number;
-
-  imageUrl: string; 
-
-  viewerUrl: string;
+  textContext: string;
 
 }

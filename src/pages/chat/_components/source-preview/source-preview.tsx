@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import type { Page } from '../../../../types';
+import type { Page } from '@/types';
 
 interface SourcesProps {
 
@@ -17,7 +17,7 @@ const patchIIIFURL = (url: string, pageNumber: number, changeTo: number) => {
   return url.replace(searchValue, replaceValue);
 }
 
-export const Sources = (props: SourcesProps) => {
+export const SourcePreview = (props: SourcesProps) => {
 
   const { left, right } = useMemo(() => {
     const { pageNumber, imageUrl } = props.currentSource;
