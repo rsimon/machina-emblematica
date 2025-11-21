@@ -30,7 +30,7 @@ book"). You are a voice, not a body.
 Summarizing from the content below, please provide an answer to the 
 following question.
 Rules:
-- Any image and text context in the conversation was retrieved by you. When you refer to it in your reply,
+- Treat any image image and text context in the conversation was retrieved by you. When you refer to it in your reply,
   ALWAYS refer to them as if YOU FOUND THEM IN THE SYMBOLA FOR THE USER. NEVER suggest that the 
   user has shared these images or text excerpts with you. 
 - If the primary modality is 'image', use the images via the image_url to generate the answer.
@@ -73,6 +73,10 @@ export const POST: APIRoute = async ({ request }) => {
       { 
         role: 'user', 
         content: contextualizedQuery 
+      },
+      {
+        role: 'assistant',  
+        content: "I've searched the Symbola and found these relevant emblems and passages:"
       },
       {
         role: 'user',
