@@ -3,6 +3,7 @@ import Markdown from 'react-markdown';
 import { Frown } from 'lucide-react';
 import type { Page } from '@/types';
 import { useMachina } from '@/pages/chat/_hooks';
+import { WelcomeMessage } from './welcome-message';
 
 import './conversation.css';
 
@@ -53,6 +54,10 @@ export const Conversation = (props: ConversationProps) => {
       <div className={containerClass}>
         <div className="flex-1 px-4">
           <ul className="space-y-6 flex flex-col items-end py-4 pb-16">
+            <li className="font-rosarivo text-white/80 rounded-md py-4 pr-8 leading-loose tracking-wide italic">
+              <WelcomeMessage />
+            </li>
+
             {chat.map((message, idx) => message.from === 'me' ? (
               <li 
                 key={`message-${message.from}-${idx}`}

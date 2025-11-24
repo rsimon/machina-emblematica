@@ -1,4 +1,5 @@
-.llm-response em {
+.llm-response em,
+.llm-response strong {
   color: #fff;
   font-style: normal;
 }
