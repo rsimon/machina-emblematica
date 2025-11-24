@@ -18,8 +18,8 @@ const EXAMPLES = [
 `* __Natural Phenomena__: What do the symbola say about the relationship 
   between the moon's phases and human behavior?`,
 
-`* __Moral Lessons__: What does the story of the frog teach us about
-  empty rethoric, arrogance and deceit?`,
+`* __Moral Lessons__: What do frogs on the pond teach us about lie, 
+  arrogance and deceit?`,
 
 `* __Textual Meanings__: How does the image of a rose and a beetle 
   relate to the line _"Cantharidum rosamors. Sic luxus deliciaque 
