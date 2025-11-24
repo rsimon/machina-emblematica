@@ -33,42 +33,31 @@ export const Conversation = (props: ConversationProps) => {
 
   const [autoScroll, setAutoScroll] = useState(true);
 
-  const isProgrammaticScroll = useRef(false);
-
   const { busy, chat, error, sendMessage } = useMachina();
 
   const thinking = useMemo(() => {
     return THINKING[Math.floor(Math.random() * THINKING.length)];
   }, [busy]);
 
-  useEffect(() => {
-    // Ignore if autoScroll is set to false
-    if (!autoScroll) return;
-
-    // Ignore if programmatic scroll is already happening.
-    // Why? Let's assume the effect runs again within the
-    // 400ms window. Then the previous run could cancel
-    // this run's lock, thus triggering the user scroll 
-    // handler.
-    if (isProgrammaticScroll.current) return;
+  /**
+   * Helper function: we want to auto-scroll if the user is
+   * near the bottom, but keep the scroll pos if not.
+   */
+  const isNearBottom = () => {
+    const el = props.scrollParent.current;
+    if (!el) return true;
     
-    isProgrammaticScroll.current = true;
-    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-
-    // Reset programmatic scroll flag after a 'magic' period
-    // which should (fingers crossed...) be long enough for the
-    // smooth scroll to have finished.
-    setTimeout(() => isProgrammaticScroll.current = false, 400);
-  }, [autoScroll, chat, busy]);
+    const distance = el.scrollHeight - el.scrollTop - el.clientHeight;
+    return distance < 50;
+  };
 
   useEffect(() => {
-    const onScroll = () => {
-      // Should only handle user scroll events
-      if (isProgrammaticScroll.current) return;
+    if (!autoScroll) return;
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chat, busy, autoScroll]);
 
-      // User scroll disables autoscrolling
-      setAutoScroll(false);
-    }
+  useEffect(() => {
+    const onScroll = () => setAutoScroll(isNearBottom());
 
     props.scrollParent.current?.addEventListener('scroll', onScroll);
 
@@ -82,7 +71,6 @@ export const Conversation = (props: ConversationProps) => {
     
     sendMessage(value);
     setValue('');
-    setAutoScroll(true);
   }
 
   const containerClass = props.currentSource 
