@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
-import type { Page } from '@/types';
 import { X } from 'lucide-react';
+import type { Page } from '@/types';
 
 interface SourcesProps {
 
