@@ -6,7 +6,7 @@ const EXAMPLES = [
   like the story of Hercules and the Hesperides and discuss 
   how the golden apples might represent knowledge or divine favor.`,
 
-`* __Mythical Beast__: Learn about the Simivulpem, a creature 
+`* __Mythical Beasts__: Learn about the Simivulpem, a creature 
   half-fox and half-monkey that carries its young in a pouch.`,
 
 `* __Symbolic Analysis__: Ask about symbols like the dragon, 
