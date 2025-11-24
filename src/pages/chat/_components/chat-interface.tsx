@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useMediaQuery } from 'usehooks-ts';
 import { SourcePreview } from './source-preview';
 import { Conversation } from './conversation';
@@ -8,6 +8,8 @@ export const ChatInterface = () => {
 
   const [currentSource, setCurrentSource] = useState<Page | undefined>(undefined);
 
+  const scrollParent = useRef<HTMLDivElement>(null);
+
   const sourcesClass = currentSource 
     ? 'w-7/12 transition-all duration-300 ease-in-out' 
     : 'w-0 transition-all duration-300 ease-in-out overflow-hidden';
@@ -15,7 +17,9 @@ export const ChatInterface = () => {
   const isDesktop = useMediaQuery('(min-width: 768px)');
 
   return (
-    <div className="h-full w-full overflow-y-auto">
+    <div 
+      ref={scrollParent}
+      className="h-full w-full overflow-y-auto">
       <div className="flex min-h-full w-full">
         {isDesktop && (
           <div className={sourcesClass}>
@@ -29,6 +33,7 @@ export const ChatInterface = () => {
 
         <div className="flex-1 min-h-full">
           <Conversation 
+            scrollParent={scrollParent}
             currentSource={currentSource} 
             onShowSource={setCurrentSource} />
         </div>

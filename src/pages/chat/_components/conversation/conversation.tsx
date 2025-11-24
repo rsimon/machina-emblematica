@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useRef, useState, type FormEvent } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import type { FormEvent, RefObject } from 'react';
 import Markdown from 'react-markdown';
 import { Frown } from 'lucide-react';
 import type { Page } from '@/types';
@@ -16,6 +17,8 @@ const THINKING = [
 
 interface ConversationProps {
 
+  scrollParent: RefObject<HTMLDivElement | null>;
+
   currentSource?: Page;
 
   onShowSource(page: Page): void;
@@ -28,21 +31,58 @@ export const Conversation = (props: ConversationProps) => {
 
   const chatEndRef = useRef<HTMLDivElement>(null);
 
-  const { busy, chat, error, sendMessage } = useMachina();
+  const [autoScroll, setAutoScroll] = useState(true);
 
-  useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [chat, busy]);
+  const isProgrammaticScroll = useRef(false);
+
+  const { busy, chat, error, sendMessage } = useMachina();
 
   const thinking = useMemo(() => {
     return THINKING[Math.floor(Math.random() * THINKING.length)];
   }, [busy]);
+
+  useEffect(() => {
+    // Ignore if autoScroll is set to false
+    if (!autoScroll) return;
+
+    // Ignore if programmatic scroll is already happening.
+    // Why? Let's assume the effect runs again within the
+    // 400ms window. Then the previous run could cancel
+    // this run's lock, thus triggering the user scroll 
+    // handler.
+    if (isProgrammaticScroll.current) return;
+    
+    isProgrammaticScroll.current = true;
+    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+
+    // Reset programmatic scroll flag after a 'magic' period
+    // which should (fingers crossed...) be long enough for the
+    // smooth scroll to have finished.
+    setTimeout(() => isProgrammaticScroll.current = false, 400);
+  }, [autoScroll, chat, busy]);
+
+  useEffect(() => {
+    const onScroll = () => {
+      // Should only handle user scroll events
+      if (isProgrammaticScroll.current) return;
+
+      // User scroll disables autoscrolling
+      setAutoScroll(false);
+    }
+
+    props.scrollParent.current?.addEventListener('scroll', onScroll);
+
+    return () => {
+      props.scrollParent.current?.removeEventListener('scroll', onScroll);
+    }
+  }, [props.scrollParent]);
 
   const onSubmit = (evt: FormEvent) => {
     evt.preventDefault();
     
     sendMessage(value);
     setValue('');
+    setAutoScroll(true);
   }
 
   const containerClass = props.currentSource 

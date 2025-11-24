@@ -51,15 +51,15 @@ export const SourcePreview = (props: SourcesProps) => {
         </button>
       </div>
 
-      <div className="flex-1 flex justify-center items-center p-4">
+      <div className="flex-1 flex justify-center items-center p-2">
         <img 
           src={left} 
-          className="max-w-5/12 max-h-1/2 object-contain rounded shadow-2xl" />
+          className="max-w-1/2 max-h-7/12 object-contain rounded shadow-2xl" />
 
         {right && (
           <img 
             src={right} 
-            className="max-w-5/12 max-h-1/2 object-contain rounded shadow-2xl" />  
+            className="max-w-1/2 max-h-7/12 object-contain rounded shadow-2xl" />  
         )}
       </div>
       
