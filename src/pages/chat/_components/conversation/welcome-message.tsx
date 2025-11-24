@@ -12,23 +12,14 @@ const EXAMPLES = [
 `* __Symbolic Analysis__: Ask about symbols like the dragon, 
   which often represents vigilance and the guarding of treasures.`,
 
-`* __Emblem Meanings__: For example, what does the emblem of the crane 
-  teach us about the dangers of rushing into actions without 
-  proper consideration?`,
+`* __Emblem Details__: Ask for a specific emblem by number and title, 
+  for example emblem XIV, titled "PRETIOSUM QUOD UTILE".`,
 
-`* __Natural Phenomena__: What does the emblem _Ad Motum Lunae_
-  reveal about the relationship between the moon's phases and human 
-  behavior?`,
+`* __Natural Phenomena__: What do the symbola say about the relationship 
+  between the moon's phases and human behavior?`,
 
-`* __Comparative Insights__: How do the emblems of the hermit crab 
-  and the crane offer contrasting views on adaptability and haste?`,
-
-`* __Literary & Philosophical Themes__: What can we learn from 
-  the emblem of the peacock about pride, vanity and the pursuit 
-  of beauty?`,
-
-`* __Moral Lessons__: Consider fables such as the tale of the crow 
-  and the fox, which warns against arrogance and deceit.`,
+`* __Moral Lessons__: What does the story of the frog teach us about
+  empty rethoric, arrogance and deceit?`,
 
 `* __Textual Meanings__: How does the image of a rose and a beetle 
   relate to the line _"Cantharidum rosamors. Sic luxus deliciaque 
@@ -38,11 +29,11 @@ const EXAMPLES = [
   Pliny, and Cicero are referenced and reinterpreted throughout the
   Symbola.`,
 
-`* __Animals & Allegory__: For example, why is the Pelican depicted 
-  as a symbol of self-sacrifice and parental love?`,
+`* __Animals & Allegory__: What moral lessons can we learn from the 
+  crocodile?`,
 
-`* __Virtues & Vices__: Ask about emblems portraying humility, courage, 
-  greed, or patience — how do these images express moral character?`
+  `* __Virtues & Vices__: Ask about emblems portraying humility, courage, 
+    greed, innocence or patience — how do these images express moral character?`
 ];
 
 const WELCOME_MESSAGE =
