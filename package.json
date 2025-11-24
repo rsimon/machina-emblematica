@@ -13,7 +13,7 @@
     "@astrojs/react": "^4.4.2",
     "@icons-pack/react-simple-icons": "^13.8.0",
     "@tailwindcss/vite": "^4.1.17",
-    "@types/react": "^19.2.6",
+    "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "astro": "^5.16.0",
     "lucide-react": "^0.554.0",
@@ -23,6 +23,7 @@
     "react-dom": "^19.2.0",
     "react-markdown": "^10.1.0",
     "react-scrollama": "^2.4.2",
-    "tailwindcss": "^4.1.17"
+    "tailwindcss": "^4.1.17",
+    "usehooks-ts": "^3.1.1"
   }
 }
