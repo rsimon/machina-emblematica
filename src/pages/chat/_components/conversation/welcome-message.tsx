@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import Markdown from 'react-markdown';
+import { motion } from 'motion/react';
 
 const EXAMPLES = [
 `* __Mythological Interpretations__: Let us explore ancient tales 
@@ -62,9 +63,13 @@ export const WelcomeMessage = () => {
   }, []);
 
   return (
-    <div className="llm-response">
+    <motion.div
+      className="llm-response"
+      initial={{ opacity: 0, filter: 'blur(8px)' }}
+      animate={{ opacity: 1, filter: 'blur(0px)' }}
+      transition={{ duration: 0.8, ease: 'easeOut' }}>
       <Markdown>{message}</Markdown>
-    </div>
+    </motion.div>
   )
 
 }
