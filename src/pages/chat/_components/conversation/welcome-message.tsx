@@ -33,7 +33,7 @@ const EXAMPLES = [
   crocodile?`,
 
   `* __Virtues & Vices__: Ask about emblems portraying humility, courage, 
-    greed, innocence or patience — how do these images express moral character?`
+    greed, grace or patience — how do these images express moral character?`
 ];
 
 const WELCOME_MESSAGE =
