@@ -4,15 +4,20 @@ This repository contains the source code of Machina Emblematica. The Machina is 
 Let the Machina guide you through the world of Symbola et Emblemata. The prototype can be tested here: [https://machina.rainersimon.io](https://machina.rainersimon.io).
 
 ## Disclaimer
-This tool uses artificial intelligence (AI) to search, analyse, and retrieve images and texts. While we strive for accuracy and reliability, users should be aware of the tool's limitations and their responsibilities when using it.
+This tool uses artificial intelligence (AI) to retrieve images and texts and to generate natural language text responses. While we strive for accuracy and reliability, users should be aware of the tool's limitations and their responsibilities when using it.
 
 This artificial intelligence system is classified under the [EU AI Act (Regulation 2024/432)](https://artificialintelligenceact.eu/the-act/) as a minimal risk system. We are committed to full compliance with all applicable requirements of the EU AI Act and related regulations.
 
 ## Transparency Information
 In accordance with Articles 13 and 52 of the EU AI Act:
 - Provider Name: [https://rainersimon.io](https://rainersimon.io)
-- Model Version: Open-CLIP ViT-B-32 pre-trained on the LAION-2B English subset of LAION-5B
-- Last Update: see [HuggingFace repository](https://huggingface.co/laion/CLIP-ViT-B-32-laion2B-s34B-b79K)
+- Model Versions:
+  - Image Retrieval: Open-CLIP ViT-B-32 pre-trained on the LAION-2B English subset of LAION-5B
+  - Last Update: see [HuggingFace repository](https://huggingface.co/laion/CLIP-ViT-B-32-laion2B-s34B-b79K)
+  - Text Retrieval: Flax-Sentence-Embeddings version 4 (all datasets, mpnet-base)
+  - Last Update: see [HuggingFace repository](https://huggingface.co/flax-sentence-embeddings/all_datasets_v4_mpnet-base)
+  - Retrieval-Augmented Generation: Qwen2.5-VL-32B-Instruct
+  - Last Update: see [HuggingFace repository](https://huggingface.co/Qwen/Qwen2.5-VL-32B-Instruct)
 - Purpose and Intended Use: Exploration and retrieval of historical image content. The tool was developed for research purposes and is still under development.
 
 ## AI Technology Limitations
