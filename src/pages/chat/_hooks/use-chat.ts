@@ -20,7 +20,7 @@ export const useChat = () => {
     const payload: ChatRequestPayload = {
       contextualizedQuery,
       chatHistory,
-      images: pages.map(p => ({ id: p.id, url: p.imageUrl })),
+      images: pages.map(p => ({ url: p.imageUrl })),
       textContext,
       modality,
       stream: false
@@ -65,7 +65,7 @@ export const useChat = () => {
     const payload: ChatRequestPayload = {
       contextualizedQuery,
       chatHistory,
-      images: pages.map(p => ({ id: p.id, url: p.imageUrl })),
+      images: pages.map(p => ({ url: p.imageUrl })),
       textContext,
       modality,
       stream: true
@@ -114,6 +114,8 @@ export const useChat = () => {
           }
         }
       }
+
+      console.log(fullContent);
 
       return fullContent.replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
     }).catch(error => {

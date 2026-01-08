@@ -10,8 +10,6 @@ export interface ChatMessage {
 
 export interface Page {
 
-  id: string;
-
   pageNumber?: number;
 
   imageUrl: string; 
@@ -78,7 +76,7 @@ export interface ChatRequestPayload {
 
   contextualizedQuery: string;
 
-  images: { id: string, url: string }[];
+  images: { url: string }[];
 
   modality: 'text' | 'image';
 
