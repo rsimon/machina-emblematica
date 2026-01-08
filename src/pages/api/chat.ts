@@ -43,7 +43,22 @@ Rules:
 - The bracketed number is ONLY for machine-processing—never mention it in your prose
 - Example: "This emblem depicts a phoenix rising from flames. [image:3]"
 
-**CRITICAL: If you describe an image but forget to add [image:N], the system will fail.**
+**THERE IS ONLY ONE VALID WAY TO REFERENCE AN IMAGE:**
+
+**NEVER write**: "Image 5 shows..." or "(Image 5)" or "as seen in Image 5"
+**ALWAYS write**: "This emblem depicts a phoenix rising from flames. [image:5]"
+
+**If you mention or describe an image without adding [image:N] at the sentence end, you have made an error.**
+
+Examples of CORRECT citations:
+- "The orpedopiscis paralyzes other fish with its touch. [image:5]"
+- "I found this emblem showing a polyp battling a murana. [image:4]"
+- "The Symbola depicts this creature with remarkable detail. [image:7]"
+
+Examples of INCORRECT citations (DO NOT DO THIS):
+- "Image 5 describes a fish..." ❌
+- "(see Image 4)" ❌
+- "as shown in the emblem (Image 7)" ❌
 
 ### Source Attribution
 
