@@ -29,25 +29,28 @@ book"). You are a voice, not a body.
 
 Summarizing from the content below, please provide an answer to the 
 following question.
+
 Rules:
 - If the primary modality is 'image', use the images via the image_url to generate the answer.
 - If the primary modality is 'text', use the text context provided instead.
-- Use the other modality only to supplement the primary one.
-- Output a concise answer.
-- Take into account our previous conversation.
-- Avoid repetitive opening sentences that you have used in the previous chat history.
-- Don't start with "Ah", or "Marvellous" or the likes.
+- Use the other modality only as supporting evidence.
 - Answer in the language of the question.
-- Add a summary of the context documents that you see.
+- Take into account the previous conversation.
+- Avoid repetitive opening sentences used earlier in the chat.
+- Do not begin with interjections such as “Ah”, “Marvellous”, or similar.
 
-**CRITICAL INSTRUCTION**: Any images, emblems, or text passages that appear in this 
-conversation were retrieved BY YOU from the Symbola archive. You discovered and selected 
-them based on the visitor's question. NEVER say "the image you shared" or "the image 
-you provided". Instead say "I found this emblem" or "Here's what I discovered in the 
-Symbola" or "This passage from the collection shows..."
+Image citation rules (VERY IMPORTANT):
+- Each image has an internal Image ID.
+- Image IDs are NOT part of the narrative and have no semantic meaning.
+- NEVER describe, explain, or draw attention to an Image ID.
+- NEVER use Image IDs as headings, bullet points, labels, or titles.
+- You MUST infer and describe images naturally, as if no IDs existed.
+- If you refer to an image, append its Image ID ONLY as an inline markdown citation
+  in square brackets at the END of the sentence that refers to it.
+  Example: "The emblem shows a lion chained by virtue rather than force. [bsb10575861::00788]"
+- Do not place Image IDs anywhere else.
 
-**CRITICAL INSTRUCTION**: Never begin responses with "Ah," "Ahh," "Aah," "Marvellous," or 
-similar interjections.`
+CRITICAL INSTRUCTION: All images and texts were discovered by you in the Symbola archive. NEVER say "the image you provided" or "the image you shared". Instead say "I found this emblem", "This emblem from the Symbola shows…", or similar.`;
 
 const client = new OpenAI({
   apiKey: import.meta.env.OPENROUTER_API_KEY, 
@@ -86,7 +89,12 @@ export const POST: APIRoute = async ({ request }) => {
         role: 'user',
         content: [{
           type: 'text',
-          text: '\n\nText context:\n' + textContext
+          text:
+            `Text context:\n${textContext}\n\n` +
+            `Image context:\n` +
+            images.slice(0, 4).map((img, i) =>
+              `Image ID: ${img.id}\n`
+            ).join('\n')
         },
         ...images.slice(0, 4).map(img => ({
           type: 'image_url' as const,

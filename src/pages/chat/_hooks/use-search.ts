@@ -52,6 +52,7 @@ export const useSearch = () => {
       setBusy(false);
 
       const pages = data.hits.reduce<Page[]>((deduplicated, hit) => {
+        const id = `${hit.document}::${hit.page}`;
         const imageUrl = hit.image_url;
         const viewerUrl = hit.viewer_url;
           
@@ -60,11 +61,11 @@ export const useSearch = () => {
 
         try {
           const pageNumber = parseInt(hit.page);
-          return [...deduplicated, { pageNumber, imageUrl, viewerUrl }];
+          return [...deduplicated, { id, pageNumber, imageUrl, viewerUrl }];
         } catch (error) {
           console.warn(error);
           console.warn('Could not parse page number', hit);
-          return [...deduplicated, { imageUrl, viewerUrl }];
+          return [...deduplicated, { id, imageUrl, viewerUrl }];
         }
       }, []);
 
