@@ -1,12 +1,23 @@
-export interface ChatMessage {
+export interface UserChatMessage {
+
+  from: 'me';
+
+  text: string;
+
+}
+
+export interface MachinaChatMessage {
 
   from: 'me' | 'machina';
 
   text: string;
 
-  pages?: Page[];
+  pages: Page[];
 
 }
+
+
+export type ChatMessage = UserChatMessage | MachinaChatMessage;
 
 export interface Page {
 
