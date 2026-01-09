@@ -25,9 +25,9 @@ You will complete TWO strictly separated tasks:
 Primary modality: ${modality}
 
 **MANDATORY RULES**
-- NEVER begin your response with an interjection like "Ah". If it starts with "Ah" you made a mistake.
 - Maximum 300 words (2-3 paragraphs)
-- Answer in the language of the question
+- Keep it short. Don't directly quote more than 3 emblems or text pages in one response. Summarize if necessary.
+- NEVER begin your response with an interjection like "Ah". If your response starts with "Ah," it is not valid.
 - Use images if modality is 'image'; use text context if modality is 'text'
 - The other modality provides supporting evidence only
 - Consider the previous conversation
