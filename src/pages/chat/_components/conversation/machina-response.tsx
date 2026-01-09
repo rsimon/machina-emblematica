@@ -70,10 +70,15 @@ export const MachinaResponse = (props: MachinaResponseProps) => {
       const n = parseInt(properties.id) - 1;
       const page = props.message.pages[n];
 
+      const onClick = () => {
+        console.log('Viewing page', page);
+        props.onShowSource(page);
+      }
+
       return page ? (
         <button 
           className="cursor-pointer align-text-top mx-0.5"
-          onClick={() => props.onShowSource(page)}>
+          onClick={onClick}>
           <img 
             src={page.imageUrl} 
             className="rounded-full size-5 border border-white/70 object-cover" />
