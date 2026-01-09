@@ -115,7 +115,7 @@ export const useChat = () => {
         }
       }
 
-      console.log(fullContent);
+      // console.log(fullContent);
 
       return fullContent.replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
     }).catch(error => {

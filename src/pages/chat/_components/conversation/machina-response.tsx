@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import Markdown, { type Components } from 'react-markdown';
 import RemarkDirective from 'remark-directive';
 import type { MachinaChatMessage, Page } from '@/types';
@@ -65,20 +65,15 @@ export const MachinaResponse = (props: MachinaResponseProps) => {
     ].map(i => props.message.pages[i - 1]);
   }, [narrative, classification, props.message.pages]);
 
-  const renderImageMarker = (properties: any) => {
+  const renderImageMarker = useCallback((properties: any) => {
     try {
       const n = parseInt(properties.id) - 1;
       const page = props.message.pages[n];
 
-      const onClick = () => {
-        console.log('Viewing page', page);
-        props.onShowSource(page);
-      }
-
       return page ? (
         <button 
           className="cursor-pointer align-text-top mx-0.5"
-          onClick={onClick}>
+          onClick={() => props.onShowSource(page)}>
           <img 
             src={page.imageUrl} 
             className="rounded-full size-5 border border-white/70 object-cover" />
@@ -87,16 +82,17 @@ export const MachinaResponse = (props: MachinaResponseProps) => {
     } catch {
       return null;
     }
-  }
-  
+  }, [props.message.pages]);
+
+  const components = useMemo(() => ({
+    'image-marker': ({ node }: any) => renderImageMarker(node.properties)
+  } as Components), []);  
   return (
     <div>
       <div className="llm-response">
         <Markdown
           remarkPlugins={[ RemarkDirective, ImageMarkerPlugin ]}
-          components={{
-            'image-marker': ({ node }: any) => renderImageMarker(node.properties)
-           } as Components}>{narrative}</Markdown>
+          components={components}>{narrative}</Markdown>
       </div>
         
       {pages.length > 0 && (
