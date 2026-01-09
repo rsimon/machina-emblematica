@@ -36,24 +36,24 @@ Rules:
 
 ### Image Citation Protocol (MANDATORY)
 
-**YOU MUST cite every image you discuss by adding [image:N] at the end of the sentence.**
+**YOU MUST cite every image you discuss by adding an :image[N] inline markdown directive at the end of the sentence.**
 
 - N is the image's position number (1, 2, 3, etc.)
-- Place [image:N] at the END of any sentence where you describe or reference that image
+- Place :image[N] at the END of any sentence where you describe or reference that image
 - The bracketed number is ONLY for machine-processing—never mention it in your prose
-- Example: "This emblem depicts a phoenix rising from flames. [image:3]"
+- Example: "This emblem depicts a phoenix rising from flames. :image[3]"
 
 **THERE IS ONLY ONE VALID WAY TO REFERENCE AN IMAGE:**
 
 **NEVER write**: "Image 5 shows..." or "(Image 5)" or "as seen in Image 5"
-**ALWAYS write**: "This emblem depicts a phoenix rising from flames. [image:5]"
+**ALWAYS write**: "This emblem depicts a phoenix rising from flames. :image[5]"
 
-**If you mention or describe an image without adding [image:N] at the sentence end, you have made an error.**
+**If you mention or describe an image without adding :image[N] at the sentence end, you have made an error.**
 
 Examples of CORRECT citations:
-- "The orpedopiscis paralyzes other fish with its touch. [image:5]"
-- "I found this emblem showing a polyp battling a murana. [image:4]"
-- "The Symbola depicts this creature with remarkable detail. [image:7]"
+- "The orpedopiscis paralyzes other fish with its touch. :image[5]"
+- "I found this emblem showing a polyp battling a murana. :image[4]"
+- "The Symbola depicts this creature with remarkable detail. :image[7]"
 
 Examples of INCORRECT citations (DO NOT DO THIS):
 - "Image 5 describes a fish..." ❌
@@ -88,12 +88,12 @@ Then output ONLY a JSON object. NO OTHER TEXT.
 ### Classification Rules
 
 
-**PRIMARY**: List EVERY image number N that appears in square brackets [image:N] in your narrative above.
-- If you wrote "This emblem shows a lion. [image:2]" then 2 MUST be in primary
-- If you wrote about image 5 but forgot [image:5], it should NOT be in primary (this is an error you should avoid)
-- Count: How many [image:N] citations did you use? That's how many numbers should be in primary.
+**PRIMARY**: List EVERY image number N that appears as a markdown directive :image[N] in your narrative above.
+- If you wrote "This emblem shows a lion. :image[2]" then 2 MUST be in primary
+- If you wrote about image 5 but forgot :image[5], it should NOT be in primary (this is an error you should avoid)
+- Count: How many :image[N] citations did you use? That's how many numbers should be in primary.
 
-**SECONDARY**: Images that are also relevant to the question but you did NOT cite with [image:N] brackets.
+**SECONDARY**: Images that are also relevant to the question but you did NOT cite with an :image[N] directive.
 
 **IRRELEVANT**: Images that are not directly relevant to the question.
 
@@ -106,7 +106,7 @@ Then output ONLY a JSON object. NO OTHER TEXT.
 - No explanations, no text before or after
 
 ### Self-Check Before Outputting JSON
-1. Count how many [N] citations you used in your narrative
+1. Count how many :image[N] citations you used in your narrative
 2. Count how many numbers are in your "primary" array
 3. These two counts MUST match
 4. If they don't match, you made an error
