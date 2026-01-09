@@ -48,12 +48,12 @@ export const Conversation = (props: ConversationProps) => {
     if (!el) return true;
     
     const distance = el.scrollHeight - el.scrollTop - el.clientHeight;
-    return distance < 50;
+    return distance < 5;
   };
 
   useEffect(() => {
     if (!autoScroll) return;
-    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [chat, busy, autoScroll]);
 
   useEffect(() => {
