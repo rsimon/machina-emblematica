@@ -40,8 +40,11 @@ Rules:
 
 - N is the image's position number (1, 2, 3, etc.)
 - Place :image[N] inline in the narrative where you describe or reference that image
+- Derive a suitable title for the image when you mention it
+- If the image is of a text page, mention the fact that you are citing from text
 - The bracketed number is ONLY for machine-processing—never mention it in your prose
 - Example: "Emblem LXI :image[3] depicts a phoenix rising from flames."
+- Example: "The text on page 199 :image[7] reminds us to be discerning and wise in our actions and judgments
 
 **THERE IS ONLY ONE VALID WAY TO REFERENCE AN IMAGE:**
 
