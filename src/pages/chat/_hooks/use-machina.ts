@@ -36,12 +36,12 @@ export const useMachina = () => {
           (chunk: string) => {
             setChat(current => {
               const updated = [...current];
-                updated[currentResponseIndex] = {
-                  ...updated[currentResponseIndex],
-                  text: updated[currentResponseIndex].text + chunk
-                };
-                return updated;
-              });
+              updated[currentResponseIndex] = {
+                ...updated[currentResponseIndex],
+                text: updated[currentResponseIndex].text + chunk
+              };
+              return updated;
+            });
           }).catch(error => {
             setError(error.message);
           })

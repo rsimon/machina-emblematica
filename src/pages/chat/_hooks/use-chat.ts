@@ -114,6 +114,7 @@ export const useChat = () => {
           }
         }
       }
+
       return fullContent.replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
     }).catch(error => {
       setBusy(false);

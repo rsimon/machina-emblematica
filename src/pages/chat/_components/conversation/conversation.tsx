@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { FormEvent, RefObject } from 'react';
-import Markdown from 'react-markdown';
 import { Frown } from 'lucide-react';
 import type { Page } from '@/types';
 import { useMachina } from '@/pages/chat/_hooks';
+import { MachinaResponse } from './machina-response';
 import { WelcomeMessage } from './welcome-message';
 
 import './conversation.css';
@@ -95,26 +95,10 @@ export const Conversation = (props: ConversationProps) => {
             ) : message.text ? (
               <li
                 key={`message-${message.from}-${idx}`}
-                className="font-rosarivo text-white/80 rounded-md py-4 pr-8 leading-loose tracking-wide italic">
-                <div className="llm-response">
-                  <Markdown>{message.text}</Markdown>
-                </div>
-
-                {(message.pages || []).length > 0 && (
-                  <ul className="flex flex-wrap gap-2 pt-4">
-                    {message.pages?.map(page => (
-                      <li key={page.imageUrl}>
-                        <button 
-                          className="cursor-pointer"
-                          onClick={() => props.onShowSource(page)}>
-                          <img 
-                            src={page.imageUrl} 
-                            className="rounded-full shrink-0 size-10 border-2 border-white/70 object-cover" />
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                )}
+                className="font-rosarivo text-white/80 w-full py-4 pr-8 leading-loose tracking-wide italic">
+                <MachinaResponse
+                  message={message}
+                  onShowSource={props.onShowSource} />
               </li>
             ) : null)}
           </ul>
