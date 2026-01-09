@@ -87,10 +87,10 @@ Then output ONLY a JSON object. NO OTHER TEXT.
 
 ### Classification Rules
 
-
 **PRIMARY**: List EVERY image number N that appears as a markdown directive :image[N] in your narrative above.
 - If you wrote "This emblem shows a lion. :image[2]" then 2 MUST be in primary
 - If you wrote about image 5 but forgot :image[5], it should NOT be in primary (this is an error you should avoid)
+- The array must be sorted according to the order in which you referenced the images in the text. 
 - Count: How many :image[N] citations did you use? That's how many numbers should be in primary.
 
 **SECONDARY**: Images that are also relevant to the question but you did NOT cite with an :image[N] directive.
