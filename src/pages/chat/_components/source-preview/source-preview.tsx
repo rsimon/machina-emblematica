@@ -37,7 +37,7 @@ export const SourcePreview = (props: SourcesProps) => {
       return { left, right };
     } else {
       const left = patchIIIFURL(imageUrl, pageNumber, pageNumber - 1);
-      const right = props.currentSource.imageUrl;
+      const right = props.currentSource?.imageUrl;
       return { left, right };
     }
   }, [props.currentSource]);
