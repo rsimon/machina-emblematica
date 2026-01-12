@@ -48,7 +48,7 @@ export const Conversation = (props: ConversationProps) => {
     if (!el) return true;
     
     const distance = el.scrollHeight - el.scrollTop - el.clientHeight;
-    return distance < 5;
+    return distance < 10;
   };
 
   useEffect(() => {
@@ -71,6 +71,11 @@ export const Conversation = (props: ConversationProps) => {
     
     sendMessage(value);
     setValue('');
+
+    if (!isNearBottom())
+      window.setTimeout(() => {
+          chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+      }, 10)
   }
 
   const containerClass = props.currentSource 
