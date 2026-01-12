@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { FormEvent, RefObject } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
-import { Frown } from 'lucide-react';
+import { useMediaQuery } from 'usehooks-ts';
+import { ArrowRight, Frown } from 'lucide-react';
 import type { Page } from '@/types';
 import { useMachina } from '@/pages/chat/_hooks';
 import { MachinaResponse } from './machina-response';
@@ -35,6 +36,8 @@ export const Conversation = (props: ConversationProps) => {
   const [autoScroll, setAutoScroll] = useState(true);
 
   const { busy, chat, error, sendMessage } = useMachina();
+
+  const isMobile = useMediaQuery('(max-width: 640px)');
 
   const thinking = useMemo(() => {
     return THINKING[Math.floor(Math.random() * THINKING.length)];
@@ -75,8 +78,19 @@ export const Conversation = (props: ConversationProps) => {
 
     if (!isNearBottom())
       window.setTimeout(() => {
-          chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+        chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
       }, 10)
+  }
+
+    const onKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    // On mobile, always allow Enter to create newlines
+    // if (isMobile()) return;
+
+    // On desktop: Enter submits, Shift+Enter creates newline
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      onSubmit(e as any);
+    }
   }
 
   const containerClass = props.currentSource 
@@ -137,19 +151,29 @@ export const Conversation = (props: ConversationProps) => {
             before:absolute before:left-0 before:-top-6 before:z-10
             before:w-full before:h-10 before:bg-contain before:bg-center 
             before:bg-[url('/images/chat-input-top.png')] before:bg-no-repeat
-            after:absolute after:left-0 after:bottom-4 after:z-10
+            after:absolute after:left-0 after:bottom-5.5 after:z-10
             after:w-full after:h-3.5 after:bg-contain after:bg-center 
             after:bg-[url('/images/chat-input-bottom.png')] after:bg-no-repeat">
             <TextareaAutosize 
               autoFocus
               autoCorrect="off"
-              className="relative p-4 w-full rounded-md text-white/70 text-base tracking-wide
+              className="relative p-4 pr-14 sm:pr-4 w-full rounded-md text-white/70 text-base tracking-wide
                 outline-none bg-linear-to-b from-[#6b5d4a] to-[#8d7965] 
                 shadow-[0_0_18px_rgba(0,0,0,0.8),inset_0_0_80px_rgba(0,0,0,0.6)]
                 border border-[#6e5539] placeholder-mocha resize-none"
               value={value}
-              placeholder="Ask me anything about the Symbola et Emblemata..."
-              onChange={evt => setValue(evt.target.value)} />
+              placeholder={isMobile ? 'Ask me anything...' : 'Ask me anything about the Symbola et Emblemata...'}
+              onChange={evt => setValue(evt.target.value)} 
+              onKeyDown={onKeyDown} />
+
+
+            {isMobile && (
+              <button 
+                className="sm:hidden absolute text-white disabled:opacity-50 cursor-pointer bottom-9.5 right-2 bg-white/10 p-3 rounded-full"
+                disabled={!value}>
+                <ArrowRight className="size-4" />
+              </button>
+            )}
           </div>
 
           <div className="absolute blur-2xl bottom-4 w-full left-1/2 -translate-x-1/2 h-10 bg-white/15" />
