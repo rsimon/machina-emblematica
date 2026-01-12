@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { FormEvent, RefObject } from 'react';
+import TextareaAutosize from 'react-textarea-autosize';
 import { Frown } from 'lucide-react';
 import type { Page } from '@/types';
 import { useMachina } from '@/pages/chat/_hooks';
@@ -139,13 +140,13 @@ export const Conversation = (props: ConversationProps) => {
             after:absolute after:left-0 after:bottom-4 after:z-10
             after:w-full after:h-3.5 after:bg-contain after:bg-center 
             after:bg-[url('/images/chat-input-bottom.png')] after:bg-no-repeat">
-            <input 
+            <TextareaAutosize 
               autoFocus
               autoCorrect="off"
               className="relative p-4 w-full rounded-md text-white/70 text-base tracking-wide
                 outline-none bg-linear-to-b from-[#6b5d4a] to-[#8d7965] 
                 shadow-[0_0_18px_rgba(0,0,0,0.8),inset_0_0_80px_rgba(0,0,0,0.6)]
-                border border-[#6e5539] placeholder-mocha"
+                border border-[#6e5539] placeholder-mocha resize-none"
               value={value}
               placeholder="Ask me anything about the Symbola et Emblemata..."
               onChange={evt => setValue(evt.target.value)} />
