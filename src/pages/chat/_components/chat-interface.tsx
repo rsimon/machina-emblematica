@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
 import { useMediaQuery } from 'usehooks-ts';
 import { SourcePreview } from './source-preview';
 import { Conversation } from './conversation';
@@ -23,11 +24,21 @@ export const ChatInterface = () => {
       <div className="flex min-h-full w-full">
         {isDesktop && (
           <div className={sourcesClass}>
-            {currentSource && (
-              <SourcePreview
-                currentSource={currentSource} 
-                onClose={() => setCurrentSource(undefined)} />
-            )}
+            <AnimatePresence mode="sync">
+              {currentSource && (
+                <motion.div
+                  key={currentSource.pageNumber ?? currentSource.imageUrl}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.25 }}
+                  className="h-full w-full">
+                  <SourcePreview
+                    currentSource={currentSource} 
+                    onClose={() => setCurrentSource(undefined)} />
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         )}
 

@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { X } from 'lucide-react';
 import type { Page } from '@/types';
 
@@ -23,6 +23,7 @@ const patchIIIFURL = (url: string, pageNumber: number, changeTo: number) => {
 }
 
 export const SourcePreview = (props: SourcesProps) => {
+  const [isLoading, setIsLoading] = useState(true);
 
   const { left, right } = useMemo(() => {
     const { pageNumber, imageUrl } = props.currentSource;
@@ -41,6 +42,47 @@ export const SourcePreview = (props: SourcesProps) => {
     }
   }, [props.currentSource]);
 
+  useEffect(() => {
+    setIsLoading(true);
+    
+    const leftImg = new Image();
+    const rightImg = right ? new Image() : null;
+    
+    let leftLoaded = false;
+    let rightLoaded = !right; // If no right image, consider it "loaded"
+    
+    const checkBothLoaded = () => {
+      if (leftLoaded && rightLoaded)
+        setIsLoading(false);
+    }
+    
+    leftImg.onload = () => {
+      leftLoaded = true;
+      checkBothLoaded();
+    };
+    
+    leftImg.onerror = () => {
+      leftLoaded = true;
+      checkBothLoaded();
+    };
+    
+    if (rightImg) {
+      rightImg.onload = () => {
+        rightLoaded = true;
+        checkBothLoaded();
+      };
+      
+      rightImg.onerror = () => {
+        rightLoaded = true;
+        checkBothLoaded();
+      };
+      
+      rightImg.src = right!;
+    }
+    
+    leftImg.src = left;
+  }, [left, right]);
+
   return props.isMobile ? (
     <div className="relative w-full h-full flex flex-col">
       <div className="absolute top-4 right-4 z-20">
@@ -52,14 +94,20 @@ export const SourcePreview = (props: SourcesProps) => {
       </div>
 
       <div className="flex-1 flex justify-center items-center p-2">
-        <img 
-          src={left} 
-          className="max-w-1/2 max-h-7/12 object-contain rounded shadow-2xl" />
+        <div
+          className={`max-w-1/2 max-h-7/12 aspect-25/42 flex justify-end ${right ? 'rounded-l' :  'rounded'}`}>
+          <img 
+            src={left} 
+            className={`h-full w-auto object-contain shadow-2xl ${right ? 'rounded-l' : 'rounded'}`} />
+        </div>
 
         {right && (
-          <img 
-            src={right} 
-            className="max-w-1/2 max-h-7/12 object-contain rounded shadow-2xl" />  
+          <div
+            className="max-w-1/2 max-h-7/12 rounded-r aspect-25/42 flex justify-start">
+            <img 
+              src={right} 
+              className="h-full w-auto object-contain rounded-r shadow-2xl" />  
+          </div>
         )}
       </div>
       
@@ -73,43 +121,54 @@ export const SourcePreview = (props: SourcesProps) => {
       </div>
     </div>
   ) : (
-    <div className="fixed top-0 h-screen w-7/12">
-      <div className="absolute top-4 left-4 z-10">
-        <button 
-          className="cursor-pointer text-white/60 hover:text-white"
-          onClick={props.onClose}>
-          <X className="size-5" />
-        </button>
-      </div>
+    isLoading ? (
+      <div className="fixed top-0 h-screen w-7/12">
+        <div className="h-screen flex justify-center items-center -rotate-3">
+          <div 
+            className="w-5/12 h-[75vh] aspect-25/42 border border-white/5 bg-white/5 animate-pulse rounded-l" />
 
-      <div className="h-screen flex justify-center items-center -rotate-3">
-        <div 
-          className={`max-w-5/12 max-h-[75vh] aspect-25/42 flex justify-end ${right ? 'rounded-l' :  'rounded'}`}>
-          <img 
-            src={left}
-            className={`h-full w-auto object-contain ${right ? 'rounded-l' : 'rounded'}`} />
+          <div 
+            className="w-5/12 h-[75vh] aspect-25/42 border border-l-0 border-white/5 bg-white/5 animate-pulse rounded-r" />
+        </div>
+      </div>
+    ) : (
+      <div className="fixed top-0 h-screen w-7/12">
+        <div className="absolute top-4 left-4 z-10">
+          <button 
+            className="cursor-pointer text-white/60 hover:text-white"
+            onClick={props.onClose}>
+            <X className="size-5" />
+          </button>
         </div>
 
-        {right && (
+        <div className="h-screen flex justify-center items-center -rotate-3">
           <div 
-            className="max-w-5/12 max-h-[75vh] rounded-r aspect-25/42 flex justify-start"
-            style={{ aspectRatio: '25/42' }}>
+            className={`max-w-5/12 max-h-[75vh] aspect-25/42 flex justify-end`}>
             <img 
-              src={right} 
-              className="h-full w-auto object-contain rounded-r" />  
+              src={left}
+              className={`h-full w-auto object-contain ${right ? 'rounded-l' : 'rounded'}`} />
           </div>
-        )}
+
+          {right && (
+            <div 
+              className="max-w-5/12 max-h-[75vh] rounded-r aspect-25/42 flex justify-start">
+              <img 
+                src={right} 
+                className="h-full w-auto object-contain rounded-r" />  
+            </div>
+          )}
+        </div>
+        
+        <div 
+          className="fixed bottom-4 left-4 text-white/70 text-sm">
+          <a 
+            target="_blank"
+            href={props.currentSource.viewerUrl}>
+            View at <span className="underline">Münchener Digitale Bibliothek</span>
+          </a>
+        </div>
       </div>
-      
-      <div 
-        className="fixed bottom-4 left-4 text-white/70 text-sm">
-        <a 
-          target="_blank"
-          href={props.currentSource.viewerUrl}>
-          View at <span className="underline">Münchener Digitale Bibliothek</span>
-        </a>
-      </div>
-    </div>
+    )
   )
 
 }
