@@ -83,14 +83,21 @@ export const SourcePreview = (props: SourcesProps) => {
       </div>
 
       <div className="h-screen flex justify-center items-center -rotate-3">
-        <img 
-          src={left} 
-          className={`max-w-4/12 max-h-[80vh] ${right ? 'rounded-l' :  'rounded'}`} />
+        <div 
+          className={`max-w-5/12 max-h-[75vh] aspect-25/42 flex justify-end ${right ? 'rounded-l' :  'rounded'}`}>
+          <img 
+            src={left}
+            className={`h-full w-auto object-contain ${right ? 'rounded-l' : 'rounded'}`} />
+        </div>
 
         {right && (
-          <img 
-            src={right} 
-            className="max-w-4/12 max-h-[80vh] rounded-r" />  
+          <div 
+            className="max-w-5/12 max-h-[75vh] rounded-r aspect-25/42 flex justify-start"
+            style={{ aspectRatio: '25/42' }}>
+            <img 
+              src={right} 
+              className="h-full w-auto object-contain rounded-r" />  
+          </div>
         )}
       </div>
       
