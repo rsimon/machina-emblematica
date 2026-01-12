@@ -72,11 +72,11 @@ export const AnimatedParagraph = (props: AnimatedParagraphProps) => {
   
   return props.children ? (
     <motion.div
-      className="motion-safe:transition-transform" 
+      className="motion-safe:transition-transform min-h-12" 
       variants={PARAGRAPH_VARIANTS}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true }}>
+      viewport={{ once: true, amount: 0.3 }}>
       <p>
         {props.html.map((html, idx) => (
           <motion.span
@@ -96,11 +96,11 @@ export const AnimatedParagraph = (props: AnimatedParagraphProps) => {
     </motion.div>
   ) : (
     <motion.p 
-      className="motion-safe:transition-transform" 
+      className="motion-safe:transition-transform min-h-12" 
       variants={PARAGRAPH_VARIANTS}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true }}>
+      viewport={{ once: true, amount: 0.3 }}>
       {props.html.map((html, idx) => (
         <motion.span
           className="inline-block origin-center"
