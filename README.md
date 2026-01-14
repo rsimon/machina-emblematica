@@ -12,7 +12,7 @@ Let the Machina guide you through the world of _Symbola et Emblemata_. You can t
 
 ## Disclaimer
 
-Machina Emblematica usess generative AI to produce natural-language responses. It is an **experimental research prototype** and, as such, has inherent technical and methodological limitations.
+Machina Emblematica uses generative AI to produce natural-language responses. It is an **experimental research prototype** and, as such, has inherent technical and methodological limitations.
 
 AI-generated content may be inaccurate, incomplete, misleading, or biased. Users should **independently verify any important information**. This system is intended **solely for research and exploratory purposes** and must not be used for critical decision-making or professional applications.
 
@@ -42,7 +42,7 @@ You are interacting with an AI system that retrieves and generates content.
 3. `npm start` to run in dev mode.
 
 # Funding Acknowledgement
-This project received funding from the BMFTR joint project HERMES and the Furman Humanities Center.
+This project received funding from the BMFTR joint project [HERMES](https://hermes-hub.de/), the [Furman Humanities Center](https://www.furman.edu/humanities-center/) and [Durham University](https://www.durham.ac.uk/departments/academic/classics-ancient-history/).
 
 # References
 ```
