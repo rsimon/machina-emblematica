@@ -78,6 +78,9 @@ export const useChat = () => {
       },
       body: JSON.stringify(payload),
     }).then(async response => {
+      if (!response.ok)
+        throw new Error(`HTTP error: ${response.status}`);
+
       const reader = response.body?.getReader();
       const decoder = new TextDecoder();
 

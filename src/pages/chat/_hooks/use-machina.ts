@@ -22,6 +22,10 @@ export const useMachina = () => {
         // Response being streamed right now
         const currentResponseIndex = chat.length + 1;
 
+        console.log('Search response:');
+        console.log('----------------');
+        console.log(res);
+
         setChat(current => ([
           ...current, 
           { from: 'machina', text: '', pages: res.pages }
