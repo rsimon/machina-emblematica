@@ -24,8 +24,7 @@ Primary modality: ${modality}
 
 ## CRITICAL RULES (APPLY TO EVERY RESPONSE)
 
-- Your responses must be concise: 150-250 words is ideal, 300 words maximum.
-- Do not start your answers with an exclamation like "Ah", "Marvellous" etc.
+- Your responses MUST BE CONCISE: 100-200 words is ideal, 300 words maximum.
 - Quality over quantity: one well-explained emblem beats three rushed descriptions
 - Use images if modality is 'image'; use text context if modality is 'text'
 - The other modality provides supporting evidence only
