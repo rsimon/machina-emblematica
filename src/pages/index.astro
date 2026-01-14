@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@/layouts/base-layout.astro';
 import { AnimatedImage, AnimatedParagraph } from './_index/components';
+import { SiGithub } from '@icons-pack/react-simple-icons';
 ---
 <BaseLayout title="Machina Emblematica">
   <div class="relative">
@@ -21,11 +22,14 @@ import { AnimatedImage, AnimatedParagraph } from './_index/components';
           class="max-w-[120%] md:max-w-200 z-40 relative drop-shadow-[0_0_60px_rgba(0,0,0,0.9)] aspect-1600/883" />
       </div>
 
-      <a 
-        class="absolute text-sm text-white/70 hover:text-white inline-block font-sans top-3 right-3 md:top-6 md:right-6 rounded-full z-30 px-5 py-2.5 bg-white/5 hover:bg-white/10 backdrop-blur-xs"
-        href="#about">
-        About
-      </a>
+      <div
+        class="absolute flex gap-3 items-center text-sm text-white/70 hover:text-white font-sans top-3 right-3 md:top-6 md:right-6 rounded-full z-30 px-5 py-2.5 bg-white/5 hover:bg-white/10 backdrop-blur-xs">
+        <a href="#about">About</a> 
+
+        <a href="https://github.com/rsimon/machina-emblematica" target="_blank">
+          <SiGithub className="size-4" />
+        </a>
+      </div>
     </header>
 
     <main class="font-rosarivo leading-loose min-h-screen">
@@ -177,8 +181,14 @@ import { AnimatedImage, AnimatedParagraph } from './_index/components';
           <p class="pt-28">
             A project of scholarly curiosity, digital alchemy, and emblematic wonder. Made possible by 
             open access resources and a love of the obscure. The project received funding from the 
-            BMFTR joint project <a class="opacity-50 underline" href="https://hermes-hub.de/" target="_blank">HERMES</a> and
-            the <a class="opacity-50 underline" target="_blank" href="https://www.furman.edu/humanities-center/">Furman Humanities Center</a>.
+            BMFTR joint project <a class="opacity-50 underline" href="https://hermes-hub.de/" target="_blank">HERMES</a>,
+            the <a class="opacity-50 underline" target="_blank" href="https://www.furman.edu/humanities-center/">Furman Humanities Center</a>,
+            and <a class="opacity-50 underline" target="_blank" href="https://www.durham.ac.uk/departments/academic/classics-ancient-history/">Durham University</a>.
+          </p>
+
+          <p class="pt-8">
+            Open source code available 
+            on <a class="opacity-50 underline" target="_blank" href="https://github.com/rsimon/machina-emblematica">Github</a>.
           </p>
         </div>
       </div>
