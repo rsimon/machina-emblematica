@@ -143,7 +143,7 @@ export const SourcePreview = (props: SourcesProps) => {
 
         <div className="h-screen flex justify-center items-center -rotate-3">
           <div 
-            className={`max-w-5/12 max-h-[75vh] aspect-25/42 flex justify-end`}>
+            className="w-5/12 h-[75vh] aspect-25/42 flex justify-end">
             <img 
               src={left}
               className={`h-full w-auto object-contain ${right ? 'rounded-l' : 'rounded'}`} />
@@ -151,7 +151,7 @@ export const SourcePreview = (props: SourcesProps) => {
 
           {right && (
             <div 
-              className="max-w-5/12 max-h-[75vh] rounded-r aspect-25/42 flex justify-start">
+              className="w-5/12 h-[75vh] rounded-r aspect-25/42 flex justify-start">
               <img 
                 src={right} 
                 className="h-full w-auto object-contain rounded-r" />  
