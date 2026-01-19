@@ -94,21 +94,23 @@ export const SourcePreview = (props: SourcesProps) => {
       </div>
 
       <div className="flex-1 flex justify-center items-center p-2">
-        <div
-          className={`max-w-1/2 max-h-7/12 aspect-25/42 flex justify-end ${right ? 'rounded-l' :  'rounded'}`}>
-          <img 
-            src={left} 
-            className={`h-full w-auto object-contain shadow-2xl ${right ? 'rounded-l' : 'rounded'}`} />
-        </div>
-
-        {right && (
+        <div className="flex h-[75vh] w-full gap-0">
           <div
-            className="max-w-1/2 max-h-7/12 rounded-r aspect-25/42 flex justify-start">
+            className="max-h-[75vh] w-1/2 aspect-25/42 flex justify-end">
             <img 
-              src={right} 
-              className="h-full w-auto object-contain rounded-r shadow-2xl" />  
+              src={left} 
+              className={`h-full w-auto object-contain shadow-2xl ${right ? 'rounded-l' : 'rounded'}`} />
           </div>
-        )}
+
+          {right && (
+            <div
+              className="max-h-[75vh] w-1/2 rounded-r aspect-25/42 flex justify-start">
+              <img 
+                src={right} 
+                className="h-full w-auto object-contain rounded-r shadow-2xl" />  
+            </div>
+          )}
+        </div>
       </div>
       
       <div className="pb-4 px-4 text-white/90 text-sm text-center">
@@ -132,7 +134,7 @@ export const SourcePreview = (props: SourcesProps) => {
         </div>
       </div>
     ) : (
-      <div className="fixed top-0 h-screen w-7/12">
+      <div className="fixed top-0 h-screen w-7/12 px-6">
         <div className="absolute top-4 left-4 z-10">
           <button 
             className="cursor-pointer text-white/60 hover:text-white"
@@ -142,21 +144,23 @@ export const SourcePreview = (props: SourcesProps) => {
         </div>
 
         <div className="h-screen flex justify-center items-center -rotate-3">
-          <div 
-            className="w-5/12 h-[75vh] aspect-25/42 flex justify-end">
-            <img 
-              src={left}
-              className={`h-full w-auto object-contain ${right ? 'rounded-l' : 'rounded'}`} />
-          </div>
-
-          {right && (
+          <div className="flex h-[75vh] w-11/12 gap-0">
             <div 
-              className="w-5/12 h-[75vh] rounded-r aspect-25/42 flex justify-start">
+              className="max-h-[75vh] max-w-1/2 aspect-25/42 flex justify-end">
               <img 
-                src={right} 
-                className="h-full w-auto object-contain rounded-r" />  
+                src={left}
+                className={`max-h-[75vh] w-auto object-contain ${right ? 'rounded-l' : 'rounded'}`} />
             </div>
-          )}
+
+            {right && (
+              <div 
+                className="max-h-[75vh] max-w-1/2 rounded-r aspect-25/42 flex justify-start">
+                <img 
+                  src={right} 
+                  className="h-full w-auto object-contain rounded-r" />  
+              </div>
+            )}
+          </div>
         </div>
         
         <div 
