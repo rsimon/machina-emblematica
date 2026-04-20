@@ -63,7 +63,14 @@ export const contextualizeQuery = async (userQuery: string, history: ChatMessage
   });
 
   const content = response.choices[0]?.message?.content || '';
-  const cleaned = content.replace(/^```(?:json)?\s*\n?/i, '').replace(/\n?```\s*$/, '');
-  
-  return JSON.parse(cleaned);
+  const fenceMatch = content.match(/```(?:json)?\s*\r?\n([\s\S]*?)\r?\n\s*```/i);
+  const cleaned = fenceMatch ? fenceMatch[1].trim() : content.trim();
+
+  if (!cleaned) {
+    console.error('Query contextualization failed');
+    console.error(userQuery);
+    console.log(JSON.stringify(content));
+  }
+
+  return cleaned ? JSON.parse(cleaned) : { indexModality: 'text', contextualizedQuery: userQuery};
 }
