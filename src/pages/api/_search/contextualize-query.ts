@@ -24,8 +24,8 @@ const getPrompt = (history: string, question: string) =>
 
 You have two tasks:
 
-1. Given the conversation history, rewrite the user's latest question as a standalone retrieval query 
-that includes all necessary context. If the user question pertains to a particular page or 
+1. Rewrite the user's latest question as a concise, standalone retrieval query 
+for a vector index. If the user question pertains to a particular page or 
 chapter number, emblem title or other canonical numerical reference, repeat this reference 
 in the rewritten query.
 
