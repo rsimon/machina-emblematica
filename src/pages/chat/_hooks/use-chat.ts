@@ -12,7 +12,8 @@ export const useChat = () => {
     contextualizedQuery: string, 
     chatHistory: ChatMessage[], 
     pages: Page[],
-    textContext: string, 
+    // textContext: string, 
+    textPassages: string[],
     modality: 'text' | 'image'
   ) => {
     setBusy(true);
@@ -21,7 +22,8 @@ export const useChat = () => {
       contextualizedQuery,
       chatHistory,
       images: pages.map(p => ({ url: p.imageUrl })),
-      textContext,
+      // textContext,
+      textPassages,
       modality,
       stream: false
     };
@@ -56,7 +58,8 @@ export const useChat = () => {
     contextualizedQuery: string, 
     chatHistory: ChatMessage[],
     pages: Page[],
-    textContext: string,
+    // textContext: string,
+    textPassages: string[],
     modality: 'text' | 'image',
     onChunk: (chunk: string) => void
   ) => {
@@ -66,7 +69,8 @@ export const useChat = () => {
       contextualizedQuery,
       chatHistory,
       images: pages.map(p => ({ url: p.imageUrl })),
-      textContext,
+      // textContext,
+      textPassages,
       modality,
       stream: true
     };

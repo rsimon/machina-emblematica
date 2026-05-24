@@ -35,7 +35,8 @@ export const useMachina = () => {
           res.contextualizedQuery, 
           chat,
           res.pages,
-          res.textContext,
+          // res.textContext,
+          res.textPassages,
           res.indexModality, 
           (chunk: string) => {
             setChat(current => {

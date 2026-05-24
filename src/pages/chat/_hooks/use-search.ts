@@ -18,7 +18,9 @@ interface UseSearchResponse {
 
   pages: Page[];
 
-  textContext: string;
+  // textContext: string;
+
+  textPassages: string[];
 
 }
 
@@ -68,7 +70,8 @@ export const useSearch = () => {
         }
       }, []);
 
-      const textContext = data.hits.map((d: any) => d.text_page).join('\n\n');
+      // const textContext = data.hits.map((d: any) => d.text_page).join('\n\n');
+      const textPassages: string[] = data.hits.map((d: any) => d.text_page);
 
       return {
         contextualizedQuery: data.contextualizedQuery,
@@ -76,7 +79,8 @@ export const useSearch = () => {
         indexName: data.indexName,
         originalQuery: q,
         pages,
-        textContext
+        // textContext
+        textPassages
       }
     }).catch(error => {
       setBusy(false);

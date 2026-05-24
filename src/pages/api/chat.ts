@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro';
 import { OpenAI } from 'openai';
 import type { ChatMessage, ChatRequestPayload } from '@/types';
 import type { ChatCompletionMessageParam } from 'openai/resources/index.mjs';
+import type { ChatCompletionContentPart } from 'openai/resources.js';
 
 export const prerender = false;
 
@@ -135,7 +136,8 @@ export const POST: APIRoute = async ({ request }) => {
       images = [],
       modality, 
       stream = false,
-      textContext
+      // textContext
+      textPassages
     } = await request.json() as ChatRequestPayload;
 
     const messages: ChatCompletionMessageParam[] = [
@@ -155,16 +157,30 @@ export const POST: APIRoute = async ({ request }) => {
         role: 'assistant',  
         content: "I've searched the Symbola and found these relevant emblems and passages:"
       },
+      ...(textPassages.length > 0 ? [{
+        role: 'user',
+        content: [{
+          type: 'text',
+          text: `Text context: (${textPassages.length} emblems):\n
+---\n
+When you reference a passage below in your narrative, cite it as :image[N].`
+        }, 
+        ...textPassages.map(str => ({
+          type: 'text',
+          text: str
+        } as ChatCompletionContentPart))]
+      } as ChatCompletionMessageParam] : []),
       {
         role: 'user',
         content: [
-          {
+          /*{
             type: 'text',
             text: `Text context:\n${textContext}\n\n` +
                   `---\n\n` +
                   `Image context (${images.slice(0, 10).length} emblems):\n\n` +
                   `When you reference an image below in your narrative, cite it at the end of the sentence.\n`
           },
+          */
           ...images.slice(0, 10).map(img => ({
             type: 'image_url' as const,
             image_url: { url: img.url }

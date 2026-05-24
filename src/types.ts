@@ -93,6 +93,8 @@ export interface ChatRequestPayload {
 
   stream: boolean;
 
-  textContext: string;
+  // textContext: string;
+
+  textPassages: string[];
 
 }
