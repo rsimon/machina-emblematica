@@ -82,7 +82,7 @@ export const Conversation = (props: ConversationProps) => {
       }, 10)
   }
 
-    const onKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+  const onKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     // On mobile, always allow Enter to create newlines
     // if (isMobile()) return;
 
@@ -165,7 +165,6 @@ export const Conversation = (props: ConversationProps) => {
               placeholder={isMobile ? 'Ask me anything...' : 'Ask me anything about the Symbola et Emblemata...'}
               onChange={evt => setValue(evt.target.value)} 
               onKeyDown={onKeyDown} />
-
 
             {isMobile && (
               <button 

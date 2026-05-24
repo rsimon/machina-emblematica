@@ -1,10 +1,10 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import Markdown, { type Components } from 'react-markdown';
 import RemarkDirective from 'remark-directive';
 import type { MachinaChatMessage, Page } from '@/types';
 import { ImageMarkerPlugin } from './image-marker-plugin';
 
-const SEPARATOR = '\n\n---CURATION---\n\n';
+const SEPARATOR = '\n\n---CURATION---';
 
 interface LLMResponse {
 
@@ -65,6 +65,10 @@ export const MachinaResponse = (props: MachinaResponseProps) => {
     ].map(i => props.message.pages[i - 1]);
   }, [narrative, classification, props.message.pages]);
 
+  useEffect(() => {
+    if (classification) console.log(props.message.text);
+  }, [props.message.text, classification]);
+
   const renderImageMarker = useCallback((properties: any) => {
     try {
       const n = parseInt(properties.id) - 1;
@@ -87,6 +91,7 @@ export const MachinaResponse = (props: MachinaResponseProps) => {
   const components = useMemo(() => ({
     'image-marker': ({ node }: any) => renderImageMarker(node.properties)
   } as Components), []);  
+
   return (
     <div>
       <div className="llm-response">
@@ -112,6 +117,5 @@ export const MachinaResponse = (props: MachinaResponseProps) => {
       )}
     </div>
   )
-
 
 }
