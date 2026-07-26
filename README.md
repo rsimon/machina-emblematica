@@ -8,7 +8,7 @@ The system facilitates access to seventeenth-century Latin emblems by retrieving
 
 Let the Machina guide you through the world of _Symbola et Emblemata_. You can try the prototype here:
 
-<https://machina.rainersimon.io>
+<https://machina.ait.ac.at>
 
 ## Disclaimer
 
