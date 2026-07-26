@@ -1,6 +1,6 @@
 # Machina Emblematica
 
-This repository contains the source code of [Machina Emblematica](https://machina.rainersimon.io).
+This repository contains the source code of [Machina Emblematica](https://machina.ait.ac.at).
 
 Machina Emblematica is a prototype **multimodal Retrieval Augmented Generation (RAG) system** based on the digitized 1668 edition of Joachim Camerarius' [Symbola et Emblemata](https://www.digitale-sammlungen.de/en/details/bsb10575861). Its goal is to provide an innovative and user-friendly conversational interface that enables users to explore both the textual and the visual dimension of this emblem book through natural-language queries.
 
