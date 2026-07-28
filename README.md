@@ -25,7 +25,7 @@ You are interacting with an AI system that retrieves and generates content.
 - **AI Models Used:**
   - Image Retrieval: [Open-CLIP ViT-B-32 (LAION-2B)](https://huggingface.co/laion/CLIP-ViT-B-32-laion2B-s34B-b79K ), v. ViT-B/32, updated 2025-01-22
   - Text Retrieval: [Flax-Sentence-Embeddings](https://huggingface.co/flax-sentence-embeddings/all_datasets_v4_mpnet-base ), v. 4, updated 2021-07-23
-  - Text Generation: [Qwen2.5-VL-32B-Instruct](https://huggingface.co/Qwen/Qwen2.5-VL-32B-Instruct), v. 2.5, updated 2025-04-14
+  - Text Generation: [Qwen2.5-VL-72B-Instruct](https://huggingface.co/Qwen/Qwen2.5-VL-72B-Instruct), v. 2.5, updated 2025-06-06
 - **Purpose and Intended Use:** Research and exploratory access to historical textual and visual materials (**BETA**)
 
 ## Known Limitations
