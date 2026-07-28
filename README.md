@@ -21,7 +21,7 @@ AI-generated content may be inaccurate, incomplete, misleading, or biased. Users
 ## Transparency Information
 
 You are interacting with an AI system that retrieves and generates content.
-- **Provider / Imprint:** <https://rainersimon.io/imprint>
+- **Providert:** AIT Austrian Institute of Technology GmbH. Contact: [Michela Vignoli](&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#109;&#105;&#99;&#104;&#101;&#108;&#97;&#46;&#118;&#105;&#103;&#110;&#111;&#108;&#105;&#64;&#97;&#105;&#116;&#46;&#97;&#99;&#46;&#97;&#116;)
 - **AI Models Used:**
   - Image Retrieval: [Open-CLIP ViT-B-32 (LAION-2B)](https://huggingface.co/laion/CLIP-ViT-B-32-laion2B-s34B-b79K ), v. ViT-B/32, updated 2025-01-22
   - Text Retrieval: [Flax-Sentence-Embeddings](https://huggingface.co/flax-sentence-embeddings/all_datasets_v4_mpnet-base ), v. 4, updated 2021-07-23
